@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BadassUniverse_MapEditor.Models.Game
 {
@@ -55,64 +52,6 @@ namespace BadassUniverse_MapEditor.Models.Game
             return GetFloor(floorIndex).GetBuildings();
         }
 
-        public bool TryToADDInnerCell(MapCell innerMapCell, int floorIndex)
-        {
-            var floor = GetFloor(floorIndex);
-            var innerCellFloor = innerMapCell.GetFloor(floorIndex);
-            if (innerCellFloor.IsEmpty()) return false;
-
-            var room = innerCellFloor.GetRoom();
-            if (room != null)
-            {
-                var addResult = floor.AddRoom(room.Index);
-                if (!addResult)
-                {
-                    return false;
-                }
-            }
-
-            var walls = innerCellFloor.GetWalls();
-            if (walls.Count() > 0)
-            {
-                foreach (var wall in walls)
-                {
-                    var addResult = floor.AddWall(wall.RelatedRoomIndex);
-                    if (!addResult)
-                    {
-                        return false;
-                    }
-                }
-            }
-
-            var doors = innerCellFloor.GetDoors();
-            if (doors.Count() > 0)
-            {
-                foreach (var door in doors)
-                {
-                    var addResult = floor.AddDoor(door.DoorIndex, door.RelatedRoomIndex, door.RoomFloorDisplacement);
-                    if (!addResult)
-                    {
-                        return false;
-                    }
-                }
-            }
-
-            var buildings = innerCellFloor.GetBuildings();
-            if (buildings.Count() > 0)
-            {
-                foreach (var building in buildings)
-                {
-                    var addResult = building.AddWall(building.Index);
-                    if (!addResult)
-                    {
-                        return false;
-                    }
-                }
-            }
-
-            return true;
-        }
-
         public MapCellFloor GetFloor(int floorIndex)
         {
             if (!Floors.ContainsKey(floorIndex))
@@ -120,6 +59,66 @@ namespace BadassUniverse_MapEditor.Models.Game
                 Floors.Add(floorIndex, new MapCellFloor());
             }
             return Floors[floorIndex];
+        }
+
+        public static MapCell InitEmpty() => new();
+
+        public object Clone()
+        {
+            Dictionary<int, MapCellFloor> FloorsCopy = new();
+            foreach (var Floor in Floors)
+		    {
+                FloorsCopy.Add(Floor.Key, (MapCellFloor)Floor.Value.Clone());
+            }
+            MapCell NewCell = InitEmpty();
+            NewCell.Floors = FloorsCopy;
+            return NewCell;
+        }
+
+        public bool TryToAddInnerCell(MapCell InnerMapCell, int FloorIndex)
+        {
+            var Floor = GetFloor(FloorIndex);
+            var InnerCellFloor = InnerMapCell.GetFloor(FloorIndex);
+            if (InnerCellFloor.IsEmpty()) return false;
+
+            var Room = InnerCellFloor.GetRoom();
+            if (Room is not null)
+		    {
+                bool bAddResult = Floor.AddRoom(Room.Index);
+                if (!bAddResult) return false;
+            }
+
+            var Walls = InnerCellFloor.GetWalls();
+            if (Walls.Count > 0)
+		    {
+                foreach (var Wall in Walls)
+			    {
+                    bool bAddResult = Floor.AddWall(Wall.RelatedRoomIndex);
+                    if (!bAddResult) return false;
+                }
+            }
+
+            var Doors = InnerCellFloor.GetDoors();
+            if (Doors.Count > 0)
+            {   
+                foreach (var Door in Doors)
+			    {
+                    bool bAddResult = Floor.AddDoor(Door.DoorIndex, Door.RelatedRoomIndex, Door.RoomFloorDisplacement);
+                    if (!bAddResult) return false;
+                }
+            }
+
+            var Buildings = InnerCellFloor.GetBuildings();
+            if (Buildings.Count > 0)
+		    {
+                foreach (var Building in Buildings)
+			    {
+                    bool bAddResult = Floor.AddBuilding(Building.Index);
+                    if (!bAddResult) return false;
+                }
+            }
+
+            return true;
         }
     }
 }
