@@ -4,9 +4,11 @@ using System;
 
 namespace BadassUniverse_MapEditor.Services.Mapper.Factories
 {
-    public class BasicWorldFactory : IWorldFactory
+    public class BasicFacadeSubFactory : IFacadeSubFactory
     {
-        public World CreateWorld(MapDTO map, ISubFactory[] factories)
+        Type ISubFactory.SubType => typeof(Facade);
+
+        Facade IFacadeSubFactory.CreateFacade(FacadeDTO facade)
         {
             throw new NotImplementedException();
         }

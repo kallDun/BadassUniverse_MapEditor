@@ -4,9 +4,11 @@ using System;
 
 namespace BadassUniverse_MapEditor.Services.Mapper.Factories
 {
-    public class BasicWorldFactory : IWorldFactory
+    public class BasicPhysicsItemSubFactory : IPhysicsItemSubFactory
     {
-        public World CreateWorld(MapDTO map, ISubFactory[] factories)
+        Type ISubFactory.SubType => typeof(PhysicsItem);
+
+        PhysicsItem IPhysicsItemSubFactory.CreatePhysicsItem(PhysicsItemDTO item)
         {
             throw new NotImplementedException();
         }

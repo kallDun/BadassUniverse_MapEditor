@@ -6,11 +6,11 @@ namespace BadassUniverse_MapEditor.Services.Mapper.Factories
 {
     public class BasicRoomSubFactory : IRoomSubFactory
     {
-        Type ISubFactory.SubType => throw new NotImplementedException();
+        Type ISubFactory.SubType => typeof(Room);
 
         Room IRoomSubFactory.CreateRoom(RoomDTO room)
         {
-
+            throw new NotImplementedException();
         }
     }
 }
