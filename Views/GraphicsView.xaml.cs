@@ -1,5 +1,4 @@
-﻿using BadassUniverse_MapEditor.Views;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace BadassUniverse_MapEditor
+namespace BadassUniverse_MapEditor.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for GraphicsView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class GraphicsView : UserControl
     {
-        public MainWindow()
+        public GraphicsView()
         {
             InitializeComponent();
         }
