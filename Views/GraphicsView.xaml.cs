@@ -35,7 +35,7 @@ namespace BadassUniverse_MapEditor.Views
                 for (int j = 0; j < cols; j++)
                 {
                     Rectangle rect = new Rectangle();
-                    rect.Fill = Brushes.Gray;
+                    rect.Fill = Brushes.DarkGray;
                     rect.Stroke = Brushes.White;
                     rect.StrokeThickness = 1;
                     rect.Width = size;

@@ -12,10 +12,53 @@
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
         mc:Ignorable="d"
-        Title="Badass Universe Map Editor" Height="450" Width="800">
+        Title="Badass Universe Map Editor" Height="650" Width="1000">
     <Grid>
-        <materialDesign:Card Margin="16">
-            <Frame Grid.Column="1" Source="Views/GraphicsView.xaml"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0">
+            <Menu Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,5,0,0">
+                <MenuItem Header="File" Height="25">
+                    <MenuItem Header="New"/>
+                    <MenuItem Header="Open"/>
+                    <MenuItem Header="Save"/>
+                    <MenuItem Header="Save As"/>
+                    <Separator/>
+                    <MenuItem Header="Exit"/>
+                </MenuItem>
+                <MenuItem Header="Edit" Height="25">
+                    <MenuItem Header="Sorry, not done yet"/>                    
+                </MenuItem>
+                <MenuItem Header="Help" Height="25">
+                    <MenuItem Header="Sorry, not done yet"/>
+                </MenuItem>
+            </Menu>
+        </StackPanel>
+
+        <materialDesign:Card Margin="10,10,0,10" Grid.Column="0" Grid.Row="1">
+            <Frame Source="Views/GraphicsView.xaml"/>
         </materialDesign:Card>
+
+        <Grid Grid.Column="1" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <materialDesign:Card Margin="10,10,10,5" Grid.Row="0">
+                <Frame Source="Views/ItemsView.xaml"/>
+            </materialDesign:Card>
+            <materialDesign:Card Margin="10,5,10,10" Grid.Row="1">
+                <Frame Source="Views/PropertiesView.xaml"/>
+            </materialDesign:Card>
+        </Grid>
     </Grid>
 </Window>
