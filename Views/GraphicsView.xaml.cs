@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -15,6 +16,7 @@ namespace BadassUniverse_MapEditor.Views
         double zoomValue = 1;
         double zoomMin = 1;
         double zoomMax = 10;
+        double zoomDelta = .5f;
 
         public GraphicsView()
         {
@@ -52,7 +54,17 @@ namespace BadassUniverse_MapEditor.Views
                 for (int j = 0; j < cols; j++)
                 {
                     Rectangle rect = new Rectangle();
-                    rect.Fill = Brushes.DarkGray;
+                    //rect.Fill = Brushes.DarkGray;
+
+
+                    // random color
+                    Random rnd = new();
+                    byte[] bytes = new byte[3];
+                    rnd.NextBytes(bytes);
+                    Color randomColor = Color.FromRgb(bytes[0], bytes[1], bytes[2]);
+                    rect.Fill = new SolidColorBrush(randomColor);
+
+
                     rect.Stroke = Brushes.White;
                     rect.StrokeThickness = 1;
                     rect.Width = size;
@@ -99,11 +111,11 @@ namespace BadassUniverse_MapEditor.Views
 
             if (e.Delta > 0)
             {
-                ChangeZoom(zoomValue + 1);
+                ChangeZoom(zoomValue + zoomDelta);
             }
             if (e.Delta < 0)
             {
-                ChangeZoom(zoomValue - 1);
+                ChangeZoom(zoomValue - zoomDelta);
             }
 
             e.Handled = true;
@@ -118,13 +130,17 @@ namespace BadassUniverse_MapEditor.Views
 
         void ChangeZoom(double value)
         {
-            zoomValue = Math.Clamp(value, zoomMin, zoomMax);
+            double newValue = Math.Clamp(value, zoomMin, zoomMax);
+            if (newValue == zoomValue) return;
+            zoomValue = newValue;
             scaleTransform.ScaleX = zoomValue;
             scaleTransform.ScaleY = zoomValue;
 
-            var centerOfViewport = new Point(scrollViewer.ViewportWidth / 2,
-                                             scrollViewer.ViewportHeight / 2);
+            var centerOfViewport = new Point(scrollViewer.ViewportWidth / 2, scrollViewer.ViewportHeight / 2);
             lastCenterPositionOnTarget = scrollViewer.TranslatePoint(centerOfViewport, GraphicsGrid);
+
+            scrollViewer.ScrollToHorizontalOffset(scrollViewer.HorizontalOffset);
+            scrollViewer.ScrollToVerticalOffset(scrollViewer.VerticalOffset);
         }
 
         void OnScrollViewerScrollChanged(object sender, ScrollChangedEventArgs e)
@@ -138,10 +154,8 @@ namespace BadassUniverse_MapEditor.Views
                 {
                     if (lastCenterPositionOnTarget.HasValue)
                     {
-                        var centerOfViewport = new Point(scrollViewer.ViewportWidth / 2,
-                                                         scrollViewer.ViewportHeight / 2);
-                        Point centerOfTargetNow =
-                              scrollViewer.TranslatePoint(centerOfViewport, GraphicsGrid);
+                        var centerOfViewport = new Point(scrollViewer.ViewportWidth / 2, scrollViewer.ViewportHeight / 2);
+                        Point centerOfTargetNow = scrollViewer.TranslatePoint(centerOfViewport, GraphicsGrid);
 
                         targetBefore = lastCenterPositionOnTarget;
                         targetNow = centerOfTargetNow;
@@ -160,18 +174,13 @@ namespace BadassUniverse_MapEditor.Views
                     double dXInTargetPixels = targetNow.Value.X - targetBefore.Value.X;
                     double dYInTargetPixels = targetNow.Value.Y - targetBefore.Value.Y;
 
-                    double multiplicatorX = e.ExtentWidth / GraphicsGrid.Width;
-                    double multiplicatorY = e.ExtentHeight / GraphicsGrid.Height;
+                    double multiplicatorX = e.ExtentWidth / GraphicsGrid.ActualWidth;
+                    double multiplicatorY = e.ExtentHeight / GraphicsGrid.ActualHeight;
 
-                    double newOffsetX = scrollViewer.HorizontalOffset -
-                                        dXInTargetPixels * multiplicatorX;
-                    double newOffsetY = scrollViewer.VerticalOffset -
-                                        dYInTargetPixels * multiplicatorY;
+                    double newOffsetX = scrollViewer.HorizontalOffset - dXInTargetPixels * multiplicatorX;
+                    double newOffsetY = scrollViewer.VerticalOffset - dYInTargetPixels * multiplicatorY;
 
-                    if (double.IsNaN(newOffsetX) || double.IsNaN(newOffsetY))
-                    {
-                        return;
-                    }
+                    if (double.IsNaN(newOffsetX) || double.IsNaN(newOffsetY)) return;
 
                     scrollViewer.ScrollToHorizontalOffset(newOffsetX);
                     scrollViewer.ScrollToVerticalOffset(newOffsetY);
