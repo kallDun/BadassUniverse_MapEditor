@@ -13,8 +13,14 @@
              FontFamily="{DynamicResource MaterialDesignFont}"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-            <Grid x:Name="GraphicsGrid"/>
+        <ScrollViewer Name="scrollViewer" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden">
+            <Grid x:Name="GraphicsGrid" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Grid.LayoutTransform>
+                    <TransformGroup>
+                        <ScaleTransform x:Name="scaleTransform"/>
+                    </TransformGroup>
+                </Grid.LayoutTransform>
+            </Grid>
         </ScrollViewer>
     </Grid>
 </UserControl>

@@ -34,8 +34,15 @@
                     <Separator/>
                     <MenuItem Header="Exit"/>
                 </MenuItem>
-                <MenuItem Header="Edit" Height="25">
-                    <MenuItem Header="Sorry, not done yet"/>                    
+                <MenuItem Header="Server" Height="25">
+                    <MenuItem Header="User">
+                        <TextBox Text="Name"/>
+                        <TextBox Text="Password"/>
+                        <MenuItem Header="Log in"/>
+                        <MenuItem Header="Log out"/>
+                    </MenuItem>
+                    <MenuItem Header="Save"/>
+                    <MenuItem Header="Load"/>
                 </MenuItem>
                 <MenuItem Header="Help" Height="25">
                     <MenuItem Header="Sorry, not done yet"/>
