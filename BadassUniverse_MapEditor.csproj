@@ -8,9 +8,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\Icons\Facade.png" />
+    <None Remove="Assets\Icons\Item.png" />
+    <None Remove="Assets\Icons\Mob.png" />
+    <None Remove="Assets\Icons\Room.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MaterialDesignColors" Version="2.1.4" />
     <PackageReference Include="MaterialDesignThemes" Version="4.9.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\Icons\Facade.png" />
+    <Resource Include="Assets\Icons\Item.png" />
+    <Resource Include="Assets\Icons\Mob.png" />
+    <Resource Include="Assets\Icons\Room.png" />
   </ItemGroup>
 
 </Project>
