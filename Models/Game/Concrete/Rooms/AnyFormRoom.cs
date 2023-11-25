@@ -27,7 +27,7 @@ namespace BadassUniverse_MapEditor.Models.Game.Concrete.Rooms
             
             foreach (var door in doorParameters)
             {
-                map.RoomInit_SetDoor(Id, door.Position, door.Id, door.Height);
+                map.RoomInit_SetDoor(Id, door.Position, door.Id, door.FloorDisplacement);
             }
             map = map.RotateMap(rotation);
             return map;

@@ -15,24 +15,24 @@ namespace BadassUniverse_MapEditor.Models.Game
             if (MapDirection.Down == Rotation)
             {
                 newMap = InitMap(GetSizeY(), GetSizeX());
-                for (int i = 0; i < GetSizeY(); i++) 
+                for (int y = 0; y < GetSizeY(); y++) 
                 {
-                    for (int j = 0; j < GetSizeX(); j++)
+                    for (int x = 0; x < GetSizeX(); x++)
                     {
-                        MapIndex Index = GetRotatedIndex(new MapIndex(i, j), Rotation, GetSizeX(), GetSizeY());
-                        newMap.SetValue(Index, (MapCell)GetValue(new MapIndex(i, j)).Clone());
+                        MapIndex Index = GetRotatedIndex(new MapIndex(y, x), Rotation, GetSizeX(), GetSizeY());
+                        newMap.SetValue(Index, (MapCell)GetValue(new MapIndex(y, x)).Clone());
                     }
                 }
             }
             else
             {
                 newMap = InitMap(GetSizeX(), GetSizeY());
-                for (int i = 0; i < GetSizeY(); i++)
+                for (int y = 0; y < GetSizeY(); y++)
                 {
-                    for (int j = 0; j < GetSizeX(); j++)
+                    for (int x = 0; x < GetSizeX(); x++)
                     {
-                        MapIndex Index = GetRotatedIndex(new MapIndex(i, j), Rotation, GetSizeY(), GetSizeX());
-                        newMap.SetValue(Index, (MapCell)GetValue(new MapIndex(i, j)).Clone());
+                        MapIndex Index = GetRotatedIndex(new MapIndex(y, x), Rotation, GetSizeY(), GetSizeX());
+                        newMap.SetValue(Index, (MapCell)GetValue(new MapIndex(y, x)).Clone());
                     }
                 }
             }
@@ -42,14 +42,20 @@ namespace BadassUniverse_MapEditor.Models.Game
 
         private static MapIndex GetRotatedIndex(MapIndex MapIndex, MapDirection Rotation, int GetSizeY, int GetSizeX)
 	    {
-            return Rotation switch
+            MapIndex Index = MapIndex;
+            if (MapDirection.Right == Rotation)
             {
-                MapDirection.Up => MapIndex,
-                MapDirection.Right => new MapIndex(MapIndex.X, GetSizeY - MapIndex.Y - 1),
-                MapDirection.Down => new MapIndex(GetSizeX - MapIndex.X - 1, GetSizeY - MapIndex.Y - 1),
-                MapDirection.Left => new MapIndex(GetSizeX - MapIndex.X - 1, MapIndex.Y),
-                _ => MapIndex,
-            };
+                Index = new MapIndex(MapIndex.X, GetSizeX - 1 - MapIndex.Y);
+            }
+            else if (MapDirection.Down == Rotation)
+            {
+                Index = new MapIndex(GetSizeY - 1 - MapIndex.Y, GetSizeX - 1 - MapIndex.X);
+            }
+            else if (MapDirection.Left == Rotation)
+            {
+                Index = new MapIndex(GetSizeY - 1 - MapIndex.X, MapIndex.Y);
+            }
+            return Index;
         }
 
         public bool FillWithInnerMap(Map InnerMap, int InnerMapFloorIndex, MapIndex TopLeftCorner, out Map OutGlobalMap)
@@ -140,7 +146,7 @@ namespace BadassUniverse_MapEditor.Models.Game
 
         public void RoomInit_SetDoor(int RoomIndex, MapIndex Index, int DoorIndex, int FloorDisplacement)
         {
-            var Cell = MapCell.InitEmpty();
+            var Cell = GetValue(Index);
             Cell.AddDoor(DoorIndex, RoomIndex, FloorDisplacement);
             SetValue(Index, Cell);
         }

@@ -26,8 +26,8 @@ namespace BadassUniverse_MapEditor.Services.Storage
                         new()
                         {
                             Id = 0,
-                            Position = new MapIndex(0, 0),
-                            Height = 0
+                            Position = new MapIndex(5, 0),
+                            FloorDisplacement = 0
                         }
                     },
                     RoomType = typeof(SquareRoom)

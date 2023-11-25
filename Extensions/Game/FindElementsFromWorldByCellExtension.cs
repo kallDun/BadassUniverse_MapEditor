@@ -9,7 +9,7 @@ namespace BadassUniverse_MapEditor.Extensions.Game
     {
         public static Room? GetRoomFromWorldByCell(this World world, MapCell mapCell, int currentFloor)
         {
-            MapItemRoom itemRoom = mapCell.GetRoom(currentFloor);
+            MapItemRoom? itemRoom = mapCell.GetRoom(currentFloor);
             if (itemRoom != null)
             {
                 return world.Rooms.FirstOrDefault(x => x.Id == itemRoom.Index);

@@ -53,7 +53,10 @@ namespace BadassUniverse_MapEditor.Views
                 for (int x = 0; x < map.GetSizeX(); x++)
                 {
                     MapIndex index = new(y, x);
-                    GraphicsCell cell = new(world, index, map.GetValue(index), drawingFloor);
+                    Frame cell = new()
+                    {
+                        Content = new GraphicsCell(world, index, map.GetValue(index), drawingFloor)
+                    };
                     Grid.SetRow(cell, y);
                     Grid.SetColumn(cell, x);
                     GraphicsGrid.Children.Add(cell);

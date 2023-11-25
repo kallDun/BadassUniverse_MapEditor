@@ -24,7 +24,7 @@ namespace BadassUniverse_MapEditor.Models.Game
         }
         public bool AddWall(int relatedRoomIndex, int floorIndex = 0)
         {
-            return GetFloor(floorIndex).AddRoom(relatedRoomIndex);
+            return GetFloor(floorIndex).AddWall(relatedRoomIndex);
         }
         public bool AddDoor(int doorIndex, int relatedRoomIndex, int roomFloorDisplacement = 0, int floorIndex = 0)
         {
@@ -35,7 +35,7 @@ namespace BadassUniverse_MapEditor.Models.Game
             return GetFloor(floorIndex).AddBuilding(buildingIndex);
         }
 
-        public MapItemRoom GetRoom(int floorIndex)
+        public MapItemRoom? GetRoom(int floorIndex)
         {
             return GetFloor(floorIndex).GetRoom();
         }

@@ -23,7 +23,7 @@ namespace BadassUniverse_MapEditor.Models.Game.Concrete.Rooms
             map.RoomInit_FillSquareRoomSpace(Id, new MapIndex(0, 0), new MapIndex(parameters.Width + 1, parameters.Length + 1));
             foreach (var door in doorParameters)
             {
-                map.RoomInit_SetDoor(Id, door.Position, door.Id, door.Height);
+                map.RoomInit_SetDoor(Id, door.Position, door.Id, door.FloorDisplacement);
             }
             map = map.RotateMap(rotation);
             return map;

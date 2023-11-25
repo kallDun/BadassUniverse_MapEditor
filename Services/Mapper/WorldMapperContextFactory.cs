@@ -5,9 +5,9 @@ using System.Windows;
 
 namespace BadassUniverse_MapEditor.Services.Mapper
 {
-    public class WorldMapperContextGenerator
+    public class WorldMapperContextFactory
     {
-        public static WorldMapperContext Generate(string mapVersion)
+        public static WorldMapperContext GetContext(string mapVersion)
         {
             string version = GetApplicationVersion();
             if (mapVersion.CompareTo(version) > 0)
@@ -24,7 +24,7 @@ namespace BadassUniverse_MapEditor.Services.Mapper
             return mapperContext;
         }
 
-        public static WorldMapperContext GenerateDefaultContext() => Generate(GetApplicationVersion());
+        public static WorldMapperContext GetDefaultContext() => GetContext(GetApplicationVersion());
 
         private static string GetApplicationVersion()
         {

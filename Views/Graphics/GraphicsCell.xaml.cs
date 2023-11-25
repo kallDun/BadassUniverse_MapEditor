@@ -1,6 +1,8 @@
 ﻿using BadassUniverse_MapEditor.Extensions.Game;
 using BadassUniverse_MapEditor.Models.Game;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -35,6 +37,11 @@ namespace BadassUniverse_MapEditor.Views.Graphics
             bool hasWalls = TryToInitializeWalls();
             bool hasDoors = TryToInitializeDoors();
             bool hasFacade = TryToInitializeFacade();
+
+            if (hasRoom || hasWalls || hasDoors || hasFacade)
+            {
+                Debug.WriteLine($"Index=({position.Y};{position.X}), Room={hasRoom}, Walls={hasWalls}, Doors={hasDoors}");
+            }
         }
 
         private bool TryToInitializeRoom()
@@ -129,7 +136,7 @@ namespace BadassUniverse_MapEditor.Views.Graphics
 
             for (int i = 0; i < values.Count; i+=2)
             {
-                byte alpha = (byte)(255 / (values.Count / 2));
+                byte alpha = (byte)(255 / (values.Count / 2 + values.Count % 2));
                 Color color1 = Color.FromArgb(alpha, values[i].Color.R, values[i].Color.G, values[i].Color.B);
                 Color color2 = i + 1 < values.Count
                     ? Color.FromArgb(alpha, values[i + 1].Color.R, values[i + 1].Color.G, values[i + 1].Color.B)

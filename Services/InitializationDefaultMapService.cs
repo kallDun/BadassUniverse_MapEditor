@@ -30,13 +30,27 @@ namespace BadassUniverse_MapEditor.Services
             mapDTO.Rooms.Add(new RoomDTO
             {
                 Id = 0,
-                Name = "Default Room",
                 MapId = 0,
                 InGameRoomId = 0,
-                Color = Color.FromRgb(120, 120, 120),
+                Name = StorageService.GetRoomName(gameRoomId: 0),
+                Color = Color.FromRgb(0, 120, 120),
                 MapOffsetX = 25,
                 MapOffsetY = 25,
                 Rotation = MapDirection.Up,
+                Floor = 0,
+                PhysicsItems = new List<PhysicsItemDTO>(),
+                Mobs = new List<MobDTO>()
+            });
+            mapDTO.Rooms.Add(new RoomDTO
+            {
+                Id = 1,
+                MapId = 0,
+                InGameRoomId = 0,
+                Name = StorageService.GetRoomName(gameRoomId: 0),
+                Color = Color.FromRgb(0, 0, 120),
+                MapOffsetX = 14,
+                MapOffsetY = 24,
+                Rotation = MapDirection.Down,
                 Floor = 0,
                 PhysicsItems = new List<PhysicsItemDTO>(),
                 Mobs = new List<MobDTO>()

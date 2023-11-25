@@ -15,7 +15,7 @@ namespace BadassUniverse_MapEditor.Services.Mapper
         public WorldMapper(MapDTO mapDTO)
         {
             this.mapDTO = mapDTO;
-            mapperContext = WorldMapperContextGenerator.Generate(mapDTO.Version);
+            mapperContext = WorldMapperContextFactory.GetContext(mapDTO.Version);
         }
 
         public bool TryToGetWorld(out World world)

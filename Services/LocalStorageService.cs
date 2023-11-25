@@ -25,12 +25,12 @@ namespace BadassUniverse_MapEditor.Services
             else throw new ArgumentException("Cannot create world from mapDTO");
         }
 
-        public string GetRoomName(int roomId)
+        public string GetRoomName(int gameRoomId)
         {
             WorldMapperContext context = worldMapper?.MapperContext
-                ?? WorldMapperContextGenerator.GenerateDefaultContext();
-            return context.GameStorage.GetRoomData(roomId)?.Name
-                ?? throw new ArgumentException($"Room with id {roomId} not found.");
+                ?? WorldMapperContextFactory.GetDefaultContext();
+            return context.GameStorage.GetRoomData(gameRoomId)?.Name
+                ?? throw new ArgumentException($"Room with id {gameRoomId} not found.");
         }
 
         public override void Destroy() => throw new Exception("LocalStorageService cannot be destroyed");
