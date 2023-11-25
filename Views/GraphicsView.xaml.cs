@@ -21,7 +21,7 @@ namespace BadassUniverse_MapEditor.Views
         {
             int rows = 40;
             int cols = 80;
-            int size = 24;
+            int size = 25;
             for (int i = 0; i < rows; i++)
             {
                 RowDefinition row = new RowDefinition();
