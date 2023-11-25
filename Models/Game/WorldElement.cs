@@ -10,15 +10,15 @@ namespace BadassUniverse_MapEditor.Models.Game
             Name = name;
             Color = color;
             Floor = floor;
-            LocalMap = GenerateMap();
         }
 
         public int Id { get; set; }
         public string Name { get; private set; }
         public Color Color { get; private set; }
         public int Floor { get; private set; }
-        public Map LocalMap { get; private set; }
 
+        private Map? map;
+        public Map LocalMap => map ??= GenerateMap();
         protected abstract Map GenerateMap();
     }
 }

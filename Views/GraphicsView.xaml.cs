@@ -1,67 +1,64 @@
 ﻿using BadassUniverse_MapEditor.Extensions.Graphics;
-using System;
+using BadassUniverse_MapEditor.Models.Game;
+using BadassUniverse_MapEditor.Services;
+using BadassUniverse_MapEditor.Services.Manager;
+using BadassUniverse_MapEditor.Views.Graphics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Shapes;
 
 namespace BadassUniverse_MapEditor.Views
 {
     public partial class GraphicsView : UserControl
     {
+        private static LocalStorageService StorageService
+            => ServicesManager.Instance.GetService<LocalStorageService>();
+
         public GraphicsView()
         {
             InitializeComponent();
-            InitGrid();
             scrollViewer.EnableDragZoom(GraphicsGrid, scaleTransform, MouseButton.Middle);
+            StorageService.OnWorldChanged += RedrawGrid;
+            RedrawGrid();
         }
 
-        private void InitGrid()
+        private void RedrawGrid()
         {
-            int rows = 40;
-            int cols = 80;
+            GraphicsGrid.Children.Clear();
+
             int size = 25;
-            for (int i = 0; i < rows; i++)
+            int drawingFloor = 0;
+            World world = StorageService.World;
+            Map map = world.Map;
+
+            for (int i = 0; i < map.GetSizeY(); i++)
             {
-                RowDefinition row = new RowDefinition();
-                row.Height = new GridLength(size);
+                RowDefinition row = new()
+                {
+                    Height = new GridLength(size)
+                };
                 GraphicsGrid.RowDefinitions.Add(row);
             }
-            for (int i = 0; i < cols; i++)
+            for (int i = 0; i < map.GetSizeX(); i++)
             {
-                ColumnDefinition col = new ColumnDefinition();
-                col.Width = new GridLength(size);
+                ColumnDefinition col = new()
+                {
+                    Width = new GridLength(size)
+                };
                 GraphicsGrid.ColumnDefinitions.Add(col);
             }
-            for (int i = 0; i < rows; i++)
+
+            for (int y = 0; y < map.GetSizeY(); y++)
             {
-                for (int j = 0; j < cols; j++)
+                for (int x = 0; x < map.GetSizeX(); x++)
                 {
-                    Rectangle rect = new Rectangle();
-                    //rect.Fill = Brushes.DarkGray;
-
-
-                    // random color
-                    Random rnd = new();
-                    byte[] bytes = new byte[3];
-                    rnd.NextBytes(bytes);
-                    Color randomColor = Color.FromRgb(bytes[0], bytes[1], bytes[2]);
-                    rect.Fill = new SolidColorBrush(randomColor);
-
-
-                    rect.Stroke = Brushes.White;
-                    rect.StrokeThickness = 1;
-                    rect.Width = size;
-                    rect.Height = size;
-                    Grid.SetRow(rect, i);
-                    Grid.SetColumn(rect, j);
-                    GraphicsGrid.Children.Add(rect);
+                    MapIndex index = new(y, x);
+                    GraphicsCell cell = new(world, index, map.GetValue(index), drawingFloor);
+                    Grid.SetRow(cell, y);
+                    Grid.SetColumn(cell, x);
+                    GraphicsGrid.Children.Add(cell);
                 }
             }
         }
-
-
-        
     }
 }

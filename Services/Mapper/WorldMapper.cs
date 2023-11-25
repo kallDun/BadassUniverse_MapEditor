@@ -1,19 +1,26 @@
 using BadassUniverse_MapEditor.Models.Game;
 using BadassUniverse_MapEditor.Models.Server;
-using BadassUniverse_MapEditor.Services.Mapper.Factories;
 
 namespace BadassUniverse_MapEditor.Services.Mapper
 {
     public class WorldMapper : IWorldMapper
     {
-        public bool TryToGetWorld(MapDTO mapDTO, out World world)
+        private WorldMapperContext mapperContext;
+        private MapDTO mapDTO;
+
+        public WorldMapperContext MapperContext => mapperContext;
+
+        public MapDTO MapDTO => mapDTO;
+
+        public WorldMapper(MapDTO mapDTO)
         {
-            IWorldFactory factory = new BasicWorldFactory();
-            ISubFactory[] subFactories = new ISubFactory[]
-            {
-                new BasicRoomSubFactory(), new BasicFacadeSubFactory(), new BasicPhysicsItemSubFactory(), new BasicMobSubFactory()
-            };
-            world = factory.CreateWorld(mapDTO, subFactories);
+            this.mapDTO = mapDTO;
+            mapperContext = WorldMapperContextGenerator.Generate(mapDTO.Version);
+        }
+
+        public bool TryToGetWorld(out World world)
+        {
+            world = mapperContext.WorldFactory.CreateWorld(mapDTO, mapperContext);
             return world != null;
         }
     }

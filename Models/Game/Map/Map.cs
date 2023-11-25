@@ -94,6 +94,10 @@ namespace BadassUniverse_MapEditor.Models.Game
             for (int i = 0; i < SizeY; i++)
             {
                 map.Array[i] = new MapCell[SizeX];
+                for (int j = 0; j < SizeX; j++)
+                {
+                    map.Array[i][j] = MapCell.InitEmpty();
+                }
             }
             return map;
         }

@@ -2,31 +2,24 @@
 using BadassUniverse_MapEditor.Models.Server;
 using System;
 using System.Linq;
-using System.Windows;
 
 namespace BadassUniverse_MapEditor.Services.Mapper.Factories
 {
     public class BasicWorldFactory : IWorldFactory
     {
-        public World CreateWorld(MapDTO mapDto, ISubFactory[] factories)
+        public World CreateWorld(MapDTO mapDto, WorldMapperContext mapperContext)
         {
-            App? app = Application.Current as App;
-            if (app == null) throw new Exception("App is null");
-            string version = app.Version;
-            if (mapDto.Version.CompareTo(version) > 0) 
-                throw new Exception("Map version is higher than the application version");
-
             World world = new()
             {
                 Name = mapDto.Name,
                 Map = Map.InitMap(mapDto.YLenght, mapDto.XLenght)
             };
 
-            if (factories.FirstOrDefault(x => x is IRoomSubFactory) is IRoomSubFactory roomFactory)
+            if (mapperContext.SubFactories.FirstOrDefault(x => x is IRoomSubFactory) is IRoomSubFactory roomFactory)
             {
                 foreach (var roomDto in mapDto.Rooms)
                 {
-                    Room room = roomFactory.CreateRoom(roomDto);
+                    Room room = roomFactory.CreateRoom(roomDto, mapperContext.GameStorage);
                     world.Rooms.Add(room);
 
                     bool result = world.Map.FillWithInnerMap(room.LocalMap, roomDto.Floor, 
@@ -36,11 +29,11 @@ namespace BadassUniverse_MapEditor.Services.Mapper.Factories
                 }
             }
 
-            if (factories.FirstOrDefault(x => x is IFacadeSubFactory) is IFacadeSubFactory facadeFactory)
+            /*if (mapperContext.SubFactories.FirstOrDefault(x => x is IFacadeSubFactory) is IFacadeSubFactory facadeFactory)
             {
                 foreach (var facadeDto in mapDto.Facades)
                 {
-                    Facade facade = facadeFactory.CreateFacade(facadeDto);
+                    Facade facade = facadeFactory.CreateFacade(facadeDto, mapperContext.GameStorage);
                     world.Facades.Add(facade);
 
                     bool result = world.Map.FillWithInnerMap(facade.LocalMap, facadeDto.Floor,
@@ -48,7 +41,7 @@ namespace BadassUniverse_MapEditor.Services.Mapper.Factories
                     if (!result) throw new ArgumentException("Invalid intersection of facade map");
                     world.Map = outMap;
                 }
-            }
+            }*/
 
             return world;
         }
