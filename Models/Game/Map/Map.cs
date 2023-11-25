@@ -52,7 +52,7 @@ namespace BadassUniverse_MapEditor.Models.Game
             };
         }
 
-        public bool FillWithInnerMap(Map InnerMap, int InnerMapFloorIndex, MapIndex TopLeftCorner, Map OutGlobalMap)
+        public bool FillWithInnerMap(Map InnerMap, int InnerMapFloorIndex, MapIndex TopLeftCorner, out Map OutGlobalMap)
 	    {
             OutGlobalMap = (Map)Clone();
 

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using BadassUniverse_MapEditor.Models.Game;
+using System.Collections.Generic;
 
 namespace BadassUniverse_MapEditor.Models.Server
 {
@@ -7,8 +8,12 @@ namespace BadassUniverse_MapEditor.Models.Server
         public int Id { get; set; }
         public int MapId { get; set; }
         public int InGameRoomId { get; set; }
+        public string? Name { get; set; }
+        public ColorDTO Color { get; set; }
         public int MapOffsetX { get; set; }
         public int MapOffsetY { get; set; }
+        public MapDirection Rotation { get; set; }
+        public int Floor { get; set; }
         public string? Params { get; set; }
         public string? DoorParams { get; set; }
         public required List<PhysicsItemDTO> PhysicsItems { get; set; }

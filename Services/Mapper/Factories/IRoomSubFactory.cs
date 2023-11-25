@@ -5,6 +5,6 @@ namespace BadassUniverse_MapEditor.Services.Mapper.Factories
 {
     public interface IRoomSubFactory : ISubFactory
     {
-        protected abstract Room CreateRoom(RoomDTO room);
+        Room CreateRoom(RoomDTO room);
     }
 }

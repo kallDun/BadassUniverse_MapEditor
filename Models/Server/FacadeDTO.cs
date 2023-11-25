@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BadassUniverse_MapEditor.Models.Game;
 
 namespace BadassUniverse_MapEditor.Models.Server
 {
@@ -13,6 +9,8 @@ namespace BadassUniverse_MapEditor.Models.Server
         public int InGameFacadeId { get; set; }
         public int MapOffsetX { get; set; }
         public int MapOffsetY { get; set; }
-
+        public ColorDTO Color { get; set; }
+        public int Floor { get; set; }
+        public MapDirection Rotation { get; set; }
     }
 }

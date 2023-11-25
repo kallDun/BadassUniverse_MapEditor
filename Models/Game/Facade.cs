@@ -2,10 +2,10 @@
 
 namespace BadassUniverse_MapEditor.Models.Game
 {
-    public class Facade
+    public abstract class Facade : WorldElement
     {
-        public int Id { get; set; }
-
-        public Color Color { get; set; }
+        protected Facade(int id, string name, int floor, Color color) : base(id, name, floor, color)
+        {
+        }
     }
 }

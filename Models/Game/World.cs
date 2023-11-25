@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace BadassUniverse_MapEditor.Models.Game
 {
     public class World
     {
-        public List<Room> Rooms { get; set; }
-        public List<PhysicsItem> Items { get; set; }
-        public List<Facade> Facades { get; set; }
-        public List<Mob> Mobs { get; set; }
-        public Map Map { get; set; }
+        public required string Name { get; set; }
+        public List<Room> Rooms { get; } = new List<Room>();
+        public List<Facade> Facades { get; } = new List<Facade>();
+        public List<PhysicsItem> Items { get; } = new List<PhysicsItem>();
+        public List<Mob> Mobs { get; } = new List<Mob>(); 
+        public required Map Map { get; set; }
     }
 }

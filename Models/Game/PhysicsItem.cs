@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BadassUniverse_MapEditor.Models.Game
 {
-    public class PhysicsItem
+    public abstract class PhysicsItem
     {
 
     }

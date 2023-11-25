@@ -5,6 +5,6 @@ namespace BadassUniverse_MapEditor.Services.Mapper.Factories
 {
     public interface IMobSubFactory : ISubFactory
     {
-        protected abstract Mob CreateMob(MobDTO mob);
+        Mob CreateMob(MobDTO mob);
     }
 }

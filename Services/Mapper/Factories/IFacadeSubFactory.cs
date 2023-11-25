@@ -5,6 +5,6 @@ namespace BadassUniverse_MapEditor.Services.Mapper.Factories
 {
     public interface IFacadeSubFactory : ISubFactory
     {
-        protected abstract Facade CreateFacade(FacadeDTO facade);
+        Facade CreateFacade(FacadeDTO facade);
     }
 }

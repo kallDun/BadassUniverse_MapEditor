@@ -5,6 +5,6 @@ namespace BadassUniverse_MapEditor.Services.Mapper.Factories
 {
     public interface IPhysicsItemSubFactory : ISubFactory
     {
-        protected abstract PhysicsItem CreatePhysicsItem(PhysicsItemDTO physicsItem);
+        PhysicsItem CreatePhysicsItem(PhysicsItemDTO physicsItem);
     }
 }
