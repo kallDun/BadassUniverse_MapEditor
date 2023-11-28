@@ -22,5 +22,7 @@ namespace BadassUniverse_MapEditor.Services.Manager
             }
             return (T)service;
         }
+
+        public void RegisterService<T>() where T : IService, new() => GetService<T>();
     }
 }

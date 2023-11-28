@@ -13,8 +13,10 @@ namespace BadassUniverse_MapEditor.Services
         private static LocalStorageService StorageService
             => ServicesManager.Instance.GetService<LocalStorageService>();
 
-        public void InitializeDefaultMap()
+        public override void Initialize()
         {
+            base.Initialize();
+
             MapDTO mapDTO = new()
             {
                 Id = 0,
