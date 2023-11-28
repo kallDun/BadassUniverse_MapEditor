@@ -1,6 +1,5 @@
 ﻿using BadassUniverse_MapEditor.Extensions.Game;
 using BadassUniverse_MapEditor.Models.Game;
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -9,7 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
-namespace BadassUniverse_MapEditor.Views.Graphics
+namespace BadassUniverse_MapEditor.Views.Elements
 {
     public partial class GraphicsCell : UserControl
     {

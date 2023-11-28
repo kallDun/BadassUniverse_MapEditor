@@ -1,9 +1,9 @@
-﻿<UserControl x:Class="BadassUniverse_MapEditor.Views.Elements.SubElements.PropertySubElementComboBox"
+﻿<UserControl x:Class="BadassUniverse_MapEditor.Views.Elements.PropertySubElementCheckBox"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
              TextElement.FontWeight="Regular"
              TextElement.FontSize="20"
              TextOptions.TextFormattingMode="Ideal"
@@ -17,13 +17,13 @@
         </Grid.ColumnDefinitions>
 
         <TextBlock TextAlignment="Right" VerticalAlignment="Center" 
-           Text="Property with combobox" Margin="20,0,20,0" TextWrapping="Wrap"/>
+               Text="Property with checkbox" Margin="20,0,20,0" TextWrapping="Wrap"/>
 
         <Rectangle HorizontalAlignment="Right" VerticalAlignment="Center" 
-           Width="1" Height="30" Fill="Black"/>
+               Width="1" Height="30" Fill="Black"/>
 
-        <ComboBox Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" 
-            VerticalContentAlignment="Center" Margin="20,0,20,0" Height="30"
-            Style="{DynamicResource MaterialDesignFloatingHintComboBox}" FontSize="20"/>
+        <CheckBox Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" 
+            VerticalContentAlignment="Center" Content="Action" Margin="20,0,20,0"
+            Style="{DynamicResource MaterialDesignFilterChipPrimaryCheckBox}" FontSize="20"/>
     </Grid>
 </UserControl>

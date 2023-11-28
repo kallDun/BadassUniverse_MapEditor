@@ -2,7 +2,7 @@
 using BadassUniverse_MapEditor.Models.Game;
 using BadassUniverse_MapEditor.Services;
 using BadassUniverse_MapEditor.Services.Manager;
-using BadassUniverse_MapEditor.Views.Graphics;
+using BadassUniverse_MapEditor.Views.Elements;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;

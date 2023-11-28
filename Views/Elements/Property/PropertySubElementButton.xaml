@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="BadassUniverse_MapEditor.Views.Elements.SubElements.PropertySubElementCheckBox"
+﻿<UserControl x:Class="BadassUniverse_MapEditor.Views.Elements.PropertySubElementButton"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -9,7 +9,7 @@
              TextOptions.TextFormattingMode="Ideal"
              TextOptions.TextRenderingMode="Auto"
              FontFamily="{DynamicResource MaterialDesignFont}"
-             d:DesignHeight="50" d:DesignWidth="450">
+             d:DesignHeight="50" d:DesignWidth="400">
     <Grid HorizontalAlignment="Center">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -17,13 +17,13 @@
         </Grid.ColumnDefinitions>
 
         <TextBlock TextAlignment="Right" VerticalAlignment="Center" 
-               Text="Property with checkbox" Margin="20,0,20,0" TextWrapping="Wrap"/>
-
+                   Text="Property with button" Margin="20,0,20,0" TextWrapping="Wrap"/>
+        
         <Rectangle HorizontalAlignment="Right" VerticalAlignment="Center" 
-               Width="1" Height="30" Fill="Black"/>
-
-        <CheckBox Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" 
-            VerticalContentAlignment="Center" Content="Action" Margin="20,0,20,0"
-            Style="{DynamicResource MaterialDesignFilterChipPrimaryCheckBox}" FontSize="20"/>
+                   Width="1" Height="30" Fill="Black"/>
+        
+        <Button Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" 
+                VerticalContentAlignment="Center" Content="Action" Margin="20,0,20,0"
+                Style="{DynamicResource MaterialDesignOutlinedButton}" FontSize="20"/>
     </Grid>
 </UserControl>
