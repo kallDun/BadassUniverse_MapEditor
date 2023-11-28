@@ -8,8 +8,8 @@
              d:DesignHeight="500" d:DesignWidth="400">
     <Grid>
         <ScrollViewer>
-            <StackPanel ScrollViewer.CanContentScroll="True" CanHorizontallyScroll="True">
-                <Frame Source="Elements/ItemElementView.xaml" Margin="0,5,0,0"/>
+            <StackPanel ScrollViewer.CanContentScroll="True" CanHorizontallyScroll="True"
+                        x:Name="ItemsStackPanel">
             </StackPanel>
         </ScrollViewer>
     </Grid>

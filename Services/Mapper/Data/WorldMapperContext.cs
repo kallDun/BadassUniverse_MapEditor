@@ -5,12 +5,15 @@ namespace BadassUniverse_MapEditor.Services.Mapper
 {
     public class WorldMapperContext
     {
-        public WorldMapperContext(IGameStorage gameStorage, IWorldFactory worldFactory, ISubFactory[] subFactories)
+        public WorldMapperContext(string version, IGameStorage gameStorage, IWorldFactory worldFactory, ISubFactory[] subFactories)
         {
+            Version = version;
             GameStorage = gameStorage;
             WorldFactory = worldFactory;
             SubFactories = subFactories;
         }
+
+        public string Version { get; private set; }
 
         public IGameStorage GameStorage { get; private set; }
 

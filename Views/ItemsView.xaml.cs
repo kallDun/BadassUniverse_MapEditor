@@ -1,20 +1,30 @@
-﻿using System.Windows;
+﻿using BadassUniverse_MapEditor.Services;
+using BadassUniverse_MapEditor.Services.Manager;
+using BadassUniverse_MapEditor.Views.Elements;
 using System.Windows.Controls;
-using System.Windows.Media;
-using System.Windows.Shapes;
 
 namespace BadassUniverse_MapEditor.Views
 {
     public partial class ItemsView : UserControl
     {
+        private static ItemsListService ItemsService
+            => ServicesManager.Instance.GetService<ItemsListService>();
+
         public ItemsView()
         {
             InitializeComponent();
             InitPanel();
+            ItemsService.OnItemsListChanged += InitPanel;
         }
+
         private void InitPanel()
         {
-            
+            var items = ItemsService.LoadItems();
+            foreach (var item in items)
+            {
+                ItemElementView view = new(item);
+                ItemsStackPanel.Children.Add(view);
+            }
         }
     }
 }

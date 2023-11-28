@@ -2,6 +2,7 @@
 using BadassUniverse_MapEditor.Models.Server;
 using BadassUniverse_MapEditor.Services.Manager;
 using BadassUniverse_MapEditor.Services.Mapper;
+using BadassUniverse_MapEditor.Services.Storage;
 using System;
 
 namespace BadassUniverse_MapEditor.Services
@@ -9,30 +10,39 @@ namespace BadassUniverse_MapEditor.Services
     public class LocalStorageService : AService
     {
         private World? world;
+        private WorldDTO? worldDTO;
+        private WorldMapperContext? worldMapperContext;
         private IWorldMapper? worldMapper;
 
         public Action? OnWorldChanged { get; set; }
         public World World => world ?? throw new Exception("World is null.");
 
-        public void SetMap(MapDTO mapDTO)
+        public override void Initialize()
         {
-            worldMapper = new WorldMapper(mapDTO);
+            base.Initialize();
+            worldMapperContext ??= WorldMapperContextFactory.GetDefaultContext();
+        }
+
+        public void SetWorld(WorldDTO worldDTO)
+        {
+            if (worldMapperContext == null || worldMapperContext.Version != worldDTO.Version)
+            {
+                worldMapperContext = WorldMapperContextFactory.GetContext(worldDTO.Version);
+            }
+            worldMapper = new WorldMapper(worldDTO, worldMapperContext);
             if (worldMapper.TryToGetWorld(out World world))
             {
+                this.worldDTO = worldDTO;
                 this.world = world;
                 OnWorldChanged?.Invoke();
             }
-            else throw new ArgumentException("Cannot create world from mapDTO");
+            else throw new ArgumentException("Cannot create world from mapDTO.");
         }
 
-        public string GetRoomName(int gameRoomId)
-        {
-            WorldMapperContext context = worldMapper?.MapperContext
-                ?? WorldMapperContextFactory.GetDefaultContext();
-            return context.GameStorage.GetRoomData(gameRoomId)?.Name
-                ?? throw new ArgumentException($"Room with id {gameRoomId} not found.");
-        }
+        public IGameStorage GetGameStorage() => worldMapperContext?.GameStorage 
+            ?? throw new Exception("World Context is null. Initialize Local Storage first!");
 
-        public override void Destroy() => throw new Exception("LocalStorageService cannot be destroyed");
+        public override void Destroy() 
+            => throw new Exception("LocalStorageService cannot be destroyed.");
     }
 }

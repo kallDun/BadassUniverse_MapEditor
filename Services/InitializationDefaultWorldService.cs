@@ -8,7 +8,7 @@ using System.Windows.Media;
 
 namespace BadassUniverse_MapEditor.Services
 {
-    public class InitializationDefaultMapService : AService
+    public class InitializationDefaultWorldService : AService
     {
         private static LocalStorageService StorageService
             => ServicesManager.Instance.GetService<LocalStorageService>();
@@ -17,10 +17,10 @@ namespace BadassUniverse_MapEditor.Services
         {
             base.Initialize();
 
-            MapDTO mapDTO = new()
+            WorldDTO worldDTO = new()
             {
                 Id = 0,
-                Name = "Default Map",
+                Name = "Default World",
                 XLenght = 50,
                 YLenght = 50,
                 PlayerSpawnRoomId = 0,
@@ -29,12 +29,13 @@ namespace BadassUniverse_MapEditor.Services
                 Version = (Application.Current as App 
                     ?? throw new Exception("Application cannot be null.")).Version
             };
-            mapDTO.Rooms.Add(new RoomDTO
+            worldDTO.Rooms.Add(new RoomDTO
             {
                 Id = 0,
                 MapId = 0,
                 InGameRoomId = 0,
-                Name = StorageService.GetRoomName(gameRoomId: 0),
+                Name = StorageService.GetGameStorage().GetRoomData(0)?.Name 
+                    ?? throw new ArgumentException($"Room with id {0} not found."),
                 Color = Color.FromRgb(0, 120, 120),
                 MapOffsetX = 25,
                 MapOffsetY = 25,
@@ -43,12 +44,13 @@ namespace BadassUniverse_MapEditor.Services
                 PhysicsItems = new List<PhysicsItemDTO>(),
                 Mobs = new List<MobDTO>()
             });
-            mapDTO.Rooms.Add(new RoomDTO
+            worldDTO.Rooms.Add(new RoomDTO
             {
                 Id = 1,
                 MapId = 0,
                 InGameRoomId = 0,
-                Name = StorageService.GetRoomName(gameRoomId: 0),
+                Name = StorageService.GetGameStorage().GetRoomData(0)?.Name 
+                    ?? throw new ArgumentException($"Room with id {0} not found."),
                 Color = Color.FromRgb(0, 0, 120),
                 MapOffsetX = 14,
                 MapOffsetY = 24,
@@ -58,7 +60,7 @@ namespace BadassUniverse_MapEditor.Services
                 Mobs = new List<MobDTO>()
             });
 
-            StorageService.SetMap(mapDTO);
+            StorageService.SetWorld(worldDTO);
         }
     }
 }

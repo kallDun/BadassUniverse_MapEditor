@@ -14,6 +14,7 @@ namespace BadassUniverse_MapEditor.Services.Mapper
                 throw new Exception("Map version is higher than the application version");
 
             WorldMapperContext mapperContext = new(
+                mapVersion,
                 new TestGameStorage(), new BasicWorldFactory(),
                 new ISubFactory[]
                 {

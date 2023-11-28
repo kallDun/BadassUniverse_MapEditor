@@ -6,21 +6,17 @@ namespace BadassUniverse_MapEditor.Services.Mapper
     public class WorldMapper : IWorldMapper
     {
         private WorldMapperContext mapperContext;
-        private MapDTO mapDTO;
+        private WorldDTO worldDto;
 
-        public WorldMapperContext MapperContext => mapperContext;
-
-        public MapDTO MapDTO => mapDTO;
-
-        public WorldMapper(MapDTO mapDTO)
+        public WorldMapper(WorldDTO worldDto, WorldMapperContext mapperContext)
         {
-            this.mapDTO = mapDTO;
-            mapperContext = WorldMapperContextFactory.GetContext(mapDTO.Version);
+            this.worldDto = worldDto;
+            this.mapperContext = mapperContext;
         }
 
         public bool TryToGetWorld(out World world)
         {
-            world = mapperContext.WorldFactory.CreateWorld(mapDTO, mapperContext);
+            world = mapperContext.WorldFactory.CreateWorld(worldDto, mapperContext);
             return world != null;
         }
     }

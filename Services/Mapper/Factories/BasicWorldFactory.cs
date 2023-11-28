@@ -7,17 +7,17 @@ namespace BadassUniverse_MapEditor.Services.Mapper.Factories
 {
     public class BasicWorldFactory : IWorldFactory
     {
-        public World CreateWorld(MapDTO mapDto, WorldMapperContext mapperContext)
+        public World CreateWorld(WorldDTO worldDto, WorldMapperContext mapperContext)
         {
             World world = new()
             {
-                Name = mapDto.Name,
-                Map = Map.InitMap(mapDto.YLenght, mapDto.XLenght)
+                Name = worldDto.Name,
+                Map = Map.InitMap(worldDto.YLenght, worldDto.XLenght)
             };
 
             if (mapperContext.SubFactories.FirstOrDefault(x => x is IRoomSubFactory) is IRoomSubFactory roomFactory)
             {
-                foreach (var roomDto in mapDto.Rooms)
+                foreach (var roomDto in worldDto.Rooms)
                 {
                     Room room = roomFactory.CreateRoom(roomDto, mapperContext.GameStorage);
                     world.Rooms.Add(room);

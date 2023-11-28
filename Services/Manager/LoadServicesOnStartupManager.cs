@@ -5,7 +5,7 @@
         public static void Initialize()
         {
             ServicesManager.Instance.RegisterService<LocalStorageService>();
-            ServicesManager.Instance.RegisterService<InitializationDefaultMapService>();
+            ServicesManager.Instance.RegisterService<InitializationDefaultWorldService>();
         }
     }
 }

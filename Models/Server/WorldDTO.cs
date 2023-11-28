@@ -2,7 +2,7 @@
 
 namespace BadassUniverse_MapEditor.Models.Server
 {
-    public class MapDTO
+    public class WorldDTO
     {
         public required int Id { get; set; }
         public required string Name { get; set; }
