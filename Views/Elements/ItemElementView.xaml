@@ -29,7 +29,7 @@
 
         <Button x:Name="item_place_button" 
                 HorizontalAlignment="Right" VerticalAlignment="Center" 
-                Content="Action" FontSize="20" Margin="20 0 20 0" Grid.Column="2"
+                Content="Spawn" FontSize="20" Margin="20 0 20 0" Grid.Column="2"
                 Style="{DynamicResource MaterialDesignOutlinedButton}"/>
     </Grid>
 </UserControl>

@@ -4,13 +4,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="500" d:DesignWidth="400">
     <Grid>
-        <StackPanel>
-            <Frame Grid.Row="0" Source="Elements/Property/PropertySubElementButton.xaml" Height="75"/>
-            <Frame Grid.Row="1" Source="Elements/Property/PropertySubElementCheckBox.xaml" Height="75"/>
-            <Frame Grid.Row="2" Source="Elements/Property/PropertySubElementComboBox.xaml" Height="75"/>
-            <Frame Grid.Row="3" Source="Elements/Property/PropertySubElementTextBox.xaml" Height="75"/>
-        </StackPanel>
+        <ScrollViewer>
+            <StackPanel ScrollViewer.CanContentScroll="True" CanHorizontallyScroll="True">
+                <Frame Grid.Row="0" Source="Elements/Property/PropertySubElementButton.xaml" Height="75"/>
+                <Frame Grid.Row="1" Source="Elements/Property/PropertySubElementCheckBox.xaml" Height="75"/>
+                <Frame Grid.Row="2" Source="Elements/Property/PropertySubElementComboBox.xaml" Height="75"/>
+                <Frame Grid.Row="3" Source="Elements/Property/PropertySubElementTextBox.xaml" Height="75"/>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </UserControl>
