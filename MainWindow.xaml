@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
-        TextElement.FontSize="13"
+        TextElement.FontSize="20"
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
@@ -20,12 +20,13 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="20*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0">
-            <Menu Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,5,0,0">
+        <StackPanel Grid.Row="0" VerticalAlignment="Center">
+            <Menu Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" 
+                  Margin="10,5,0,0" FontSize="20">
                 <MenuItem Header="File" Height="25">
                     <MenuItem Header="New"/>
                     <MenuItem Header="Open"/>
@@ -56,8 +57,8 @@
 
         <Grid Grid.Column="1" Grid.Row="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="*" MinHeight="100"/>
+                <RowDefinition Height="*" MinHeight="100"/>
             </Grid.RowDefinitions>
 
             <materialDesign:Card Margin="10,10,10,5" Grid.Row="0">
@@ -66,6 +67,32 @@
             <materialDesign:Card Margin="10,5,10,10" Grid.Row="1">
                 <Frame Source="Views/PropertiesView.xaml"/>
             </materialDesign:Card>
+
+            <GridSplitter Height="4" Width="150" VerticalAlignment="Bottom" HorizontalAlignment="Center"
+                          Style="{DynamicResource MaterialDesignScrollBarThumbVertical}"
+                          ResizeDirection="Rows" Focusable="False">
+                <GridSplitter.Template>
+                    <ControlTemplate TargetType="{x:Type GridSplitter}">
+                        <Grid>
+                            <Rectangle Fill="{DynamicResource AttentionToActionBrush}" />
+                        </Grid>
+                    </ControlTemplate>
+                </GridSplitter.Template>
+            </GridSplitter>
         </Grid>
+
+        <GridSplitter Grid.Column="1" Grid.Row="1"
+                      Height="150" Width="4"
+                      VerticalAlignment="Center" HorizontalAlignment="Left"
+                      Style="{DynamicResource MaterialDesignScrollBarThumbVertical}"
+                      ResizeDirection="Columns" Focusable="False">
+            <GridSplitter.Template>
+                <ControlTemplate TargetType="{x:Type GridSplitter}">
+                    <Grid>
+                        <Rectangle Fill="{DynamicResource AttentionToActionBrush}" />
+                    </Grid>
+                </ControlTemplate>
+            </GridSplitter.Template>
+        </GridSplitter>
     </Grid>
 </Window>

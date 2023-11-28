@@ -6,16 +6,30 @@
              xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
              xmlns:local="clr-namespace:BadassUniverse_MapEditor.Views.Elements"
              mc:Ignorable="d" 
-             d:DesignHeight="100" d:DesignWidth="200">
-    <Grid>
+             TextElement.FontWeight="Regular"
+             TextElement.FontSize="20"
+             TextOptions.TextFormattingMode="Ideal"
+             TextOptions.TextRenderingMode="Auto"
+             FontFamily="{DynamicResource MaterialDesignFont}"
+             d:DesignHeight="50" d:DesignWidth="400">
+    <Grid HorizontalAlignment="Center">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="175"/>
+            <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
+        
+        <Image Source="/Assets/Icons/Room.png" Width="50" Height="50" 
+               HorizontalAlignment="Left" VerticalAlignment="Center"
+               Margin="20 0 20 0"/>
 
-        <Image Source="/Assets/Icons/Room.png" Width="50" Height="50" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <TextBox Grid.Column="1" x:Name="item_name_text" Margin="10, 0, 10, 0" VerticalAlignment="Center" />
-        <Button Grid.Column="2" x:Name="item_place_button" HorizontalAlignment="Right" VerticalAlignment="Center" MinWidth="150" FontSize="20" Content="Place" Margin="0,0,20,0"/>
+        <TextBlock x:Name="item_name_text" Text="item to spawn on field"
+                   MinWidth="120" TextWrapping="Wrap" TextAlignment="Center"
+                   VerticalAlignment="Center" Grid.Column="1"/>
+
+        <Button x:Name="item_place_button" 
+                HorizontalAlignment="Right" VerticalAlignment="Center" 
+                Content="Action" FontSize="20" Margin="20 0 20 0" Grid.Column="2"
+                Style="{DynamicResource MaterialDesignOutlinedButton}"/>
     </Grid>
 </UserControl>
