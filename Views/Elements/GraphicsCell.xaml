@@ -33,13 +33,13 @@
             <Ellipse Width="22" Height="22" Stroke="Black" StrokeThickness="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
 
-        <Grid x:Name="FacadeView" Visibility="Hidden">
+        <Grid x:Name="FacadeView" Visibility="Visible">
             <Border BorderBrush="Black" BorderThickness="1"/>
-            <Line X1="0" Y1="0" X2="50" Y2="50" Stroke="Black" StrokeThickness="1"/>
-            <Line X1="0" Y1="15" X2="35" Y2="50" Stroke="Black" StrokeThickness="1"/>
-            <Line X1="0" Y1="30" X2="20" Y2="50" Stroke="Black" StrokeThickness="1"/>
-            <Line X1="15" Y1="0" X2="50" Y2="35" Stroke="Black" StrokeThickness="1"/>
-            <Line X1="30" Y1="0" X2="50" Y2="20" Stroke="Black" StrokeThickness="1"/>
+            <Line X1="0" Y1="15" X2="10" Y2="25" Stroke="Black" StrokeThickness="1"/>
+            <Line X1="0" Y1="7.5" X2="17.5" Y2="25" Stroke="Black" StrokeThickness="1"/>
+            <Line X1="0" Y1="0" X2="25" Y2="25" Stroke="Black" StrokeThickness="1"/>
+            <Line X1="7.5" Y1="0" X2="25" Y2="17.5" Stroke="Black" StrokeThickness="1"/>
+            <Line X1="15" Y1="0" X2="25" Y2="10" Stroke="Black" StrokeThickness="1"/>
         </Grid>
     </Grid>
 </UserControl>

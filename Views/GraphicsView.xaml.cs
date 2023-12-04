@@ -1,11 +1,11 @@
-﻿using BadassUniverse_MapEditor.Extensions.Graphics;
+﻿using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
+using BadassUniverse_MapEditor.Extensions.Graphics;
 using BadassUniverse_MapEditor.Models.Game;
 using BadassUniverse_MapEditor.Services;
 using BadassUniverse_MapEditor.Services.Manager;
 using BadassUniverse_MapEditor.Views.Elements;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
 
 namespace BadassUniverse_MapEditor.Views
 {
@@ -13,6 +13,8 @@ namespace BadassUniverse_MapEditor.Views
     {
         private static LocalStorageService StorageService
             => ServicesManager.Instance.GetService<LocalStorageService>();
+        
+        private GraphicsCellView[][]? cells;
 
         public GraphicsView()
         {
@@ -30,9 +32,11 @@ namespace BadassUniverse_MapEditor.Views
             int drawingFloor = 0;
             World world = StorageService.World;
             Map map = world.Map;
+            cells = new GraphicsCellView[map.GetSizeY()][];
 
             for (int i = 0; i < map.GetSizeY(); i++)
             {
+                cells[i] = new GraphicsCellView[map.GetSizeX()];
                 RowDefinition row = new()
                 {
                     Height = new GridLength(size)
@@ -53,13 +57,11 @@ namespace BadassUniverse_MapEditor.Views
                 for (int x = 0; x < map.GetSizeX(); x++)
                 {
                     MapIndex index = new(y, x);
-                    Frame cell = new()
-                    {
-                        Content = new GraphicsCell(world, index, map.GetValue(index), drawingFloor)
-                    };
-                    Grid.SetRow(cell, y);
-                    Grid.SetColumn(cell, x);
-                    GraphicsGrid.Children.Add(cell);
+                    GraphicsCellView cell = new(world, index, map.GetValue(index), drawingFloor, size);
+                    cells[y][x] = cell;
+                    Grid.SetRow(cell.Content, y);
+                    Grid.SetColumn(cell.Content, x);
+                    GraphicsGrid.Children.Add(cell.Content);
                 }
             }
         }

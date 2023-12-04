@@ -1,12 +1,12 @@
-﻿using BadassUniverse_MapEditor.Extensions.Game;
-using BadassUniverse_MapEditor.Models.Game;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using BadassUniverse_MapEditor.Extensions.Game;
+using BadassUniverse_MapEditor.Models.Game;
 
 namespace BadassUniverse_MapEditor.Views.Elements
 {
@@ -46,12 +46,9 @@ namespace BadassUniverse_MapEditor.Views.Elements
         private bool TryToInitializeRoom()
         {
             Room? room = world.GetRoomFromWorldByCell(mapCell, currentFloor);
-            if (room != null)
-            {
-                InitBackground(room.Color);
-                return true;
-            }
-            return false;
+            if (room == null) return false;
+            InitBackground(room.Color);
+            return true;
         }
 
         private bool TryToInitializeWalls()
@@ -105,13 +102,11 @@ namespace BadassUniverse_MapEditor.Views.Elements
         private bool TryToInitializeFacade()
         {
             var facades = world.GetFacadesFromWorldByCell(mapCell, currentFloor);
-            if (facades.Any())
-            {
-                InitFacadeBackground();
-                InitBackground(facades.First().Color);
-                return true;
-            }
-            return false;
+            var facadesArray = facades as Facade[] ?? facades.ToArray();
+            if (!facadesArray.Any()) return false;
+            InitFacadeBackground();
+            InitBackground(facadesArray.First().Color);
+            return true;
         }
 
 
