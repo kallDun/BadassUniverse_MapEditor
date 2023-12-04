@@ -30,7 +30,7 @@ namespace BadassUniverse_MapEditor.Services
                 worldMapperContext = WorldMapperContextFactory.GetContext(worldDTO.Version);
             }
             worldMapper = new WorldMapper(worldDTO, worldMapperContext);
-            if (worldMapper.TryToGetWorld(out World world))
+            if (worldMapper.TryToGetWorld(out World? world))
             {
                 this.worldDTO = worldDTO;
                 this.world = world;

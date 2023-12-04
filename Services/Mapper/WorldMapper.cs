@@ -1,3 +1,5 @@
+using System;
+using System.Diagnostics;
 using BadassUniverse_MapEditor.Models.Game;
 using BadassUniverse_MapEditor.Models.Server;
 
@@ -5,8 +7,8 @@ namespace BadassUniverse_MapEditor.Services.Mapper
 {
     public class WorldMapper : IWorldMapper
     {
-        private WorldMapperContext mapperContext;
-        private WorldDTO worldDto;
+        private readonly WorldMapperContext mapperContext;
+        private readonly WorldDTO worldDto;
 
         public WorldMapper(WorldDTO worldDto, WorldMapperContext mapperContext)
         {
@@ -14,9 +16,17 @@ namespace BadassUniverse_MapEditor.Services.Mapper
             this.mapperContext = mapperContext;
         }
 
-        public bool TryToGetWorld(out World world)
+        public bool TryToGetWorld(out World? world)
         {
-            world = mapperContext.WorldFactory.CreateWorld(worldDto, mapperContext);
+            try
+            {
+                world = mapperContext.WorldFactory.CreateWorld(worldDto, mapperContext);
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+                world = null;
+            }
             return world != null;
         }
     }
