@@ -2,7 +2,6 @@
 using BadassUniverse_MapEditor.Models.Server;
 using BadassUniverse_MapEditor.Services.Manager;
 using System;
-using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Media;
 
@@ -24,40 +23,30 @@ namespace BadassUniverse_MapEditor.Services
                 XLenght = 50,
                 YLenght = 50,
                 PlayerSpawnRoomId = 0,
-                Rooms = new List<RoomDTO>(),
-                Facades = new List<FacadeDTO>(),
                 Version = (Application.Current as App 
                     ?? throw new Exception("Application cannot be null.")).Version
             };
             worldDTO.Rooms.Add(new RoomDTO
             {
                 Id = 0,
-                MapId = 0,
+                MapId = worldDTO.Id,
                 InGameRoomId = 0,
-                Name = StorageService.GetGameStorage().GetRoomData(0)?.Name 
-                    ?? throw new ArgumentException($"Room with id {0} not found."),
+                Name = StorageService.GetGameStorage().GetRoomData(0)?.Name,
                 Color = Color.FromRgb(0, 120, 120),
                 MapOffsetX = 25,
                 MapOffsetY = 25,
-                Rotation = MapDirection.Up,
-                Floor = 0,
-                PhysicsItems = new List<PhysicsItemDTO>(),
-                Mobs = new List<MobDTO>()
+                Rotation = MapDirection.Up
             });
             worldDTO.Rooms.Add(new RoomDTO
             {
                 Id = 1,
-                MapId = 0,
+                MapId = worldDTO.Id,
                 InGameRoomId = 0,
-                Name = StorageService.GetGameStorage().GetRoomData(0)?.Name 
-                    ?? throw new ArgumentException($"Room with id {0} not found."),
-                Color = Color.FromRgb(0, 0, 120),
+                Name = StorageService.GetGameStorage().GetRoomData(0)?.Name,
+                Color = Color.FromRgb(100, 100, 150),
                 MapOffsetX = 14,
                 MapOffsetY = 24,
-                Rotation = MapDirection.Down,
-                Floor = 0,
-                PhysicsItems = new List<PhysicsItemDTO>(),
-                Mobs = new List<MobDTO>()
+                Rotation = MapDirection.Down
             });
 
             StorageService.SetWorld(worldDTO);

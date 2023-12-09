@@ -9,19 +9,19 @@ namespace BadassUniverse_MapEditor.Models.Server
 {
     public class RoomDTO : AItemDTO
     {
-        [Property(isReadOnly: true)] public required int Id { get; set; }
-        public required int MapId { get; set; }
+        [Property(isReadOnly: true)] public int Id { get; set; }
+        public int MapId { get; set; }
         public required int InGameRoomId { get; set; }
-        [Property(isReadOnly: true)] public required string? Name { get; set; }
-        [Property] public required ColorDTO Color { get; set; }
-        [Property("Coordinate X", true)] public required int MapOffsetX { get; set; }
-        [Property("Coordinate Y", true)] public required int MapOffsetY { get; set; }
-        [Property] public required MapDirection Rotation { get; set; }
-        [Property(isReadOnly: true)] public required int Floor { get; set; }
+        [Property(isReadOnly: true)] public string? Name { get; set; }
+        [Property] public ColorDTO Color { get; set; }
+        [Property("Coordinate X", true)] public int MapOffsetX { get; set; }
+        [Property("Coordinate Y", true)] public int MapOffsetY { get; set; }
+        [Property] public MapDirection Rotation { get; set; }
+        [Property(isReadOnly: true)] public int Floor { get; set; }
         [PropertyStringSerialized(types: new[] { typeof(StreetRoomParameters) })] public string? Params { get; set; }
         [PropertyStringSerialized(types: new[] { typeof(StreetRoomDoorParameters) })] public string? DoorParams { get; set; }
-        public required List<PhysicsItemDTO> PhysicsItems { get; set; }
-        public required List<MobDTO> Mobs { get; set; }
+        public List<PhysicsItemDTO> PhysicsItems { get; set; } = new();
+        public List<MobDTO> Mobs { get; set; } = new();
         
         public override object Clone()
         {

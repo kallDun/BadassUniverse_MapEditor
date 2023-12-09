@@ -11,8 +11,8 @@ namespace BadassUniverse_MapEditor.Models.Server
         public required int XLenght { get; set; }
         public required int YLenght { get; set; }
         public required int PlayerSpawnRoomId { get; set; }
-        public required List<RoomDTO> Rooms { get; set; }
-        public required List<FacadeDTO> Facades { get; set; }
+        public List<RoomDTO> Rooms { get; set; } = new();
+        public List<FacadeDTO> Facades { get; set; } = new();
         public required string Version { get; set; }
         
         public object Clone()
