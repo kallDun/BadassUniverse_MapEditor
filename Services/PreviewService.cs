@@ -1,11 +1,11 @@
 ﻿using System;
-using BadassUniverse_MapEditor.Extensions.Models;
-using BadassUniverse_MapEditor.Models;
-using BadassUniverse_MapEditor.Models.Game;
-using BadassUniverse_MapEditor.Models.Server;
-using BadassUniverse_MapEditor.Services.Manager;
+using MapEditor.Extensions.Models;
+using MapEditor.Models;
+using MapEditor.Models.Game;
+using MapEditor.Models.Server;
+using MapEditor.Services.Manager;
 
-namespace BadassUniverse_MapEditor.Services
+namespace MapEditor.Services
 {
     public class PreviewService : AService
     {

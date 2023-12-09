@@ -1,7 +1,7 @@
-﻿using BadassUniverse_MapEditor.Services.Manager;
-using System.Windows;
+﻿using System.Windows;
+using MapEditor.Services.Manager;
 
-namespace BadassUniverse_MapEditor
+namespace MapEditor
 {
     public partial class App : Application
     {

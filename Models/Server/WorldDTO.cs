@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace BadassUniverse_MapEditor.Models.Server
+namespace MapEditor.Models.Server
 {
     public class WorldDTO : ICloneable
     {

@@ -1,7 +1,7 @@
-﻿using BadassUniverse_MapEditor.Services.Storage.Data;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using MapEditor.Services.Storage.Data;
 
-namespace BadassUniverse_MapEditor.Services.Storage
+namespace MapEditor.Services.Storage
 {
     public interface IGameStorage
     {

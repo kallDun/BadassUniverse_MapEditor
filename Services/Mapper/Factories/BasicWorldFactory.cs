@@ -1,9 +1,9 @@
-﻿using BadassUniverse_MapEditor.Models.Game;
-using BadassUniverse_MapEditor.Models.Server;
-using System;
+﻿using System;
 using System.Linq;
+using MapEditor.Models.Game;
+using MapEditor.Models.Server;
 
-namespace BadassUniverse_MapEditor.Services.Mapper.Factories
+namespace MapEditor.Services.Mapper.Factories
 {
     public class BasicWorldFactory : IWorldFactory
     {

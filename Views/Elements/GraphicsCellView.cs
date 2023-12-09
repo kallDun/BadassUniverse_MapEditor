@@ -6,13 +6,13 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using BadassUniverse_MapEditor.Extensions.Game;
-using BadassUniverse_MapEditor.Models;
-using BadassUniverse_MapEditor.Models.Game;
-using BadassUniverse_MapEditor.Services;
-using BadassUniverse_MapEditor.Services.Manager;
+using MapEditor.Extensions.Game;
+using MapEditor.Models;
+using MapEditor.Models.Game;
+using MapEditor.Services;
+using MapEditor.Services.Manager;
 
-namespace BadassUniverse_MapEditor.Views.Elements;
+namespace MapEditor.Views.Elements;
 
 public class GraphicsCellView
 {

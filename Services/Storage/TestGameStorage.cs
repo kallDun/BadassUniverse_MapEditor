@@ -1,10 +1,10 @@
-﻿using BadassUniverse_MapEditor.Models.Game;
-using BadassUniverse_MapEditor.Models.Game.Concrete.Rooms;
-using BadassUniverse_MapEditor.Services.Storage.Data;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using MapEditor.Models.Game;
+using MapEditor.Models.Game.Concrete.Rooms;
+using MapEditor.Services.Storage.Data;
 
-namespace BadassUniverse_MapEditor.Services.Storage
+namespace MapEditor.Services.Storage
 {
     public class TestGameStorage : IGameStorage
     {

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace BadassUniverse_MapEditor.Models.Game
+namespace MapEditor.Models.Game
 {
     public class MapCell : ICloneable
     {
-        public Dictionary<int, MapCellFloor> Floors { get; set; } = new();
+        private Dictionary<int, MapCellFloor> Floors { get; set; } = new();
 
         public bool IsEmpty()
         {
@@ -52,7 +52,7 @@ namespace BadassUniverse_MapEditor.Models.Game
             return GetFloor(floorIndex).GetBuildings();
         }
 
-        public MapCellFloor GetFloor(int floorIndex)
+        private MapCellFloor GetFloor(int floorIndex)
         {
             if (!Floors.ContainsKey(floorIndex))
             {

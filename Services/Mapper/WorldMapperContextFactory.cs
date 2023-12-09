@@ -1,9 +1,9 @@
-﻿using BadassUniverse_MapEditor.Services.Mapper.Factories;
-using BadassUniverse_MapEditor.Services.Storage;
-using System;
+﻿using System;
 using System.Windows;
+using MapEditor.Services.Mapper.Factories;
+using MapEditor.Services.Storage;
 
-namespace BadassUniverse_MapEditor.Services.Mapper
+namespace MapEditor.Services.Mapper
 {
     public class WorldMapperContextFactory
     {

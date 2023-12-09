@@ -1,12 +1,12 @@
-﻿using BadassUniverse_MapEditor.Services;
-using System;
+﻿using System;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
-using BadassUniverse_MapEditor.Models;
-using BadassUniverse_MapEditor.Models.Server;
-using BadassUniverse_MapEditor.Services.Manager;
+using MapEditor.Models;
+using MapEditor.Models.Server;
+using MapEditor.Services;
+using MapEditor.Services.Manager;
 
-namespace BadassUniverse_MapEditor.Views.Elements
+namespace MapEditor.Views.Elements
 {
     public partial class ItemElementView : UserControl
     {

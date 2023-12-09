@@ -1,6 +1,6 @@
 ﻿using System.Windows.Media;
 
-namespace BadassUniverse_MapEditor.Models.Server
+namespace MapEditor.Models.Server
 {
     public struct ColorDTO
     {

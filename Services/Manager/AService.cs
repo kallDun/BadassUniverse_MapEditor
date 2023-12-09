@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BadassUniverse_MapEditor.Services.Manager
+namespace MapEditor.Services.Manager
 {
     public abstract class AService : IService
     {

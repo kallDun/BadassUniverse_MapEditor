@@ -1,4 +1,4 @@
-﻿namespace BadassUniverse_MapEditor.Models.Game
+﻿namespace MapEditor.Models.Game
 {
     public enum MapDirection
     {

@@ -1,6 +1,6 @@
 using System;
 
-namespace BadassUniverse_MapEditor.Extensions.Attributes;
+namespace MapEditor.Extensions.Attributes;
 
 [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property)]
 public class PropertyAttribute : Attribute

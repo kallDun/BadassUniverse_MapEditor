@@ -1,7 +1,7 @@
 using System.Linq;
-using BadassUniverse_MapEditor.Models.Server;
+using MapEditor.Models.Server;
 
-namespace BadassUniverse_MapEditor.Extensions.Models;
+namespace MapEditor.Extensions.Models;
 
 public static class IdentifierExtension
 {

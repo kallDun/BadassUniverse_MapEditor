@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace BadassUniverse_MapEditor.Models.Game
+namespace MapEditor.Models.Game
 {
     public class MapCellFloor : ICloneable
     {

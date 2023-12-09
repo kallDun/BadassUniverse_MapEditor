@@ -1,7 +1,7 @@
 using System;
 using System.Windows.Media;
 
-namespace BadassUniverse_MapEditor.Extensions.Models;
+namespace MapEditor.Extensions.Models;
 
 public static class ColorExtensions
 {

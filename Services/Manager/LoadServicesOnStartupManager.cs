@@ -1,4 +1,4 @@
-﻿namespace BadassUniverse_MapEditor.Services.Manager
+﻿namespace MapEditor.Services.Manager
 {
     public static class LoadServicesOnStartupManager
     {

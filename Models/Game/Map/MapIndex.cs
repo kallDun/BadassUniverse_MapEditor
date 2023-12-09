@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BadassUniverse_MapEditor.Models.Game
+namespace MapEditor.Models.Game
 {
     public struct MapIndex
     {

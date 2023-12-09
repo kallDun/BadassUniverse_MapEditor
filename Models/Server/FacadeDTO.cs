@@ -1,7 +1,7 @@
-﻿using BadassUniverse_MapEditor.Models.Game;
+﻿using MapEditor.Models.Game;
 using Newtonsoft.Json;
 
-namespace BadassUniverse_MapEditor.Models.Server
+namespace MapEditor.Models.Server
 {
     public class FacadeDTO : AItemDTO
     {

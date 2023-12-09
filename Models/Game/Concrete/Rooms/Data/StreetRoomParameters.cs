@@ -1,4 +1,4 @@
-﻿namespace BadassUniverse_MapEditor.Models.Game.Concrete.Rooms
+﻿namespace MapEditor.Models.Game.Concrete.Rooms
 {
     public class StreetRoomParameters
     {

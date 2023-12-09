@@ -1,4 +1,4 @@
-namespace BadassUniverse_MapEditor.Models;
+namespace MapEditor.Models;
 
 public enum StoredPreviewState
 {

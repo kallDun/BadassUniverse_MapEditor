@@ -1,11 +1,11 @@
-﻿using BadassUniverse_MapEditor.Models.Game;
-using BadassUniverse_MapEditor.Models.Server;
-using BadassUniverse_MapEditor.Services.Manager;
-using System;
+﻿using System;
 using System.Windows;
 using System.Windows.Media;
+using MapEditor.Models.Game;
+using MapEditor.Models.Server;
+using MapEditor.Services.Manager;
 
-namespace BadassUniverse_MapEditor.Services
+namespace MapEditor.Services
 {
     public class InitializationDefaultWorldService : AService
     {

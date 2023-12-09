@@ -1,13 +1,13 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using BadassUniverse_MapEditor.Extensions.Graphics;
-using BadassUniverse_MapEditor.Models.Game;
-using BadassUniverse_MapEditor.Services;
-using BadassUniverse_MapEditor.Services.Manager;
-using BadassUniverse_MapEditor.Views.Elements;
+using MapEditor.Extensions.Graphics;
+using MapEditor.Models.Game;
+using MapEditor.Services;
+using MapEditor.Services.Manager;
+using MapEditor.Views.Elements;
 
-namespace BadassUniverse_MapEditor.Views
+namespace MapEditor.Views
 {
     public partial class GraphicsView : UserControl
     {

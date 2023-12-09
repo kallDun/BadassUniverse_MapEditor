@@ -3,7 +3,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
-namespace BadassUniverse_MapEditor.Views
+namespace MapEditor.Views
 {
     public partial class PropertiesView : UserControl
     {

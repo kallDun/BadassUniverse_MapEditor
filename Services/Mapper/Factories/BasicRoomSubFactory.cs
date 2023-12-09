@@ -1,12 +1,12 @@
-﻿using BadassUniverse_MapEditor.Models.Game;
-using BadassUniverse_MapEditor.Models.Game.Concrete.Rooms;
-using BadassUniverse_MapEditor.Models.Server;
-using BadassUniverse_MapEditor.Services.Storage;
-using BadassUniverse_MapEditor.Services.Storage.Data;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
+using MapEditor.Models.Game;
+using MapEditor.Models.Game.Concrete.Rooms;
+using MapEditor.Models.Server;
+using MapEditor.Services.Storage;
+using MapEditor.Services.Storage.Data;
 
-namespace BadassUniverse_MapEditor.Services.Mapper.Factories
+namespace MapEditor.Services.Mapper.Factories
 {
     public class BasicRoomSubFactory : IRoomSubFactory
     {

@@ -1,6 +1,6 @@
-using BadassUniverse_MapEditor.Models.Game;
+using MapEditor.Models.Game;
 
-namespace BadassUniverse_MapEditor.Services.Mapper
+namespace MapEditor.Services.Mapper
 {
     public interface IWorldMapper
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BadassUniverse_MapEditor.Models.Game
+namespace MapEditor.Models.Game
 {
     public abstract class PhysicsItem
     {

@@ -5,10 +5,10 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using BadassUniverse_MapEditor.Extensions.Game;
-using BadassUniverse_MapEditor.Models.Game;
+using MapEditor.Extensions.Game;
+using MapEditor.Models.Game;
 
-namespace BadassUniverse_MapEditor.Views.Elements
+namespace MapEditor.Views.Elements
 {
     public partial class GraphicsCell : UserControl
     {

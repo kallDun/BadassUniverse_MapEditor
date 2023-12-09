@@ -4,7 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 
-namespace BadassUniverse_MapEditor.Extensions.Graphics
+namespace MapEditor.Extensions.Graphics
 {
     public class ScrollViewerDragZoomController
     {

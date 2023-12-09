@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BadassUniverse_MapEditor.Services.Storage.Data
+namespace MapEditor.Services.Storage.Data
 {
     public class RoomStorageData
     {

@@ -1,9 +1,9 @@
-﻿using BadassUniverse_MapEditor.Services;
-using BadassUniverse_MapEditor.Services.Manager;
-using BadassUniverse_MapEditor.Views.Elements;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
+using MapEditor.Services;
+using MapEditor.Services.Manager;
+using MapEditor.Views.Elements;
 
-namespace BadassUniverse_MapEditor.Views
+namespace MapEditor.Views
 {
     public partial class ItemsView : UserControl
     {

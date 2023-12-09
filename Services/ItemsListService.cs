@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using BadassUniverse_MapEditor.Models;
-using BadassUniverse_MapEditor.Models.Server;
-using BadassUniverse_MapEditor.Services.Manager;
-using BadassUniverse_MapEditor.Services.Storage;
+using MapEditor.Models;
+using MapEditor.Models.Server;
+using MapEditor.Services.Manager;
+using MapEditor.Services.Storage;
 
-namespace BadassUniverse_MapEditor.Services
+namespace MapEditor.Services
 {
     public class ItemsListService : AService
     {

@@ -1,11 +1,11 @@
-﻿using BadassUniverse_MapEditor.Models.Game;
-using BadassUniverse_MapEditor.Models.Server;
-using BadassUniverse_MapEditor.Services.Manager;
-using BadassUniverse_MapEditor.Services.Mapper;
-using BadassUniverse_MapEditor.Services.Storage;
-using System;
+﻿using System;
+using MapEditor.Models.Game;
+using MapEditor.Models.Server;
+using MapEditor.Services.Manager;
+using MapEditor.Services.Mapper;
+using MapEditor.Services.Storage;
 
-namespace BadassUniverse_MapEditor.Services
+namespace MapEditor.Services
 {
     public class LocalStorageService : AService
     {

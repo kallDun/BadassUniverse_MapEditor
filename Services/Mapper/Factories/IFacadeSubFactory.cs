@@ -1,8 +1,8 @@
-﻿using BadassUniverse_MapEditor.Models.Game;
-using BadassUniverse_MapEditor.Models.Server;
-using BadassUniverse_MapEditor.Services.Storage;
+﻿using MapEditor.Models.Game;
+using MapEditor.Models.Server;
+using MapEditor.Services.Storage;
 
-namespace BadassUniverse_MapEditor.Services.Mapper.Factories
+namespace MapEditor.Services.Mapper.Factories
 {
     public interface IFacadeSubFactory : ISubFactory
     {

@@ -1,11 +1,11 @@
-﻿using BadassUniverse_MapEditor.Models.Game;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using BadassUniverse_MapEditor.Extensions.Attributes;
-using BadassUniverse_MapEditor.Models.Game.Concrete.Rooms;
+using MapEditor.Extensions.Attributes;
+using MapEditor.Models.Game;
+using MapEditor.Models.Game.Concrete.Rooms;
 using Newtonsoft.Json;
 
-namespace BadassUniverse_MapEditor.Models.Server
+namespace MapEditor.Models.Server
 {
     public class RoomDTO : AItemDTO
     {

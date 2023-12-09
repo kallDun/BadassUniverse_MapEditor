@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using BadassUniverse_MapEditor.Models.Server;
+using MapEditor.Models.Server;
 
-namespace BadassUniverse_MapEditor.Services.Storage;
+namespace MapEditor.Services.Storage;
 
 public interface IListStorage
 {

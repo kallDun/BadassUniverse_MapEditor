@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace BadassUniverse_MapEditor
+namespace MapEditor
 {
     public partial class MainWindow : Window
     {

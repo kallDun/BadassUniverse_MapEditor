@@ -1,9 +1,9 @@
-﻿using BadassUniverse_MapEditor.Models.Game;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using MapEditor.Models.Game;
 
-namespace BadassUniverse_MapEditor.Extensions.Game
+namespace MapEditor.Extensions.Game
 {
     public static class FindElementsFromWorldByCellExtension
     {
