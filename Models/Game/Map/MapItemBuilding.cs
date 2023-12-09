@@ -16,7 +16,7 @@
         
         public override int GetHashCode()
         {
-            return base.GetHashCode() + Index.GetHashCode() * 31;
+            return Index.GetHashCode() * 31;
         }
     }
 }

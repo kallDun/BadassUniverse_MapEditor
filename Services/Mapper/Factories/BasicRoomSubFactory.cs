@@ -18,21 +18,21 @@ namespace BadassUniverse_MapEditor.Services.Mapper.Factories
             switch (data.RoomType)
             {
                 case { } type when type == typeof(SquareRoom):
-                    return new SquareRoom(roomDTO.Id, data.Name, roomDTO.Floor, roomDTO.Color, roomDTO.Rotation,
+                    return new SquareRoom(roomDTO.Id, data.Name, roomDTO.Floor, roomDTO.Color, roomDTO.Rotation, roomDTO.State,
                         data.Params as SquareRoomParameters
                             ?? throw new ArgumentException("Wrong format of room parameters."),
                         data.DoorParams as SquareRoomDoorParameters[]
                             ?? throw new ArgumentException("Wrong format of door parameters."));
 
                 case { } type when type == typeof(AnyFormRoom):
-                    return new AnyFormRoom(roomDTO.Id, data.Name, roomDTO.Floor, roomDTO.Color, roomDTO.Rotation,
+                    return new AnyFormRoom(roomDTO.Id, data.Name, roomDTO.Floor, roomDTO.Color, roomDTO.Rotation, roomDTO.State,
                         data.Params as AnyFormRoomParameters
                             ?? throw new ArgumentException("Wrong format of room parameters."),
                         data.DoorParams as SquareRoomDoorParameters[]
                             ?? throw new ArgumentException("Wrong format of door parameters."));
 
                 case { } type when type == typeof(StreetRoom):
-                    return new StreetRoom(roomDTO.Id, data.Name, roomDTO.Floor, roomDTO.Color, roomDTO.Rotation,
+                    return new StreetRoom(roomDTO.Id, data.Name, roomDTO.Floor, roomDTO.Color, roomDTO.Rotation, roomDTO.State,
                         JsonConvert.DeserializeObject<StreetRoomParameters>(roomDTO.Params
                             ?? throw new ArgumentNullException("Parameters in room dto must be not null."))
                             ?? throw new ArgumentException("Wrong format of room parameters."),

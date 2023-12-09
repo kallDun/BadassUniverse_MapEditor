@@ -7,6 +7,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using BadassUniverse_MapEditor.Extensions.Game;
+using BadassUniverse_MapEditor.Models;
 using BadassUniverse_MapEditor.Models.Game;
 using BadassUniverse_MapEditor.Services;
 using BadassUniverse_MapEditor.Services.Manager;
@@ -20,8 +21,12 @@ public class GraphicsCellView
     private static PreviewService PreviewService
         => ServicesManager.Instance.GetService<PreviewService>();
     
+    private byte Alpha => isPreview ? (byte)150 : (byte)255;
+    private Color MainColor => Color.FromArgb(Alpha, 0, 0, 0);
+    
     private readonly MapIndex position;
     private readonly int size;
+    private bool isPreview;
     private bool backgroundInitialized;
     private int currentFloor;
     private int hashCodeCache;
@@ -75,6 +80,7 @@ public class GraphicsCellView
         };
         Content.Children.Add(rect);
         rect.MouseMove += MouseMove;
+        rect.MouseLeftButtonDown += MouseLeftButtonDown;
     }
 
     private void MouseMove(object sender, MouseEventArgs e)
@@ -84,7 +90,7 @@ public class GraphicsCellView
 
     private void MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
-        
+        PreviewService.TryToSave();
     }
     
     #endregion
@@ -93,15 +99,11 @@ public class GraphicsCellView
     
     private void InitializeView()
     {
+        isPreview = MapCell.GetState(currentFloor) == StoredPreviewState.Preview;
         bool hasRoom = TryToInitializeRoom();
         bool hasWalls = TryToInitializeWalls();
         bool hasDoors = TryToInitializeDoors();
         bool hasFacade = TryToInitializeFacade();
-
-        if (hasRoom || hasWalls || hasDoors || hasFacade)
-        {
-            Debug.WriteLine($"Index=({position.Y};{position.X}), Room={hasRoom}, Walls={hasWalls}, Doors={hasDoors}");
-        }
     }
 
     private bool TryToInitializeRoom()
@@ -185,7 +187,7 @@ public class GraphicsCellView
     {
         Content.Children.Add(new Border()
         {
-            BorderBrush = new SolidColorBrush(Colors.Black),
+            BorderBrush = new SolidColorBrush(MainColor),
             BorderThickness = new Thickness(0.05)
         });
     }
@@ -204,7 +206,7 @@ public class GraphicsCellView
 
         for (int i = 0; i < values.Count; i+=2)
         {
-            byte alpha = (byte)(255 / (values.Count / 2 + values.Count % 2));
+            byte alpha = (byte)(Alpha / (values.Count / 2 + values.Count % 2));
             Color color1 = Color.FromArgb(alpha, values[i].Color.R, values[i].Color.G, values[i].Color.B);
             Color color2 = i + 1 < values.Count
                 ? Color.FromArgb(alpha, values[i + 1].Color.R, values[i + 1].Color.G, values[i + 1].Color.B)
@@ -241,15 +243,15 @@ public class GraphicsCellView
     {
         Border border = new Border()
         {
-            BorderBrush = new SolidColorBrush(Colors.Black),
+            BorderBrush = new SolidColorBrush(MainColor),
             BorderThickness = new Thickness(1)
         };
         Ellipse ellipse = new Ellipse()
         {
-            Fill = new SolidColorBrush(Colors.Black),
+            Fill = new SolidColorBrush(MainColor),
             Width = 10,
             Height = 10,
-            Stroke = new SolidColorBrush(Colors.Black),
+            Stroke = new SolidColorBrush(MainColor),
             StrokeThickness = 1,
             HorizontalAlignment = HorizontalAlignment.Center,
             VerticalAlignment = VerticalAlignment.Center
@@ -262,14 +264,14 @@ public class GraphicsCellView
     {
         Border border = new Border()
         {
-            BorderBrush = new SolidColorBrush(Colors.Black),
+            BorderBrush = new SolidColorBrush(MainColor),
             BorderThickness = new Thickness(1)
         };
         Ellipse ellipse = new Ellipse()
         {
             Width = 22,
             Height = 22,
-            Stroke = new SolidColorBrush(Colors.Black),
+            Stroke = new SolidColorBrush(MainColor),
             StrokeThickness = 2,
             HorizontalAlignment = HorizontalAlignment.Center,
             VerticalAlignment = VerticalAlignment.Center
@@ -282,23 +284,23 @@ public class GraphicsCellView
     {
         Border border = new Border()
         {
-            BorderBrush = new SolidColorBrush(Colors.Black),
+            BorderBrush = new SolidColorBrush(MainColor),
             BorderThickness = new Thickness(1)
         };
         Content.Children.Add(border);
 
-        AddLineToContent(0 * size, 0.6 * size, 0.4 * size, 1 * size);
-        AddLineToContent(0 * size, 0.3 * size, 0.7 * size, 1 * size);
-        AddLineToContent(0 * size, 0 * size, 1 * size, 1 * size);
-        AddLineToContent(0.3 * size, 0 * size, 1 * size, 0.7 * size);
-        AddLineToContent(0.6 * size, 0 * size, 1 * size, 0.4 * size);
+        AddLineToContent(0 * size, 0.6 * size, 0.4 * size, 1 * size, MainColor);
+        AddLineToContent(0 * size, 0.3 * size, 0.7 * size, 1 * size, MainColor);
+        AddLineToContent(0 * size, 0 * size, 1 * size, 1 * size, MainColor);
+        AddLineToContent(0.3 * size, 0 * size, 1 * size, 0.7 * size, MainColor);
+        AddLineToContent(0.6 * size, 0 * size, 1 * size, 0.4 * size, MainColor);
     }
 
-    private void AddLineToContent(double x1, double y1, double x2, double y2)
+    private void AddLineToContent(double x1, double y1, double x2, double y2, Color color)
     {
         Content.Children.Add(new Line()
         {
-            Stroke = new SolidColorBrush(Colors.Black),
+            Stroke = new SolidColorBrush(color),
             StrokeThickness = 1,
             X1 = x1, Y1 = y1, X2 = x2, Y2 = y2
         });

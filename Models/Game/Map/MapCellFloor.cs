@@ -6,6 +6,7 @@ namespace BadassUniverse_MapEditor.Models.Game
     public class MapCellFloor : ICloneable
     {
         public List<MapItem> Items { get; set; } = new();
+        public StoredPreviewState State { get; private set; } = StoredPreviewState.Stored;
 
         public bool IsEmpty() => Items.Count == 0;
 
@@ -93,6 +94,7 @@ namespace BadassUniverse_MapEditor.Models.Game
                 list.Add((MapItem)item.Clone());
             }
             newCell.Items = list;
+            newCell.State = State;
             return newCell;
         }
 
@@ -103,7 +105,13 @@ namespace BadassUniverse_MapEditor.Models.Game
             {
                 hash += item.GetHashCode();
             }
+            hash += State.GetHashCode() * 13;
             return hash;
+        }
+
+        public void SetState(StoredPreviewState state)
+        {
+            State = state;
         }
     }
 }

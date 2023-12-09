@@ -16,7 +16,7 @@
         
         public override int GetHashCode()
         {
-            return base.GetHashCode() + RelatedRoomIndex.GetHashCode() * 13;
+            return RelatedRoomIndex.GetHashCode() * 13;
         }
     }
 }

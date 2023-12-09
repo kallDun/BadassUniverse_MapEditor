@@ -121,7 +121,8 @@ namespace BadassUniverse_MapEditor.Models.Game
             return NewMap;
         }
 
-        public void RoomInit_FillSquareRoomSpace(int RoomIndex, MapIndex TopLeftCornerWithWalls, MapIndex BottomRightCornerWithWalls)
+        public void RoomInit_FillSquareRoomSpace(int RoomIndex, MapIndex TopLeftCornerWithWalls,
+            MapIndex BottomRightCornerWithWalls, int Floor, StoredPreviewState State)
         {
             for (int i = TopLeftCornerWithWalls.Y; i <= BottomRightCornerWithWalls.Y; i++)
             {
@@ -132,11 +133,13 @@ namespace BadassUniverse_MapEditor.Models.Game
                     if (i == TopLeftCornerWithWalls.Y || i == BottomRightCornerWithWalls.Y
                         || j == TopLeftCornerWithWalls.X || j == BottomRightCornerWithWalls.X)
                     {
-                        Cell.AddWall(RoomIndex);
+                        Cell.AddWall(RoomIndex, Floor);
+                        Cell.SetState(State, Floor);
                     }
                     else
                     {
-                        Cell.AddRoom(RoomIndex);
+                        Cell.AddRoom(RoomIndex, Floor);
+                        Cell.SetState(State, Floor);
                     }
 
                     SetValue(new MapIndex(i, j), Cell);
@@ -144,25 +147,28 @@ namespace BadassUniverse_MapEditor.Models.Game
             }
         }
 
-        public void RoomInit_SetDoor(int RoomIndex, MapIndex Index, int DoorIndex, int FloorDisplacement)
+        public void RoomInit_SetDoor(int RoomIndex, MapIndex Index, int DoorIndex,
+            int FloorDisplacement, int Floor, StoredPreviewState State)
         {
             var Cell = GetValue(Index);
-            Cell.AddDoor(DoorIndex, RoomIndex, FloorDisplacement);
+            Cell.AddDoor(DoorIndex, RoomIndex, FloorDisplacement, Floor);
+            Cell.SetState(State, Floor);
             SetValue(Index, Cell);
         }
 
-        public void BuildingInit_FillSquareBuildingSpace(int BuildingIndex, MapIndex TopLeftCorner, MapIndex BottomRightCorner)
+        public void BuildingInit_FillSquareBuildingSpace(int BuildingIndex, MapIndex TopLeftCorner, 
+            MapIndex BottomRightCorner, int Floor, StoredPreviewState State)
         {
             for (int i = TopLeftCorner.Y; i <= BottomRightCorner.Y; i++)
             {
                 for (int j = TopLeftCorner.X; j <= BottomRightCorner.X; j++)
                 {
                     var Cell = MapCell.InitEmpty();
-                    Cell.AddBuilding(BuildingIndex);
+                    Cell.AddBuilding(BuildingIndex, Floor);
+                    Cell.SetState(State, Floor);
                     SetValue(new MapIndex(i, j), Cell);
                 }
             }
         }
-
     }
 }

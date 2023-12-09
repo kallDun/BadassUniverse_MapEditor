@@ -18,11 +18,11 @@ namespace BadassUniverse_MapEditor.Models.Game
             }
             return true;
         }
-        public bool AddRoom(int roomIndex, int floorIndex = 0)
+        public bool AddRoom(int roomIndex, int floorIndex)
         {
             return GetFloor(floorIndex).AddRoom(roomIndex);
         }
-        public bool AddWall(int relatedRoomIndex, int floorIndex = 0)
+        public bool AddWall(int relatedRoomIndex, int floorIndex)
         {
             return GetFloor(floorIndex).AddWall(relatedRoomIndex);
         }
@@ -30,7 +30,7 @@ namespace BadassUniverse_MapEditor.Models.Game
         {
             return GetFloor(floorIndex).AddDoor(doorIndex, relatedRoomIndex, roomFloorDisplacement);
         }
-        public bool AddBuilding(int buildingIndex, int floorIndex = 0)
+        public bool AddBuilding(int buildingIndex, int floorIndex)
         {
             return GetFloor(floorIndex).AddBuilding(buildingIndex);
         }
@@ -39,15 +39,15 @@ namespace BadassUniverse_MapEditor.Models.Game
         {
             return GetFloor(floorIndex).GetRoom();
         }
-        public List<MapItemWall> GetWalls(int floorIndex = 0)
+        public List<MapItemWall> GetWalls(int floorIndex)
         {
             return GetFloor(floorIndex).GetWalls();
         }
-        public List<MapItemDoor> GetDoors(int floorIndex = 0)
+        public List<MapItemDoor> GetDoors(int floorIndex)
         {
             return GetFloor(floorIndex).GetDoors();
         }
-        public List<MapItemBuilding> GetBuilding(int floorIndex = 0)
+        public List<MapItemBuilding> GetBuilding(int floorIndex)
         {
             return GetFloor(floorIndex).GetBuildings();
         }
@@ -106,6 +106,9 @@ namespace BadassUniverse_MapEditor.Models.Game
                 }
             }
 
+            var state = (StoredPreviewState)Math.Max((int)InnerCellFloor.State, (int)GetState(FloorIndex));
+            SetState(state, FloorIndex);
+
             return true;
         }
         
@@ -130,6 +133,16 @@ namespace BadassUniverse_MapEditor.Models.Game
                 hash += Floor.Value.GetHashCode();
             }
             return hash;
+        }
+
+        public void SetState(StoredPreviewState state, int floor)
+        {
+            GetFloor(floor).SetState(state);
+        }
+
+        public StoredPreviewState GetState(int currentFloor)
+        {
+            return GetFloor(currentFloor).State;
         }
     }
 }
