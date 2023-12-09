@@ -10,8 +10,7 @@
              TextElement.FontSize="20"
              TextOptions.TextFormattingMode="Ideal"
              TextOptions.TextRenderingMode="Auto"
-             FontFamily="{DynamicResource MaterialDesignFont}"
-             d:DesignHeight="50" d:DesignWidth="400">
+             FontFamily="{DynamicResource MaterialDesignFont}">
     <Grid HorizontalAlignment="Center" MinHeight="60">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>

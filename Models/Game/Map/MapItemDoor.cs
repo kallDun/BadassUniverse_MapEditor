@@ -17,5 +17,10 @@
         {
             return new MapItemDoor(DoorIndex, RelatedRoomIndex, RoomFloorDisplacement);
         }
+        
+        public override int GetHashCode()
+        {
+            return base.GetHashCode() + DoorIndex.GetHashCode() ^ RelatedRoomIndex.GetHashCode() ^ RoomFloorDisplacement.GetHashCode() * 17;
+        }
     }
 }

@@ -1,9 +1,10 @@
-﻿using BadassUniverse_MapEditor.Services.Manager;
-using BadassUniverse_MapEditor.Services.Storage;
-using BadassUniverse_MapEditor.Services.Storage.Data;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using BadassUniverse_MapEditor.Models;
+using BadassUniverse_MapEditor.Models.Server;
+using BadassUniverse_MapEditor.Services.Manager;
+using BadassUniverse_MapEditor.Services.Storage;
 
 namespace BadassUniverse_MapEditor.Services
 {
@@ -17,44 +18,28 @@ namespace BadassUniverse_MapEditor.Services
         public override void Initialize()
         {
             base.Initialize();
-            StorageService.OnWorldChanged += OnWorldChanged;
+            StorageService.OnMapperContextChanged += MapperContextChanged;
         }
 
         public override void Destroy()
         {
             base.Destroy();
-            StorageService.OnWorldChanged -= OnWorldChanged;
+            StorageService.OnMapperContextChanged -= MapperContextChanged;
         }
 
-        private void OnWorldChanged()
-        {
-            OnItemsListChanged?.Invoke();
-        }
+        private void MapperContextChanged() => OnItemsListChanged?.Invoke();
 
-        public List<ItemData> LoadItems()
+        public List<(AItemDTO Item, ItemType Type)> LoadItems()
         {
             IGameStorage gameStorage = StorageService.GetGameStorage();
-            List<RoomStorageData> rooms = gameStorage.GetRoomsData();
-            List<ItemData> list = rooms.Select(x => new ItemData
-            {
-                Name = x.Name,
-                Type = ItemType.Room
-            }).ToList();
+            IListStorage listStorage = StorageService.GetListStorage();
+            List<(AItemDTO Item, ItemType Type)> list = new();
+
+            var rooms = listStorage.GetRooms(gameStorage)
+                .Select(item => (Item: item as AItemDTO, Type: ItemType.Room));
+            list.AddRange(rooms);
+            
             return list;
         }
-    }
-
-    public class ItemData
-    {
-        public required string Name { get; set; }
-        public required ItemType Type { get; set; }
-    }
-
-    public enum ItemType
-    {
-        Room,
-        Building,
-        Item,
-        Mob
     }
 }

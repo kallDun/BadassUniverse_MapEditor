@@ -20,18 +20,15 @@ namespace BadassUniverse_MapEditor.Views
         {
             InitializeComponent();
             scrollViewer.EnableDragZoom(GraphicsGrid, scaleTransform, MouseButton.Middle);
-            StorageService.OnWorldChanged += RedrawGrid;
-            RedrawGrid();
+            DrawGrid();
         }
 
-        private void RedrawGrid()
+        private void DrawGrid()
         {
             GraphicsGrid.Children.Clear();
 
-            int size = 25;
-            int drawingFloor = 0;
-            World world = StorageService.World;
-            Map map = world.Map;
+            const int size = 25;
+            Map map = StorageService.World.Map;
             cells = new GraphicsCellView[map.GetSizeY()][];
 
             for (int i = 0; i < map.GetSizeY(); i++)
@@ -57,7 +54,7 @@ namespace BadassUniverse_MapEditor.Views
                 for (int x = 0; x < map.GetSizeX(); x++)
                 {
                     MapIndex index = new(y, x);
-                    GraphicsCellView cell = new(world, index, map.GetValue(index), drawingFloor, size);
+                    GraphicsCellView cell = new(index, size);
                     cells[y][x] = cell;
                     Grid.SetRow(cell.Content, y);
                     Grid.SetColumn(cell.Content, x);

@@ -19,10 +19,11 @@ namespace BadassUniverse_MapEditor.Views
 
         private void InitPanel()
         {
+            ItemsStackPanel.Children.Clear();
             var items = ItemsService.LoadItems();
             foreach (var item in items)
             {
-                ItemElementView view = new(item);
+                ItemElementView view = new(item.Item, item.Type);
                 ItemsStackPanel.Children.Add(view);
             }
         }

@@ -95,5 +95,15 @@ namespace BadassUniverse_MapEditor.Models.Game
             newCell.Items = list;
             return newCell;
         }
+
+        public override int GetHashCode()
+        {
+            int hash = 0;
+            foreach (var item in Items)
+            {
+                hash += item.GetHashCode();
+            }
+            return hash;
+        }
     }
 }

@@ -63,18 +63,6 @@ namespace BadassUniverse_MapEditor.Models.Game
 
         public static MapCell InitEmpty() => new();
 
-        public object Clone()
-        {
-            Dictionary<int, MapCellFloor> FloorsCopy = new();
-            foreach (var Floor in Floors)
-		    {
-                FloorsCopy.Add(Floor.Key, (MapCellFloor)Floor.Value.Clone());
-            }
-            MapCell NewCell = InitEmpty();
-            NewCell.Floors = FloorsCopy;
-            return NewCell;
-        }
-
         public bool TryToAddInnerCell(MapCell InnerMapCell, int FloorIndex)
         {
             var Floor = GetFloor(FloorIndex);
@@ -119,6 +107,29 @@ namespace BadassUniverse_MapEditor.Models.Game
             }
 
             return true;
+        }
+        
+        public object Clone()
+        {
+            Dictionary<int, MapCellFloor> FloorsCopy = new();
+            foreach (var Floor in Floors)
+            {
+                FloorsCopy.Add(Floor.Key, (MapCellFloor)Floor.Value.Clone());
+            }
+            MapCell NewCell = InitEmpty();
+            NewCell.Floors = FloorsCopy;
+            return NewCell;
+        }
+
+        public override int GetHashCode()
+        {
+            int hash = 0;
+            foreach (var Floor in Floors)
+            {
+                hash += Floor.Key;
+                hash += Floor.Value.GetHashCode();
+            }
+            return hash;
         }
     }
 }

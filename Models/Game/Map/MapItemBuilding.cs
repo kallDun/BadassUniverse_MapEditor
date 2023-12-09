@@ -13,5 +13,10 @@
         {
             return new MapItemBuilding(Index);
         }
+        
+        public override int GetHashCode()
+        {
+            return base.GetHashCode() + Index.GetHashCode() * 31;
+        }
     }
 }

@@ -13,5 +13,10 @@
         {
             return new MapItemWall(RelatedRoomIndex);
         }
+        
+        public override int GetHashCode()
+        {
+            return base.GetHashCode() + RelatedRoomIndex.GetHashCode() * 13;
+        }
     }
 }

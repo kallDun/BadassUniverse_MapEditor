@@ -8,6 +8,19 @@ namespace BadassUniverse_MapEditor.Extensions.Graphics
 {
     public class ScrollViewerDragZoomController
     {
+        private readonly ScrollViewer scrollViewer;
+        private readonly FrameworkElement content;
+        private readonly ScaleTransform scaleTransform;
+        private readonly MouseButton dragMouseButton;
+
+        private Point? lastCenterPositionOnTarget;
+        private Point? lastMousePositionOnTarget;
+        private Point? lastDragPoint;
+        private double zoomValue = 1;
+        private const double zoomMin = 1;
+        private const double zoomMax = 10;
+        private const double zoomDelta = .5f;
+        
         public ScrollViewerDragZoomController(ScrollViewer scrollViewer, 
             FrameworkElement content, ScaleTransform scaleTransform, MouseButton dragMouseButton)
         {
@@ -24,19 +37,6 @@ namespace BadassUniverse_MapEditor.Extensions.Graphics
             scrollViewer.MouseDown += OnMouseButtonDown;
             scrollViewer.MouseMove += OnMouseMove;
         }
-
-        private ScrollViewer scrollViewer;
-        private FrameworkElement content;
-        private ScaleTransform scaleTransform;
-        private MouseButton dragMouseButton;
-
-        private Point? lastCenterPositionOnTarget;
-        private Point? lastMousePositionOnTarget;
-        private Point? lastDragPoint;
-        private double zoomValue = 1;
-        private double zoomMin = 1;
-        private double zoomMax = 10;
-        private double zoomDelta = .5f;
 
         private void OnMouseMove(object sender, MouseEventArgs e)
         {
@@ -97,7 +97,7 @@ namespace BadassUniverse_MapEditor.Extensions.Graphics
         private void ChangeZoom(double value)
         {
             double newValue = Math.Clamp(value, zoomMin, zoomMax);
-            if (newValue == zoomValue) return;
+            if (newValue.Equals(zoomValue)) return;
             zoomValue = newValue;
             scaleTransform.ScaleX = zoomValue;
             scaleTransform.ScaleY = zoomValue;
@@ -135,16 +135,16 @@ namespace BadassUniverse_MapEditor.Extensions.Graphics
                     lastMousePositionOnTarget = null;
                 }
 
-                if (targetBefore.HasValue)
+                if (targetBefore.HasValue && targetNow.HasValue)
                 {
                     double dXInTargetPixels = targetNow.Value.X - targetBefore.Value.X;
                     double dYInTargetPixels = targetNow.Value.Y - targetBefore.Value.Y;
 
-                    double multiplicatorX = e.ExtentWidth / content.ActualWidth;
-                    double multiplicatorY = e.ExtentHeight / content.ActualHeight;
+                    double multiplicationX = e.ExtentWidth / content.ActualWidth;
+                    double multiplicationY = e.ExtentHeight / content.ActualHeight;
 
-                    double newOffsetX = scrollViewer.HorizontalOffset - dXInTargetPixels * multiplicatorX;
-                    double newOffsetY = scrollViewer.VerticalOffset - dYInTargetPixels * multiplicatorY;
+                    double newOffsetX = scrollViewer.HorizontalOffset - dXInTargetPixels * multiplicationX;
+                    double newOffsetY = scrollViewer.VerticalOffset - dYInTargetPixels * multiplicationY;
 
                     if (double.IsNaN(newOffsetX) || double.IsNaN(newOffsetY)) return;
 

@@ -15,7 +15,9 @@ namespace BadassUniverse_MapEditor.Services.Mapper
 
             WorldMapperContext mapperContext = new(
                 mapVersion,
-                new TestGameStorage(), new BasicWorldFactory(),
+                new TestGameStorage(), 
+                new TestListStorage(),
+                new BasicWorldFactory(),
                 new ISubFactory[]
                 {
                     new BasicRoomSubFactory(), new BasicFacadeSubFactory(),

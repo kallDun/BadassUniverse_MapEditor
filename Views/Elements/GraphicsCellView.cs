@@ -3,38 +3,93 @@ using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using BadassUniverse_MapEditor.Extensions.Game;
 using BadassUniverse_MapEditor.Models.Game;
+using BadassUniverse_MapEditor.Services;
+using BadassUniverse_MapEditor.Services.Manager;
 
 namespace BadassUniverse_MapEditor.Views.Elements;
 
 public class GraphicsCellView
 {
-    private readonly World world;
+    private static LocalStorageService StorageService
+        => ServicesManager.Instance.GetService<LocalStorageService>();
+    private static PreviewService PreviewService
+        => ServicesManager.Instance.GetService<PreviewService>();
+    
     private readonly MapIndex position;
-    private readonly MapCell mapCell;
-    private readonly int currentFloor;
     private readonly int size;
     private bool backgroundInitialized;
+    private int currentFloor;
+    private int hashCodeCache;
+
+    private static World World => StorageService.World;
+    private MapCell MapCell => World.Map.GetValue(position);
+    public Grid Content { get; }
     
-    public Grid Content { get; private set; }
-    
-    public GraphicsCellView(World world, MapIndex position, 
-        MapCell mapCell, int currentFloor, int size)
+    public GraphicsCellView(MapIndex position, int size)
     {
-        this.world = world;
         this.position = position;
-        this.mapCell = mapCell;
-        this.currentFloor = currentFloor;
         this.size = size;
-        
         Content = new Grid();
         
-        InitializeView();
+        // init view
+        hashCodeCache = MapCell.GetHashCode();
+        currentFloor = StorageService.CurrentFloor;
+        ClearView();
         InitDefaultBackground();
+        InitializeView();
+        InitClickEvents();
+        
+        // update view
+        StorageService.OnWorldChanged += () =>
+        {
+            if (hashCodeCache != MapCell.GetHashCode() 
+                || currentFloor != StorageService.CurrentFloor)
+            {
+                hashCodeCache = MapCell.GetHashCode();
+                currentFloor = StorageService.CurrentFloor;
+                ClearView();
+                InitDefaultBackground();
+                InitializeView();
+                InitClickEvents();
+            }
+        };
     }
+
+    
+    #region Click Events
+    
+    private void InitClickEvents()
+    {
+        var rect = new Rectangle()
+        {
+            Width = size,
+            Height = size,
+            HorizontalAlignment = HorizontalAlignment.Center,
+            VerticalAlignment = VerticalAlignment.Center,
+            Fill = new SolidColorBrush(Colors.Transparent)
+        };
+        Content.Children.Add(rect);
+        rect.MouseMove += MouseMove;
+    }
+
+    private void MouseMove(object sender, MouseEventArgs e)
+    {
+        PreviewService.TryToMoveRoomOrFacade(position);
+    }
+
+    private void MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+    {
+        
+    }
+    
+    #endregion
+
+    #region Initialiaze View
     
     private void InitializeView()
     {
@@ -51,7 +106,7 @@ public class GraphicsCellView
 
     private bool TryToInitializeRoom()
     {
-        Room? room = world.GetRoomFromWorldByCell(mapCell, currentFloor);
+        Room? room = World.GetRoomFromWorldByCell(MapCell, currentFloor);
         if (room != null)
         {
             InitBackground(room.Color);
@@ -62,14 +117,14 @@ public class GraphicsCellView
 
     private bool TryToInitializeWalls()
     {
-        List<MapItemWall> walls = mapCell.GetWalls(currentFloor);
+        List<MapItemWall> walls = MapCell.GetWalls(currentFloor);
 
         List<(MapIndex Index, Color Color)> values = new();
         foreach (MapItemWall wall in walls)
         {
-            Room? room = world.GetRoomFromWall(wall);
+            Room? room = World.GetRoomFromWall(wall);
             if (room == null) continue;
-            foreach (MapIndex index in world.GetClosestNeightborPositionsToRoom(room, position, currentFloor))
+            foreach (MapIndex index in World.GetClosestNeightborPositionsToRoom(room, position, currentFloor))
             {
                 values.Add((position - index, room.Color));
             }
@@ -86,14 +141,14 @@ public class GraphicsCellView
 
     private bool TryToInitializeDoors()
     {
-        List<MapItemDoor> doors = mapCell.GetDoors(currentFloor);
+        List<MapItemDoor> doors = MapCell.GetDoors(currentFloor);
 
         List<(MapIndex Index, Color Color)> values = new();
         foreach (MapItemDoor door in doors)
         {
-            Room? room = world.GetRoomFromDoor(door);
+            Room? room = World.GetRoomFromDoor(door);
             if (room == null) continue;
-            foreach (MapIndex index in world.GetClosestNeightborPositionsToRoom(room, position, currentFloor))
+            foreach (MapIndex index in World.GetClosestNeightborPositionsToRoom(room, position, currentFloor))
             {
                 values.Add((position - index, room.Color));
             }
@@ -108,7 +163,7 @@ public class GraphicsCellView
 
     private bool TryToInitializeFacade()
     {
-        var facades = world.GetFacadesFromWorldByCell(mapCell, currentFloor);
+        var facades = World.GetFacadesFromWorldByCell(MapCell, currentFloor);
         var facadesArray = facades as Facade[] ?? facades.ToArray();
         if (!facadesArray.Any()) return false;
         InitFacadeBackground();
@@ -116,8 +171,15 @@ public class GraphicsCellView
         return true;
     }
 
+    #endregion
 
     #region View Change
+    
+    private void ClearView()
+    {
+        Content.Children.Clear();
+        backgroundInitialized = false;
+    }
     
     private void InitDefaultBackground()
     {
@@ -131,8 +193,7 @@ public class GraphicsCellView
     private void InitBackground(Color color)
     {
         if (backgroundInitialized) return;
-        Content.Background = new SolidColorBrush(color);
-        Content.Visibility = Visibility.Visible;
+        Content.Children.Add(new Rectangle() { Fill = new SolidColorBrush(color) });
         backgroundInitialized = true;
     }
 
