@@ -1,8 +1,10 @@
-﻿namespace MapEditor.Models.Game.Concrete.Rooms
+﻿using MapEditor.Services.Properties.Attributes;
+
+namespace MapEditor.Models.Game.Concrete.Rooms
 {
     public class StreetRoomParameters
     {
-        public int Width { get; set; }
-        public int Length { get; set; }
+        [CustomProperty] public int Width { get; set; }
+        [CustomProperty] public int Length { get; set; }
     }
 }

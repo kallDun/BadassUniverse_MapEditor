@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Controls;
 using System.Windows.Media;
+using BadassUniverse_MapEditor.Views.Elements.Property;
 using MapEditor.Models.Server;
 using MapEditor.Services.Manager;
 using MapEditor.Services.Properties;
@@ -32,7 +33,9 @@ namespace MapEditor.Views
                     Enum => new PropertySubElementComboBox(property),
                     Color or ColorDTO => new PropertySubElementColorPicker(property),
                     null => null,
-                    _ => null
+                    _ => property.SubProperties?.Count > 0 
+                        ? new PropertySubElementItem(property) 
+                        : null, 
                 };
                 if (propertySubElement != null)
                 {

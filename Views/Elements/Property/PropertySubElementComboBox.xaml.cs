@@ -17,8 +17,8 @@ namespace MapEditor.Views.Elements
             string[] names = Enum.GetNames(propertyData.Value.GetType());
             ValueComboBox.ItemsSource = names;
             ValueComboBox.SelectedIndex = Array.IndexOf(names, propertyData.Value.ToString());
-            MainGrid.Visibility = propertyData.IsVisible ? Visibility.Visible : Visibility.Collapsed;
             
+            MainGrid.Visibility = propertyData.IsVisible ? Visibility.Visible : Visibility.Collapsed;
             propertyData.OnVisibilityChanged += () =>
             {
                 MainGrid.Visibility = propertyData.IsVisible ? Visibility.Visible : Visibility.Collapsed;

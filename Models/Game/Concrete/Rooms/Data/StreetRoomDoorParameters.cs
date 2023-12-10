@@ -1,9 +1,13 @@
-﻿namespace MapEditor.Models.Game.Concrete.Rooms
+﻿using MapEditor.Services.Properties.Attributes;
+
+namespace MapEditor.Models.Game.Concrete.Rooms
 {
     public class StreetRoomDoorParameters
     {
-        public MapDirection Direction { get; set; }
-        public int StartIndex { get; set; }
-        public int Length { get; set; }
+        [CustomProperty] public MapDirection Direction { get; set; }
+        [CustomProperty] public int StartIndex { get; set; }
+        [CustomProperty] public int Length { get; set; }
+        
+        [CustomProperty] public StreetRoomParameters Parameters { get; set; } = new();
     }
 }
