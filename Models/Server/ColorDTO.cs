@@ -1,12 +1,13 @@
 ﻿using System.Windows.Media;
+using Newtonsoft.Json;
 
 namespace MapEditor.Models.Server
 {
     public struct ColorDTO
     {
-        public byte Red { get; set; }
-        public byte Green { get; set; }
-        public byte Blue { get; set; }
+        [JsonProperty("red")] public byte Red { get; set; }
+        [JsonProperty("green")] public byte Green { get; set; }
+        [JsonProperty("blue")] public byte Blue { get; set; }
 
         public static implicit operator Color(ColorDTO color)
         {

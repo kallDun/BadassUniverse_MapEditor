@@ -9,20 +9,19 @@ namespace MapEditor.Models.Server
 {
     public class RoomDTO : AItemDTO
     {
-        [CustomProperty(isReadOnly: true)] public int Id { get; set; }
-        public int MapId { get; set; }
-        public required int InGameRoomId { get; set; }
-        [CustomProperty(isReadOnly: true)] public string? Name { get; set; }
-        [CustomProperty] public ColorDTO Color { get; set; }
-        [CustomProperty("X")] public int MapOffsetX { get; set; }
-        [CustomProperty("Y")] public int MapOffsetY { get; set; }
-        [CustomProperty] public MapDirection Rotation { get; set; }
-        [CustomProperty(isReadOnly: true)] public int Floor { get; set; }
-        [CustomPropertyStringSerialized(types: new[] { typeof(StreetRoomParameters) })] public string? Params { get; set; }
-        [CustomPropertyStringSerialized(types: new[] { typeof(StreetRoomDoorParameters) })] public string? DoorParams { get; set; }
-        public List<PhysicsItemDTO> PhysicsItems { get; set; } = new();
-        public List<MobDTO> Mobs { get; set; } = new();
-        
+        [JsonProperty("id"), CustomProperty(isReadOnly: true)] public int Id { get; set; }
+        [JsonProperty("mapId")] public int MapId { get; set; }
+        [JsonProperty("inGameRoomId")] public required int InGameRoomId { get; set; }
+        [JsonProperty("name"), CustomProperty] public required string Name { get; set; }
+        [JsonProperty("color"), CustomProperty] public ColorDTO Color { get; set; }
+        [JsonProperty("mapOffsetX"), CustomProperty("X")] public int MapOffsetX { get; set; }
+        [JsonProperty("mapOffsetY"), CustomProperty("Y")] public int MapOffsetY { get; set; }
+        [JsonProperty("rotation"), CustomProperty] public MapDirection Rotation { get; set; }
+        [JsonProperty("floor"), CustomProperty] public int Floor { get; set; }
+        [JsonProperty("params"), CustomPropertyStringSerialized(types: new[] { typeof(StreetRoomParameters) })] public string? Params { get; set; }
+        [JsonProperty("doorParams"), CustomPropertyStringSerialized(types: new[] { typeof(StreetRoomDoorParameters) })] public string? DoorParams { get; set; }
+        [JsonProperty("physicsItems")] public List<PhysicsItemDTO> PhysicsItems { get; set; } = new();
+        [JsonProperty("mobs")] public List<MobDTO> Mobs { get; set; } = new();
         public override object Clone()
         {
             return new RoomDTO

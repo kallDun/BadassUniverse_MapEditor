@@ -1,19 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using MapEditor.Services.Properties.Attributes;
+using Newtonsoft.Json;
 
 namespace MapEditor.Models.Server
 {
     public class WorldDTO : ICloneable
     {
-        public required int Id { get; set; }
-        public required string Name { get; set; }
-        public required int XLenght { get; set; }
-        public required int YLenght { get; set; }
-        public required int PlayerSpawnRoomId { get; set; }
-        public List<RoomDTO> Rooms { get; set; } = new();
-        public List<FacadeDTO> Facades { get; set; } = new();
-        public required string Version { get; set; }
+        [JsonProperty("id"), CustomProperty(isReadOnly: true)] public required int Id { get; set; } 
+        [JsonProperty("name"), CustomProperty] public required string Name { get; set; }
+        [JsonProperty("xLength"), CustomProperty("Length")] public required int XLenght { get; set; }
+        [JsonProperty("yLength"), CustomProperty("Height")] public required int YLenght { get; set; }
+        [JsonProperty("playerSpawnRoomId"), CustomProperty("Spawn Room Id")] public required int PlayerSpawnRoomId { get; set; }
+        [JsonProperty("version"), CustomProperty(isReadOnly: true)] public required string Version { get; set; }
+        [JsonProperty("rooms")] public List<RoomDTO> Rooms { get; set; } = new();
+        [JsonProperty("facades")] public List<FacadeDTO> Facades { get; set; } = new();
         
         public object Clone()
         {

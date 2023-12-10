@@ -1,9 +1,11 @@
-﻿namespace MapEditor.Models.Server
+﻿using Newtonsoft.Json;
+
+namespace MapEditor.Models.Server
 {
     public class UserDTO
     {
-        public required string Username { get; set; }
+        [JsonProperty("username")] public required string Username { get; set; }
 
-        public required string Password { get; set; }
+        [JsonProperty("password")] public required string Password { get; set; }
     }
 }

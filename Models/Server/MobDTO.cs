@@ -1,19 +1,20 @@
-﻿using Newtonsoft.Json;
+﻿using MapEditor.Services.Properties.Attributes;
+using Newtonsoft.Json;
 
 namespace MapEditor.Models.Server
 {
     public class MobDTO : AItemDTO
     {
-        public int Id { get; set; }
-        public int RoomId { get; set; }
-        public int InGameMobItemId { get; set; }
-        public required string? Name { get; set; }
-        public float RoomOffsetX { get; set; }
-        public float RoomOffsetY { get; set; }
-        public bool IsRotationRandom { get; set; }
-        public float ZAngleRotation { get; set; }
-        public int SpawnRotation { get; set; }
-        public int SpawnTryCount { get; set; }
+        [JsonProperty("id"), CustomProperty(isReadOnly: true)] public int Id { get; set; }
+        [JsonProperty("roomId"), CustomProperty("Room Id", true)] public int RoomId { get; set; }
+        [JsonProperty("inGameMobId")] public int InGameMobId { get; set; }
+        [JsonProperty("name"), CustomProperty] public required string Name { get; set; }
+        [JsonProperty("roomOffsetX"), CustomProperty("X")] public float RoomOffsetX { get; set; }
+        [JsonProperty("roomOffsetY"), CustomProperty("Y")] public float RoomOffsetY { get; set; }
+        [JsonProperty("isRotationRandom"), CustomProperty("Rotation Random")] public bool IsRotationRandom { get; set; }
+        [JsonProperty("zAngleRotation"), CustomProperty("Rotation", hideIfProperty: "IsRotationRandom", hideIfValue: true)] public float ZAngleRotation { get; set; }
+        [JsonProperty("spawnRadius"), CustomProperty("Spawn Radius")] public int SpawnRadius { get; set; }
+        [JsonProperty("spawnTryCount"), CustomProperty("Spawn Tries")] public int SpawnTryCount { get; set; }
         
         public override object Clone()
         {
@@ -21,13 +22,13 @@ namespace MapEditor.Models.Server
             {
                 Id = Id,
                 RoomId = RoomId,
-                InGameMobItemId = InGameMobItemId,
+                InGameMobId = InGameMobId,
                 Name = Name,
                 RoomOffsetX = RoomOffsetX,
                 RoomOffsetY = RoomOffsetY,
                 IsRotationRandom = IsRotationRandom,
                 ZAngleRotation = ZAngleRotation,
-                SpawnRotation = SpawnRotation,
+                SpawnRadius = SpawnRadius,
                 SpawnTryCount = SpawnTryCount,
                 State = State
             };
