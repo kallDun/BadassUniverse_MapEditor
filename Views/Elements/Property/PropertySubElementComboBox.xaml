@@ -9,7 +9,7 @@
              TextOptions.TextFormattingMode="Ideal"
              TextOptions.TextRenderingMode="Auto"
              FontFamily="{DynamicResource MaterialDesignFont}">
-    <Grid HorizontalAlignment="Center" Height="75">
+    <Grid HorizontalAlignment="Center" Height="75" x:Name="MainGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>

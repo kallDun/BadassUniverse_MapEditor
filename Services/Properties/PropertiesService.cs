@@ -25,6 +25,10 @@ public class PropertiesService : AService
             if (propertyAttribute == null) continue;
             Properties.Add(new PropertyData(item, property, propertyAttribute));
         }
+        foreach (var property in Properties)
+        {
+            property.InitRelations(Properties);
+        }
         OnPropertiesChanged?.Invoke();
 
         foreach (var property in Properties)

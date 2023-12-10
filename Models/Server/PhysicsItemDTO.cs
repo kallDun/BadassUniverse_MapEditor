@@ -13,7 +13,7 @@ namespace MapEditor.Models.Server
         [JsonProperty("roomOffsetY"), CustomProperty("Y")] public float RoomOffsetY { get; set; }
         [JsonProperty("simulatePhysics"), CustomProperty("Simulate Physics")] public bool SimulatePhysics { get; set; }
         [JsonProperty("isRotationRandom"), CustomProperty("Rotation Random")] public bool IsRotationRandom { get; set; }
-        [JsonProperty("zAngleRotation"), CustomProperty("Rotation", hideIfProperty: "IsRotationRandom", hideIfValue: true)] public float ZAngleRotation { get; set; }
+        [JsonProperty("zAngleRotation"), CustomProperty("Rotation", showIfProperty: "IsRotationRandom", showIfValue: false)] public float ZAngleRotation { get; set; }
         [JsonProperty("spawnRadius"), CustomProperty("Spawn Radius")] public int SpawnRadius { get; set; }
         [JsonProperty("spawnTryCount"), CustomProperty("Spawn Tries")] public int SpawnTryCount { get; set; }
         

@@ -11,6 +11,12 @@ namespace MapEditor.Views.Elements
             NameTextBlock.Text = propertyData.VisualizedName;
             ValueTextBox.Text = propertyData.Value?.ToString();
             ValueTextBox.IsReadOnly = propertyData.IsReadOnly;
+            MainGrid.Visibility = propertyData.IsVisible ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
+            
+            propertyData.OnVisibilityChanged += () =>
+            {
+                MainGrid.Visibility = propertyData.IsVisible ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
+            };
             
             propertyData.OnValueChangedFromWorld += () =>
             {

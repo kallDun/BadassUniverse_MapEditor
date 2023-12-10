@@ -22,6 +22,7 @@ namespace MapEditor.Models.Server
         [JsonProperty("doorParams"), CustomPropertyStringSerialized(types: new[] { typeof(StreetRoomDoorParameters) })] public string? DoorParams { get; set; }
         [JsonProperty("physicsItems")] public List<PhysicsItemDTO> PhysicsItems { get; set; } = new();
         [JsonProperty("mobs")] public List<MobDTO> Mobs { get; set; } = new();
+        [CustomProperty] public bool TestProperty { get; set; }
         public override object Clone()
         {
             return new RoomDTO

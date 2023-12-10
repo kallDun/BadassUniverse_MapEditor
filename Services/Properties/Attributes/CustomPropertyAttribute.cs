@@ -7,15 +7,15 @@ public class CustomPropertyAttribute : Attribute
 {
     public string PropertyName { get; }
     public bool IsReadOnly { get; }
-    public string? HideIfProperty { get; }
-    public object? HideIfValue { get; }
+    public string? ShowIfProperty { get; }
+    public object? ShowIfValue { get; }
     
     public CustomPropertyAttribute(string propertyName = "", bool isReadOnly = false, 
-        string? hideIfProperty = null, object? hideIfValue = null)
+        string? showIfProperty = null, object? showIfValue = null)
     {
         PropertyName = propertyName;
         IsReadOnly = isReadOnly;
-        HideIfProperty = hideIfProperty;
-        HideIfValue = hideIfValue;
+        ShowIfProperty = showIfProperty;
+        ShowIfValue = showIfValue;
     }
 }
