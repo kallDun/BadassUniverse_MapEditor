@@ -7,7 +7,7 @@
              d:DesignHeight="500" d:DesignWidth="400">
     <Grid>
         <ScrollViewer>
-            <StackPanel x:Name="PropertiesPanel" Margin="0"
+            <StackPanel x:Name="PropertiesPanel" Margin="5"
                 ScrollViewer.CanContentScroll="True" CanHorizontallyScroll="True"/>
         </ScrollViewer>
     </Grid>

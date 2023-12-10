@@ -16,14 +16,14 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <TextBlock TextAlignment="Right" VerticalAlignment="Center" x:Name="NameTextBlock"
+        <TextBlock TextAlignment="Right" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="NameTextBlock"
             Text="Property with textbox" Margin="0,0,20,0" TextWrapping="Wrap"/>
 
-        <Rectangle Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" 
-                   Width="1" Height="30" Fill="Black"/>
+        <!--<Rectangle Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" 
+                   Width="1" Height="30" Fill="Black"/>-->
 
         <TextBox Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" x:Name="ValueTextBox"
-            VerticalContentAlignment="Center" Margin="20,0,0,0" Text="Text example" MinWidth="75" TextAlignment="Center"
+            VerticalContentAlignment="Center" Margin="20,0,0,0" Text="Text example" MinWidth="75" TextAlignment="Left"
             FontSize="20"/>
     </Grid>
 </UserControl>
