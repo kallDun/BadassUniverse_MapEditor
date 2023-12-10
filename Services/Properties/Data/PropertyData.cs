@@ -107,7 +107,7 @@ public class PropertyData
         {
             var dataEvents = PropertyDataEvents.FromList((IEnumerable<object>)Value, i);
             var attribute = Attribute.Clone() as CustomPropertyAttribute;
-            attribute.VisualizeName = $"Item [{i}]";
+            attribute.VisualizeName = $"{Attribute.VisualizeName} [{i}]";
             attribute.IsReadOnly = listAttribute.IsItemReadOnly;
             var itemListProperty = new PropertyData(array[i], dataEvents, attribute);
             ItemListProperties.Add(itemListProperty);
