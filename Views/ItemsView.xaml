@@ -9,7 +9,7 @@
     <Grid>
         <ScrollViewer>
             <StackPanel ScrollViewer.CanContentScroll="True" CanHorizontallyScroll="True"
-                        x:Name="ItemsStackPanel">
+                x:Name="ItemsStackPanel">
             </StackPanel>
         </ScrollViewer>
     </Grid>
