@@ -1,7 +1,9 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using MapEditor.Extensions.Reflection;
 using MapEditor.Models.Server;
 using MapEditor.Services.Properties.Attributes;
 
@@ -105,10 +107,65 @@ public class PropertyData
         {
             var dataEvents = PropertyDataEvents.FromList((IEnumerable<object>)Value, i);
             var attribute = Attribute.Clone() as CustomPropertyAttribute;
-            attribute.VisualizeName = $"{Attribute.VisualizeName} - {i}";
+            attribute.VisualizeName = $"Item [{i}]";
             attribute.IsReadOnly = listAttribute.IsItemReadOnly;
-            var itemListProperty = new PropertyData(array[i], dataEvents, Attribute);
+            var itemListProperty = new PropertyData(array[i], dataEvents, attribute);
             ItemListProperties.Add(itemListProperty);
         }
     }
+    
+    public void AddItemToList()
+    {
+        if (Value is not IEnumerable<object?> enumer) return;
+        var type = enumer.GetType().GetGenericArguments()[0];
+        var item = InstanceHelper.GetNewInstance(type);
+
+        // if array, add item to array
+        if (Value is Array array)
+        {
+            var newArray = Array.CreateInstance(type, array.Length + 1);
+            for (int i = 0; i < array.Length; i++)
+            {
+                newArray.SetValue(array.GetValue(i), i);
+            }
+            newArray.SetValue(item, array.Length);
+            SetValue(newArray);
+        }
+        // if list, add item to list
+        else if (Value is IList list)
+        {
+            list.Add(item);
+            SetValue(list);
+        }
+        
+        InitListProperties();
+    }
+    
+    public void RemoveItemFromList(int index)
+    {
+        if (Value is not IEnumerable<object?> enumer) return;
+        var type = enumer.GetType().GetGenericArguments()[0];
+        var item = InstanceHelper.GetNewInstance(type);
+
+        // if array, add item to array
+        if (Value is Array array)
+        {
+            var newArray = Array.CreateInstance(type, array.Length - 1);
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (i == index) continue;
+                newArray.SetValue(array.GetValue(i), i);
+            }
+            SetValue(newArray);
+        }
+        // if list, add item to list
+        else if (Value is IList list)
+        {
+            list.RemoveAt(index);
+            SetValue(list);
+        }
+        
+        InitListProperties();
+    }
+    
 }

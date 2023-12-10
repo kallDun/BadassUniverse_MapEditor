@@ -23,13 +23,6 @@ namespace MapEditor.Models.Server
         [JsonProperty("doorParams"), CustomPropertyStringSerialized(types: new[] { typeof(StreetRoomDoorParameters) })] public string? DoorParams { get; set; }
         [JsonProperty("physicsItems"), CustomPropertyList] public List<PhysicsItemDTO> PhysicsItems { get; set; } = new();
         [JsonProperty("mobs"), CustomPropertyList] public List<MobDTO> Mobs { get; set; } = new();
-
-        [CustomProperty(showIfProperty: "Rotation", showIfValue: MapDirection.Left)] public StreetRoomParameters Parameters { get; set; } = new();
-        [CustomProperty] public StreetRoomDoorParameters DoorParameters { get; set; } = new();
-        [CustomPropertyList] public List<StreetRoomParameters> ParametersList { get; set; } = new()
-        {
-            new(), new(), new()
-        };
         
         public override object Clone()
         {
