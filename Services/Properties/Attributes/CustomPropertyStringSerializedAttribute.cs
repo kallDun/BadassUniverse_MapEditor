@@ -1,14 +1,15 @@
 using System;
 using Newtonsoft.Json;
 
-namespace MapEditor.Extensions.Attributes;
+namespace MapEditor.Services.Properties.Attributes;
 
 [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property)]
-public class PropertyStringSerializedAttribute : PropertyAttribute
+public class CustomPropertyStringSerializedAttribute : CustomPropertyAttribute
 {
     private readonly Type[] types;
     
-    public PropertyStringSerializedAttribute(string propertyName = "", bool isReadOnly = false, params Type[] types) : base(propertyName, isReadOnly)
+    public CustomPropertyStringSerializedAttribute(string propertyName = "", bool isReadOnly = false, params Type[] types) 
+        : base(propertyName, isReadOnly)
     {
         this.types = types;
     }

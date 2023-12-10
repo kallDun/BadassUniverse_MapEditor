@@ -1,14 +1,14 @@
 using System;
 
-namespace MapEditor.Extensions.Attributes;
+namespace MapEditor.Services.Properties.Attributes;
 
 [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property)]
-public class PropertyAttribute : Attribute
+public class CustomPropertyAttribute : Attribute
 {
     public string PropertyName { get; set; }
     public bool IsReadOnly { get; set; }
     
-    public PropertyAttribute(string propertyName = "", bool isReadOnly = false)
+    public CustomPropertyAttribute(string propertyName = "", bool isReadOnly = false)
     {
         PropertyName = propertyName;
         IsReadOnly = isReadOnly;

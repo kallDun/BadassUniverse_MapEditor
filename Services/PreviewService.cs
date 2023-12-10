@@ -4,6 +4,7 @@ using MapEditor.Models;
 using MapEditor.Models.Game;
 using MapEditor.Models.Server;
 using MapEditor.Services.Manager;
+using MapEditor.Services.Properties;
 
 namespace MapEditor.Services
 {
@@ -11,6 +12,8 @@ namespace MapEditor.Services
     {
         private static LocalStorageService StorageService
             => ServicesManager.Instance.GetService<LocalStorageService>();
+        private static PropertiesService PropertiesService
+            => ServicesManager.Instance.GetService<PropertiesService>();
         
         private AItemDTO? previewItem;
         private ItemType? previewItemType;
@@ -50,6 +53,7 @@ namespace MapEditor.Services
                     break;
             }
             StorageService.SetPreviewWorld(worldDTOPreview);
+            PropertiesService.SetActiveItem(previewItem);
         }
 
         public void TryToMoveRoomOrFacade(MapIndex position)
@@ -63,13 +67,15 @@ namespace MapEditor.Services
                     var room = previewItem as RoomDTO ?? throw new ArgumentException("Cannot cast item to RoomDTO.");
                     room.MapOffsetX = position.X;
                     room.MapOffsetY = position.Y;
-                    room.OnValuesChanged?.Invoke();
+                    room.OnValueChanged?.Invoke("MapOffsetX");
+                    room.OnValueChanged?.Invoke("MapOffsetY");
                     break;
                 case ItemType.Building:
                     var facade = previewItem as FacadeDTO ?? throw new ArgumentException("Cannot cast item to FacadeDTO.");
                     facade.MapOffsetX = position.X;
                     facade.MapOffsetY = position.Y;
-                    facade.OnValuesChanged?.Invoke();
+                    facade.OnValueChanged?.Invoke("MapOffsetX");
+                    facade.OnValueChanged?.Invoke("MapOffsetY");
                     break;
             }
             StorageService.SetPreviewWorld(worldDTOPreview);

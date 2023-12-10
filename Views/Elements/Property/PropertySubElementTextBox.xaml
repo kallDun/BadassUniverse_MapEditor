@@ -8,23 +8,22 @@
              TextElement.FontSize="20"
              TextOptions.TextFormattingMode="Ideal"
              TextOptions.TextRenderingMode="Auto"
-             FontFamily="{DynamicResource MaterialDesignFont}"
-             d:DesignHeight="50" d:DesignWidth="450">
+             FontFamily="{DynamicResource MaterialDesignFont}">
     
-    <Grid HorizontalAlignment="Center">
+    <Grid HorizontalAlignment="Center" Height="75">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <TextBlock TextAlignment="Right" VerticalAlignment="Center" 
-            Text="Property with textbox" Margin="20,0,20,0" TextWrapping="Wrap"/>
+        <TextBlock TextAlignment="Right" VerticalAlignment="Center" x:Name="NameTextBlock"
+            Text="Property with textbox" Margin="0,0,20,0" TextWrapping="Wrap"/>
 
-        <Rectangle HorizontalAlignment="Right" VerticalAlignment="Center" 
-            Width="1" Height="30" Fill="Black"/>
+        <Rectangle Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" 
+                   Width="1" Height="30" Fill="Black"/>
 
-        <TextBox Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" 
-            VerticalContentAlignment="Center" Margin="20,0,20,0" Text="Text example"
+        <TextBox Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" x:Name="ValueTextBox"
+            VerticalContentAlignment="Center" Margin="20,0,0,0" Text="Text example" MinWidth="75" TextAlignment="Center"
             FontSize="20"/>
     </Grid>
 </UserControl>

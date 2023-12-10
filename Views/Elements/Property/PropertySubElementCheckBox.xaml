@@ -8,9 +8,8 @@
              TextElement.FontSize="20"
              TextOptions.TextFormattingMode="Ideal"
              TextOptions.TextRenderingMode="Auto"
-             FontFamily="{DynamicResource MaterialDesignFont}"
-             d:DesignHeight="50" d:DesignWidth="450">
-    <Grid HorizontalAlignment="Center">
+             FontFamily="{DynamicResource MaterialDesignFont}">
+    <Grid HorizontalAlignment="Center" Height="75">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>

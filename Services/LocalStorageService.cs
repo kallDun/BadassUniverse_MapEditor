@@ -67,6 +67,15 @@ namespace MapEditor.Services
             else throw new ArgumentException("Cannot create world from mapDTO.");
         }
         
+        public void UpdateWorld()
+        {
+            if (worldDTO is null) throw new Exception("WorldDTO is null.");
+            if (worldDTOPreview == null || !TryToSetWorld(worldDTOPreview))
+            {
+                TryToSetWorld(worldDTO);
+            }
+        }
+        
         private bool TryToSetWorld(WorldDTO worldDto)
         {
             if (worldMapperContext == null || worldMapperContext.Version != worldDto.Version)

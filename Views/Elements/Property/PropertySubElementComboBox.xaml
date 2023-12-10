@@ -8,22 +8,21 @@
              TextElement.FontSize="20"
              TextOptions.TextFormattingMode="Ideal"
              TextOptions.TextRenderingMode="Auto"
-             FontFamily="{DynamicResource MaterialDesignFont}"
-             d:DesignHeight="50" d:DesignWidth="450">
-    <Grid HorizontalAlignment="Center">
+             FontFamily="{DynamicResource MaterialDesignFont}">
+    <Grid HorizontalAlignment="Center" Height="75">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <TextBlock TextAlignment="Right" VerticalAlignment="Center" 
-           Text="Property with combobox" Margin="20,0,20,0" TextWrapping="Wrap"/>
+        <TextBlock TextAlignment="Right" VerticalAlignment="Center" x:Name="NameTextBlock"
+           Text="Property with combobox" Margin="0,0,20,0" TextWrapping="Wrap"/>
 
         <Rectangle HorizontalAlignment="Right" VerticalAlignment="Center" 
            Width="1" Height="30" Fill="Black"/>
 
-        <ComboBox Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" 
-            VerticalContentAlignment="Center" Margin="20,0,20,0" Height="30"
-            Style="{DynamicResource MaterialDesignFloatingHintComboBox}" FontSize="20"/>
+        <ComboBox Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" x:Name="ValueComboBox"
+            VerticalContentAlignment="Center" Margin="20,0,0,0" Height="33" Foreground="Black" MinWidth="75"
+            FontSize="20"/>
     </Grid>
 </UserControl>

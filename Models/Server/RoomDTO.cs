@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using MapEditor.Extensions.Attributes;
+using MapEditor.Services.Properties.Attributes;
 using MapEditor.Models.Game;
 using MapEditor.Models.Game.Concrete.Rooms;
 using Newtonsoft.Json;
@@ -9,17 +9,17 @@ namespace MapEditor.Models.Server
 {
     public class RoomDTO : AItemDTO
     {
-        [Property(isReadOnly: true)] public int Id { get; set; }
+        [CustomProperty(isReadOnly: true)] public int Id { get; set; }
         public int MapId { get; set; }
         public required int InGameRoomId { get; set; }
-        [Property(isReadOnly: true)] public string? Name { get; set; }
-        [Property] public ColorDTO Color { get; set; }
-        [Property("Coordinate X", true)] public int MapOffsetX { get; set; }
-        [Property("Coordinate Y", true)] public int MapOffsetY { get; set; }
-        [Property] public MapDirection Rotation { get; set; }
-        [Property(isReadOnly: true)] public int Floor { get; set; }
-        [PropertyStringSerialized(types: new[] { typeof(StreetRoomParameters) })] public string? Params { get; set; }
-        [PropertyStringSerialized(types: new[] { typeof(StreetRoomDoorParameters) })] public string? DoorParams { get; set; }
+        [CustomProperty(isReadOnly: true)] public string? Name { get; set; }
+        [CustomProperty] public ColorDTO Color { get; set; }
+        [CustomProperty("X")] public int MapOffsetX { get; set; }
+        [CustomProperty("Y")] public int MapOffsetY { get; set; }
+        [CustomProperty] public MapDirection Rotation { get; set; }
+        [CustomProperty(isReadOnly: true)] public int Floor { get; set; }
+        [CustomPropertyStringSerialized(types: new[] { typeof(StreetRoomParameters) })] public string? Params { get; set; }
+        [CustomPropertyStringSerialized(types: new[] { typeof(StreetRoomDoorParameters) })] public string? DoorParams { get; set; }
         public List<PhysicsItemDTO> PhysicsItems { get; set; } = new();
         public List<MobDTO> Mobs { get; set; } = new();
         

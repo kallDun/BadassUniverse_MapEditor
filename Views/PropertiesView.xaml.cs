@@ -1,21 +1,41 @@
-﻿using System.Windows;
+﻿using System;
 using System.Windows.Controls;
-using System.Windows.Media;
-using System.Windows.Shapes;
+using MapEditor.Services.Manager;
+using MapEditor.Services.Properties;
+using MapEditor.Views.Elements;
 
 namespace MapEditor.Views
 {
     public partial class PropertiesView : UserControl
     {
+        private static PropertiesService PropertiesService
+            => ServicesManager.Instance.GetService<PropertiesService>();
+        
         public PropertiesView()
         {
             InitializeComponent();
-            InitPanel();
+            PropertiesService.OnPropertiesChanged += UpdatePropertiesView;
         }
-        private void InitPanel()
+        
+        private void UpdatePropertiesView()
         {
-            
+            PropertiesPanel.Children.Clear();
+
+            foreach (var property in PropertiesService.Properties)
+            {
+                UserControl? propertySubElement = property.Value switch
+                {
+                    string or int or double or float => new PropertySubElementTextBox(property),
+                    bool => new PropertySubElementCheckBox(property),
+                    Enum => new PropertySubElementComboBox(property),
+                    null => null,
+                    _ => null
+                };
+                if (propertySubElement != null)
+                {
+                    PropertiesPanel.Children.Add(propertySubElement);
+                }
+            }
         }
     }
 }
-

@@ -7,12 +7,8 @@
              d:DesignHeight="500" d:DesignWidth="400">
     <Grid>
         <ScrollViewer>
-            <StackPanel ScrollViewer.CanContentScroll="True" CanHorizontallyScroll="True">
-                <Frame Grid.Row="0" Source="Elements/Property/PropertySubElementButton.xaml" Height="75"/>
-                <Frame Grid.Row="1" Source="Elements/Property/PropertySubElementCheckBox.xaml" Height="75"/>
-                <Frame Grid.Row="2" Source="Elements/Property/PropertySubElementComboBox.xaml" Height="75"/>
-                <Frame Grid.Row="3" Source="Elements/Property/PropertySubElementTextBox.xaml" Height="75"/>
-            </StackPanel>
+            <StackPanel x:Name="PropertiesPanel" Margin="0"
+                ScrollViewer.CanContentScroll="True" CanHorizontallyScroll="True"/>
         </ScrollViewer>
     </Grid>
 </UserControl>
