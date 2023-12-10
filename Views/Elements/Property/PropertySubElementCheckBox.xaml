@@ -9,20 +9,17 @@
              TextOptions.TextFormattingMode="Ideal"
              TextOptions.TextRenderingMode="Auto"
              FontFamily="{DynamicResource MaterialDesignFont}">
-    <Grid HorizontalAlignment="Center" Height="75" x:Name="MainGrid">
+    <Grid Height="75" x:Name="MainGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <TextBlock TextAlignment="Right" VerticalAlignment="Center" x:Name="NameTextBlock"
-               Text="Property with checkbox" Margin="0,0,20,0" TextWrapping="Wrap"/>
-
-        <Rectangle Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" 
-                   Width="1" Height="30" Fill="Black"/>
+        <TextBlock TextAlignment="Left" VerticalAlignment="Center" x:Name="NameTextBlock"
+               Text="Property with checkbox" Margin="20,0,20,0" TextWrapping="Wrap"/>
 
         <CheckBox Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" x:Name="ValueCheckBox"
-            VerticalContentAlignment="Center" Content="No" Margin="20,0,0,0"
+            VerticalContentAlignment="Center" Content="No" Margin="20,0,20,0"
             Style="{DynamicResource MaterialDesignFilterChipPrimaryCheckBox}" FontSize="20"/>
     </Grid>
 </UserControl>

@@ -12,13 +12,23 @@
              FontFamily="{DynamicResource MaterialDesignFont}">
 
     <Border BorderThickness="1" BorderBrush="Black" CornerRadius="3" Margin="5" x:Name="BorderMain">
-        <StackPanel x:Name="MainStackContainer" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="3">
-            <TextBlock x:Name="NameTextBlock" Text="Test" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0"/>
-            <StackPanel x:Name="SubElementsStackContainer" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0"/>
-            <StackPanel x:Name="AddSubElementStackContainer" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0">
-                <Button x:Name="AddSubElementButton" Content="+" Height="25" Width="25" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" Padding="0" Style="{DynamicResource MaterialDesignOutlinedButton}" FontSize="20"/>
+        <Grid x:Name="MainStackContainer" VerticalAlignment="Center" Margin="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock x:Name="NameTextBlock" Grid.Column="0" Grid.Row="0" Text="Test" TextDecorations="Underline" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,0,0"/>
+            <StackPanel x:Name="AddSubElementStackContainer" Grid.Column="1" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,0,0">
+                <TextBlock x:Name="CountSubElementText" Grid.Column="0" Text="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0"/>
+                <Button x:Name="AddSubElementButton" Content="+" Height="25" Width="25" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0" Padding="0" Style="{DynamicResource MaterialDesignOutlinedButton}" FontSize="20"/>
                 <Button x:Name="RemoveSubElementButton" Content="-" Height="25" Width="25" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,0,0,0" Padding="0" Style="{DynamicResource MaterialDesignOutlinedButton}" FontSize="20"/>
             </StackPanel>
-        </StackPanel>
+            <StackPanel x:Name="SubElementsStackContainer" Grid.Row="1" Grid.ColumnSpan="2" Orientation="Vertical" VerticalAlignment="Center" Margin="5,0,5,0"/>
+        </Grid>
     </Border>
 </UserControl>
