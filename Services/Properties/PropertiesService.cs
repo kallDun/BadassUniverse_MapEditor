@@ -23,7 +23,7 @@ public class PropertiesService : AService
         {
             CustomPropertyAttribute? propertyAttribute = property.GetCustomAttribute<CustomPropertyAttribute>();
             if (propertyAttribute == null) continue;
-            Properties.Add(new PropertyData(item, property, propertyAttribute));
+            Properties.Add(new PropertyData(item, PropertyDataEvents.FromPropertyInfo(item, property), propertyAttribute));
         }
         foreach (var property in Properties)
         {

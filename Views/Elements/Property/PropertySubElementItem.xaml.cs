@@ -1,10 +1,6 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
-using MapEditor.Models.Server;
 using MapEditor.Services.Properties.Data;
-using MapEditor.Views.Elements;
 
 namespace BadassUniverse_MapEditor.Views.Elements.Property
 {
@@ -24,21 +20,8 @@ namespace BadassUniverse_MapEditor.Views.Elements.Property
             
             foreach (var property in propertyData.SubProperties)
             {
-                UserControl? propertySubElement = property.Value switch
-                {
-                    string or int or double or float => new PropertySubElementTextBox(property),
-                    bool => new PropertySubElementCheckBox(property),
-                    Enum => new PropertySubElementComboBox(property),
-                    Color or ColorDTO => new PropertySubElementColorPicker(property),
-                    null => null,
-                    _ => property.SubProperties?.Count > 0 
-                        ? new PropertySubElementItem(property) 
-                        : null, 
-                };
-                if (propertySubElement != null)
-                {
-                    MainStackContainer.Children.Add(propertySubElement);
-                }
+                UserControl? propertySubElement = PropertyExtensions.GetPropertyView(property);
+                if (propertySubElement != null) MainStackContainer.Children.Add(propertySubElement);
             }
         }
     }
