@@ -30,7 +30,7 @@
                 <MenuItem Header="File" Height="25">
                     <MenuItem Header="New"/>
                     <MenuItem Header="Open"/>
-                    <MenuItem Header="Save"/>
+                    <MenuItem Header="Save" Click="MenuItem_OnClick"/>
                     <MenuItem Header="Save As"/>
                     <Separator/>
                     <MenuItem Header="Exit"/>
