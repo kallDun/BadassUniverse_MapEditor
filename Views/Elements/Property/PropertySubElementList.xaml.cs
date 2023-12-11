@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using MapEditor.Services.Properties.Data;
@@ -19,6 +20,7 @@ namespace BadassUniverse_MapEditor.Views.Elements.Property
             {
                 BorderMain.Visibility = propertyData.IsVisible ? Visibility.Visible : Visibility.Collapsed;
             };
+            
             UpdateListView(propertyData);
             
             AddSubElementButton.Click += (sender, args) =>
@@ -38,11 +40,24 @@ namespace BadassUniverse_MapEditor.Views.Elements.Property
         private void UpdateListView(PropertyData propertyData)
         {
             SubElementsStackContainer.Children.Clear();
-            foreach (var propertyItem in propertyData.ItemListProperties)
+            if (propertyData.ItemListProperties == null) return;
+            for (int i = 0; i < propertyData.ItemListProperties.Count; i++)
             {
+                var propertyItem = propertyData.ItemListProperties[i];
                 var propertySubElement = PropertyExtensions.GetPropertyView(propertyItem);
-                if (propertySubElement != null) SubElementsStackContainer.Children.Add(propertySubElement);
+                if (propertySubElement != null)
+                {
+                    var index = i;
+                    var view = new PropertySubElementListItem(propertySubElement, () =>
+                    {
+                        propertyData.RemoveItemFromList(index);
+                        UpdateListView(propertyData);
+                    });
+                    SubElementsStackContainer.Children.Add(view);
+                }
             }
+            CountSubElementText.Text = propertyData.ItemListProperties.Count.ToString();
         }
+        
     }
 }

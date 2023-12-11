@@ -1,28 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace BadassUniverse_MapEditor.Views.Elements.Property
 {
-    /// <summary>
-    /// Interaction logic for PropertySubElementListItem.xaml
-    /// </summary>
     public partial class PropertySubElementListItem : UserControl
     {
-        public PropertySubElementListItem()
+        public PropertySubElementListItem(UIElement userControl, Action removeAction)
         {
             InitializeComponent();
+            MainGrid.Children.Add(userControl);
+            RemoveButton.Click += (sender, args) => removeAction();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Documents;
 using MapEditor.Services.Properties.Attributes;
 using MapEditor.Models.Game;
 using MapEditor.Models.Game.Concrete.Rooms;
@@ -22,7 +23,6 @@ namespace MapEditor.Models.Server
         [JsonProperty("doorParams"), CustomPropertyStringSerialized(types: new[] { typeof(List<StreetRoomDoorParameters>) })] public string? DoorParams { get; set; }
         [JsonProperty("physicsItems"), CustomProperty] public List<PhysicsItemDTO> PhysicsItems { get; set; } = new();
         [JsonProperty("mobs"), CustomProperty] public List<MobDTO> Mobs { get; set; } = new();
-        
         public override object Clone()
         {
             return new RoomDTO
