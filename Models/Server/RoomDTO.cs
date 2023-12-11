@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Windows.Documents;
 using MapEditor.Services.Properties.Attributes;
 using MapEditor.Models.Game;
 using MapEditor.Models.Game.Concrete.Rooms;
@@ -20,9 +19,9 @@ namespace MapEditor.Models.Server
         [JsonProperty("rotation"), CustomProperty] public MapDirection Rotation { get; set; }
         [JsonProperty("floor"), CustomProperty] public int Floor { get; set; }
         [JsonProperty("params"), CustomPropertyStringSerialized(types: new[] { typeof(StreetRoomParameters) })] public string? Params { get; set; }
-        [JsonProperty("doorParams"), CustomPropertyStringSerialized(types: new[] { typeof(StreetRoomDoorParameters) })] public string? DoorParams { get; set; }
-        [JsonProperty("physicsItems"), CustomPropertyList] public List<PhysicsItemDTO> PhysicsItems { get; set; } = new();
-        [JsonProperty("mobs"), CustomPropertyList] public List<MobDTO> Mobs { get; set; } = new();
+        [JsonProperty("doorParams"), CustomPropertyStringSerialized(types: new[] { typeof(List<StreetRoomDoorParameters>) })] public string? DoorParams { get; set; }
+        [JsonProperty("physicsItems"), CustomProperty] public List<PhysicsItemDTO> PhysicsItems { get; set; } = new();
+        [JsonProperty("mobs"), CustomProperty] public List<MobDTO> Mobs { get; set; } = new();
         
         public override object Clone()
         {

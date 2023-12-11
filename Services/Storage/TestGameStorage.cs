@@ -15,7 +15,7 @@ namespace MapEditor.Services.Storage
                 new()
                 {
                     Id = 0,
-                    Name = "Test Square Room",
+                    Name = "Square Room",
                     Params = new SquareRoomParameters
                     {
                         Width = 10,
@@ -35,28 +35,8 @@ namespace MapEditor.Services.Storage
                 new()
                 {
                     Id = 1,
-                    Name = "Room #2",
-                    Params = new SquareRoomParameters
-                    {
-                        Width = 16,
-                        Length = 16,
-                    },
-                    DoorParams = new SquareRoomDoorParameters[]
-                    {
-                        new()
-                        {
-                            Id = 0,
-                            Position = new MapIndex(5, 0),
-                            FloorDisplacement = 0
-                        },
-                        new()
-                        {
-                            Id = 1,
-                            Position = new MapIndex(0, 10),
-                            FloorDisplacement = 0
-                        }
-                    },
-                    RoomType = typeof(SquareRoom)
+                    Name = "Street Room",
+                    RoomType = typeof(StreetRoom)
                 }
             };
         }

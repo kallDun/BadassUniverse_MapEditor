@@ -20,9 +20,22 @@ public class CustomPropertyStringSerializedAttribute : CustomPropertyAttribute
         if (value == null) return null;
         foreach (Type type in types)
         {
-            object? obj = JsonConvert.DeserializeObject(value, type);
-            if (obj != null) return obj;
+            try
+            {
+                object? obj = JsonConvert.DeserializeObject(value, type);
+                if (obj != null) return obj;
+            }
+            catch (Exception)
+            {
+                // ignored
+            }
         }
         return null;
+    }
+    
+    public string Serialize(object? value)
+    {
+        if (value == null) return "";
+        return JsonConvert.SerializeObject(value);
     }
 }

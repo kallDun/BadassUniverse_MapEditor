@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -19,7 +20,7 @@ public static class PropertyExtensions
             bool => new PropertySubElementCheckBox(property),
             Enum => new PropertySubElementComboBox(property),
             Color or ColorDTO => new PropertySubElementColorPicker(property),
-            IEnumerable<object> => new PropertySubElementList(property),
+            IList or Array => new PropertySubElementList(property),
             null => null,
             _ => property.SubProperties?.Count > 0
                 ? new PropertySubElementItem(property)

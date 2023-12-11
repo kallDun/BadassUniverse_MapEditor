@@ -33,12 +33,12 @@ public class PropertyData
         Attribute = attribute;
         IsVisible = true;
         
-        Value = dataEvents.GetValue();
-        OnValueChangedFromWorld += () => Value = dataEvents.GetValue();
-        
-        SubscribeToChangedFromDTO();
+        UpdateValue();
+        SubscribeToChangedEventFromDTO();
         CreateSubProperties();
         InitListProperties();
+        
+        OnValueChangedFromWorld += UpdateValue;
     }
 
     public void InitRelations(IEnumerable<PropertyData> properties)
@@ -54,9 +54,21 @@ public class PropertyData
     public void SetValue(object? value)
     {
         if (value == null) return;
-        DataEvents.SetValue(value);
+        
+        DataEvents.SetValue(Attribute is CustomPropertyStringSerializedAttribute serializedAttribute 
+            ? serializedAttribute.Serialize(value)
+            : value);
+        
         Value = value;
         OnValueChangedFromProperties?.Invoke();
+    }
+    
+    private void UpdateValue()
+    {
+        var value = DataEvents.GetValue();
+        Value = value is string str && Attribute is CustomPropertyStringSerializedAttribute serializedAttribute
+            ? serializedAttribute.Deserialize(str)
+            : value;
     }
     
     private void ChangePropertyVisibility(PropertyData relatedProperty)
@@ -65,7 +77,7 @@ public class PropertyData
         OnVisibilityChanged?.Invoke();
     }
     
-    private void SubscribeToChangedFromDTO()
+    private void SubscribeToChangedEventFromDTO()
     {
         if (Item is AItemDTO itemDto)
         {
@@ -91,14 +103,14 @@ public class PropertyData
         foreach (var property in SubProperties)
         {
             property.InitRelations(SubProperties);
-            property.OnValueChangedFromProperties += () => OnValueChangedFromProperties?.Invoke();
+            property.OnValueChangedFromProperties += () => SetValue(Value);
             OnValueChangedFromWorld += () => property.OnValueChangedFromWorld?.Invoke();
         }
     }
     
     private void InitListProperties()
     {
-        if (Value is null or not IEnumerable<object> || Attribute is not CustomPropertyListAttribute listAttribute) return;
+        if (Value is null or not IEnumerable<object>) return;
         ItemListProperties = new List<PropertyData>();
         
         var array = ((IEnumerable<object>)Value).ToArray();
@@ -107,17 +119,22 @@ public class PropertyData
         {
             var dataEvents = PropertyDataEvents.FromList((IEnumerable<object>)Value, i);
             var attribute = Attribute.Clone() as CustomPropertyAttribute;
+            if (attribute == null) continue;
             attribute.VisualizeName = $"{Attribute.VisualizeName} [{i}]";
-            attribute.IsReadOnly = listAttribute.IsItemReadOnly;
+            attribute.IsReadOnly = Attribute.IsItemReadOnly;
+            
             var itemListProperty = new PropertyData(array[i], dataEvents, attribute);
             ItemListProperties.Add(itemListProperty);
+            
+            itemListProperty.OnValueChangedFromProperties += () => SetValue(Value);
+            OnValueChangedFromWorld += () => itemListProperty.OnValueChangedFromWorld?.Invoke();
         }
     }
     
     public void AddItemToList()
     {
-        if (Value is not IEnumerable<object?> enumer) return;
-        var type = enumer.GetType().GetGenericArguments()[0];
+        if (Value is not IEnumerable<object?> enumerable) return;
+        var type = enumerable.GetType().GetGenericArguments()[0];
         var item = InstanceHelper.GetNewInstance(type);
 
         // if array, add item to array
@@ -143,8 +160,8 @@ public class PropertyData
     
     public void RemoveItemFromList(int index)
     {
-        if (Value is not IEnumerable<object?> enumer) return;
-        var type = enumer.GetType().GetGenericArguments()[0];
+        if (Value is not IEnumerable<object?> enumerable) return;
+        var type = enumerable.GetType().GetGenericArguments()[0];
         var item = InstanceHelper.GetNewInstance(type);
 
         // if array, add item to array

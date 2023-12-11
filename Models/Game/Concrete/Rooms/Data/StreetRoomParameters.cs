@@ -1,10 +1,11 @@
 ﻿using MapEditor.Services.Properties.Attributes;
+using Newtonsoft.Json;
 
 namespace MapEditor.Models.Game.Concrete.Rooms
 {
     public class StreetRoomParameters
     {
-        [CustomProperty] public int Width { get; set; }
-        [CustomProperty] public int Length { get; set; }
+        [JsonProperty("width"), CustomProperty] public int Width { get; set; }
+        [JsonProperty("length"), CustomProperty] public int Length { get; set; }
     }
 }

@@ -9,6 +9,7 @@ public class CustomPropertyAttribute : Attribute, ICloneable
     public string PropertyName { get; }
     public string VisualizeName { get; set; }
     public bool IsReadOnly { get; set; }
+    public bool IsItemReadOnly { get; set; }
     public string? ShowIfProperty { get; }
     public object? ShowIfValue { get; }
     
