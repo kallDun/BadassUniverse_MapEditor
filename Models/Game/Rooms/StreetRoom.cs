@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Windows.Media;
+using MapEditor.Models.Game.Data;
 
-namespace MapEditor.Models.Game.Concrete.Rooms
+namespace MapEditor.Models.Game.Rooms
 {
     public class StreetRoom : Room
     {
-        private MapDirection rotation;
+        private readonly MapDirection rotation;
         private readonly StreetRoomParameters parameters;
         private readonly StreetRoomDoorParameters[] doorParameters;
         private int nextDoorIndex = 0;

@@ -168,8 +168,7 @@ public class GraphicsCellView
         var facades = World.GetFacadesFromWorldByCell(MapCell, currentFloor);
         var facadesArray = facades as Facade[] ?? facades.ToArray();
         if (!facadesArray.Any()) return false;
-        InitFacadeBackground();
-        InitBackground(facadesArray.First().Color);
+        InitFacadeBackground(facadesArray.Select(x => x.Color).ToList());
         return true;
     }
 
@@ -280,20 +279,26 @@ public class GraphicsCellView
         Content.Children.Add(ellipse);
     }
 
-    private void InitFacadeBackground()
+    private void InitFacadeBackground(List<Color> colors)
     {
+        Color GetColor(int lineIndex, int totalLines = 5)
+        {
+            int index = lineIndex * colors.Count / totalLines;
+            return colors[index];
+        }
+
+        AddLineToContent(0 * size, 0.6 * size, 0.4 * size, 1 * size, GetColor(0));
+        AddLineToContent(0 * size, 0.3 * size, 0.7 * size, 1 * size, GetColor(1));
+        AddLineToContent(0 * size, 0 * size, 1 * size, 1 * size, GetColor(2));
+        AddLineToContent(0.3 * size, 0 * size, 1 * size, 0.7 * size, GetColor(3));
+        AddLineToContent(0.6 * size, 0 * size, 1 * size, 0.4 * size, GetColor(4));
+        
         Border border = new Border()
         {
             BorderBrush = new SolidColorBrush(MainColor),
             BorderThickness = new Thickness(1)
         };
         Content.Children.Add(border);
-
-        AddLineToContent(0 * size, 0.6 * size, 0.4 * size, 1 * size, MainColor);
-        AddLineToContent(0 * size, 0.3 * size, 0.7 * size, 1 * size, MainColor);
-        AddLineToContent(0 * size, 0 * size, 1 * size, 1 * size, MainColor);
-        AddLineToContent(0.3 * size, 0 * size, 1 * size, 0.7 * size, MainColor);
-        AddLineToContent(0.6 * size, 0 * size, 1 * size, 0.4 * size, MainColor);
     }
 
     private void AddLineToContent(double x1, double y1, double x2, double y2, Color color)

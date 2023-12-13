@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using MapEditor.Models.Game.Concrete.Rooms;
+using MapEditor.Models.Game.Data;
 using MapEditor.Models.Server;
 using Newtonsoft.Json;
 
@@ -26,5 +26,18 @@ public class TestListStorage : IListStorage
             },
         };
         return rooms;
+    }
+
+    public IEnumerable<FacadeDTO> GetFacades(IGameStorage storage)
+    {
+        List<FacadeDTO> facades = new()
+        {
+            new FacadeDTO
+            {
+                InGameFacadeId = 0,
+                Name = storage.GetFacadeData(0)?.Name ?? "Facade"
+            }
+        };
+        return facades;
     }
 }

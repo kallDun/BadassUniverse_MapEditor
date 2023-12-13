@@ -6,4 +6,6 @@ namespace MapEditor.Services.Storage;
 public interface IListStorage
 {
     IEnumerable<RoomDTO> GetRooms(IGameStorage storage);
+    IEnumerable<FacadeDTO> GetFacades(IGameStorage storage);
+    
 }

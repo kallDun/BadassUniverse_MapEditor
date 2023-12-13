@@ -8,7 +8,7 @@ namespace MapEditor.Models.Server
         [JsonProperty("id"), CustomProperty(isReadOnly: true)] public int Id { get; set; }
         [JsonProperty("roomId"), CustomProperty("Room Id", true)] public int RoomId { get; set; }
         [JsonProperty("inGamePhysicsItemId")] public int InGamePhysicsItemId { get; set; }
-        [JsonProperty("name"), CustomProperty] public required string Name { get; set; }
+        [JsonProperty("name"), CustomProperty] public required string Name { get; set; } = "Physics Item";
         [JsonProperty("roomOffsetX"), CustomProperty("X")] public float RoomOffsetX { get; set; }
         [JsonProperty("roomOffsetY"), CustomProperty("Y")] public float RoomOffsetY { get; set; }
         [JsonProperty("simulatePhysics"), CustomProperty("Simulate Physics")] public bool SimulatePhysics { get; set; }

@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Windows.Documents;
 using MapEditor.Services.Properties.Attributes;
 using MapEditor.Models.Game;
-using MapEditor.Models.Game.Concrete.Rooms;
+using MapEditor.Models.Game.Data;
 using Newtonsoft.Json;
 
 namespace MapEditor.Models.Server
@@ -13,7 +12,7 @@ namespace MapEditor.Models.Server
         [JsonProperty("id"), CustomProperty(isReadOnly: true)] public int Id { get; set; }
         [JsonProperty("mapId")] public int MapId { get; set; }
         [JsonProperty("inGameRoomId")] public required int InGameRoomId { get; set; }
-        [JsonProperty("name"), CustomProperty] public required string Name { get; set; }
+        [JsonProperty("name"), CustomProperty] public required string Name { get; set; } = "Room";
         [JsonProperty("color"), CustomProperty] public ColorDTO Color { get; set; }
         [JsonProperty("mapOffsetX"), CustomProperty("X")] public int MapOffsetX { get; set; }
         [JsonProperty("mapOffsetY"), CustomProperty("Y")] public int MapOffsetY { get; set; }

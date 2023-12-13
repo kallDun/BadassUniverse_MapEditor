@@ -1,6 +1,6 @@
-﻿namespace MapEditor.Models.Game.Concrete.Rooms
+﻿namespace MapEditor.Models.Game.Data
 {
-    public class SquareRoomDoorParameters
+    public class RoomDoorParameters
     {
         public int Id { get; set; }
         public MapIndex Position { get; set; }

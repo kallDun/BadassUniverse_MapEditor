@@ -1,6 +1,6 @@
-﻿namespace MapEditor.Models.Game.Concrete.Rooms
+﻿namespace MapEditor.Models.Game.Data
 {
-    public class SquareRoomParameters
+    public class SquareBuildingParameters
     {
         public int Width { get; set; }
         public int Length { get; set; }

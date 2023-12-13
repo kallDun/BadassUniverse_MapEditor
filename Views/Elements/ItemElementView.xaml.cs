@@ -17,7 +17,7 @@ namespace MapEditor.Views.Elements
             string imageName = type switch
             {
                 ItemType.Room => "Room.png",
-                ItemType.Building => "Building.png",
+                ItemType.Building => "Facade.png",
                 ItemType.Mob => "Mob.png",
                 ItemType.PhysicsItem => "Item.png",
                 _ => "Room.png"

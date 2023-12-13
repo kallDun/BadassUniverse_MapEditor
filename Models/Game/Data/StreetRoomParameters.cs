@@ -1,7 +1,7 @@
 ﻿using MapEditor.Services.Properties.Attributes;
 using Newtonsoft.Json;
 
-namespace MapEditor.Models.Game.Concrete.Rooms
+namespace MapEditor.Models.Game.Data
 {
     public class StreetRoomParameters
     {

@@ -39,6 +39,10 @@ namespace MapEditor.Services
                 .Select(item => (Item: item as AItemDTO, Type: ItemType.Room));
             list.AddRange(rooms);
             
+            var facades = listStorage.GetFacades(gameStorage)
+                .Select(item => (Item: item as AItemDTO, Type: ItemType.Building));
+            list.AddRange(facades);
+            
             return list;
         }
     }

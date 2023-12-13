@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using MapEditor.Models.Game;
-using MapEditor.Models.Game.Concrete.Rooms;
+using MapEditor.Models.Game.Data;
+using MapEditor.Models.Game.Rooms;
 using MapEditor.Services.Storage.Data;
 
 namespace MapEditor.Services.Storage
 {
     public class TestGameStorage : IGameStorage
     {
-        public List<RoomStorageData> GetRoomsData()
+        public IEnumerable<RoomStorageData> GetRoomsData()
         {
             return new List<RoomStorageData>
             {
@@ -16,12 +16,12 @@ namespace MapEditor.Services.Storage
                 {
                     Id = 0,
                     Name = "Square Room",
-                    Params = new SquareRoomParameters
+                    Params = AnyFormBuildingParameters.FromSquareParameters(new SquareBuildingParameters
                     {
                         Width = 10,
                         Length = 10,
-                    },
-                    DoorParams = new SquareRoomDoorParameters[]
+                    }),
+                    DoorParams = new RoomDoorParameters[]
                     {
                         new()
                         {
@@ -30,7 +30,7 @@ namespace MapEditor.Services.Storage
                             FloorDisplacement = 0
                         }
                     },
-                    RoomType = typeof(SquareRoom)
+                    RoomType = typeof(AnyFormRoom)
                 },
                 new()
                 {
@@ -41,9 +41,21 @@ namespace MapEditor.Services.Storage
             };
         }
 
-        public RoomStorageData? GetRoomData(int id)
+        public IEnumerable<FacadeStorageData> GetFacadesData()
         {
-            return GetRoomsData().FirstOrDefault(room => room.Id == id);
+            return new List<FacadeStorageData>
+            {
+                new()
+                {
+                    Id = 0,
+                    Name = "Little Building",
+                    Params = AnyFormBuildingParameters.FromSquareParameters(new SquareBuildingParameters
+                    {
+                        Width = 3,
+                        Length = 6,
+                    })
+                },
+            };
         }
     }
 }

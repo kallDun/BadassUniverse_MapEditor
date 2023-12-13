@@ -1,15 +1,16 @@
 ﻿using System.Windows.Media;
+using MapEditor.Models.Game.Data;
 
-namespace MapEditor.Models.Game.Concrete.Rooms
+namespace MapEditor.Models.Game.Rooms
 {
     public class AnyFormRoom : Room
     {
-        private MapDirection rotation;
-        private AnyFormRoomParameters parameters;
-        private SquareRoomDoorParameters[] doorParameters;
+        private readonly MapDirection rotation;
+        private readonly AnyFormBuildingParameters parameters;
+        private readonly RoomDoorParameters[] doorParameters;
 
         public AnyFormRoom(int id, string name, int floor, Color color, MapDirection rotation, StoredPreviewState state, 
-            AnyFormRoomParameters parameters, SquareRoomDoorParameters[] doorParameters) 
+            AnyFormBuildingParameters parameters, RoomDoorParameters[] doorParameters) 
             : base(id, name, floor, color, state)
         {
             this.rotation = rotation;
