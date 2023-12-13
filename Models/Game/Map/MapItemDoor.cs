@@ -2,10 +2,10 @@
 {
     public class MapItemDoor : MapItem
     {
-
         public int DoorIndex { get; set; }
         public int RelatedRoomIndex { get; set; }
         public int RoomFloorDisplacement { get; set; }
+        
         public MapItemDoor(int doorIndex, int relatedRoomIndex, int roomFloorDisplacement)
         {
             DoorIndex = doorIndex;

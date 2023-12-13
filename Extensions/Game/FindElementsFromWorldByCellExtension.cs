@@ -72,6 +72,15 @@ namespace MapEditor.Extensions.Game
                 }
             }
         }
-
+        
+        public static (MapItemDoor Door, Room Room, int Floor)? GetDoorRelation(this World world, MapItemDoor door, MapIndex position, int currentFloor)
+        {
+            var floor = currentFloor + door.RoomFloorDisplacement;
+            var doorResult = world.Map.GetValue(position).GetDoors(floor).FirstOrDefault(x => x != door);
+            if (doorResult == null) return null;
+            var room = world.GetRoomFromDoor(doorResult);
+            if (room == null) return null;
+            return (doorResult, room, floor);
+        }
     }
 }

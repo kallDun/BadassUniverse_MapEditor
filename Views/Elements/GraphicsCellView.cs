@@ -159,7 +159,8 @@ public class GraphicsCellView
         bool hasAnyDoors = doors.Any();
         if (!hasAnyDoors) return hasAnyDoors;
         InitGradientBackground(values);
-        InitDoorBackground();
+        bool hasDoorRelations = doors.Any(x => World.GetDoorRelation(x, position, currentFloor) != null);
+        InitDoorBackground(hasDoorRelations);
         return hasAnyDoors;
     }
 
@@ -240,33 +241,14 @@ public class GraphicsCellView
 
     private void InitWallBackground()
     {
-        Border border = new Border()
-        {
-            BorderBrush = new SolidColorBrush(MainColor),
-            BorderThickness = new Thickness(1)
-        };
-        Ellipse ellipse = new Ellipse()
-        {
-            Fill = new SolidColorBrush(MainColor),
-            Width = 10,
-            Height = 10,
-            Stroke = new SolidColorBrush(MainColor),
-            StrokeThickness = 1,
-            HorizontalAlignment = HorizontalAlignment.Center,
-            VerticalAlignment = VerticalAlignment.Center
-        };
-        Content.Children.Add(border);
-        Content.Children.Add(ellipse);
+        AddBorderToContent();
     }
 
-    private void InitDoorBackground()
+    private void InitDoorBackground(bool hasDoorRelations)
     {
-        Border border = new Border()
-        {
-            BorderBrush = new SolidColorBrush(MainColor),
-            BorderThickness = new Thickness(1)
-        };
-        Ellipse ellipse = new Ellipse()
+        AddBorderToContent();
+        
+        Ellipse ellipseOutside = new Ellipse()
         {
             Width = 22,
             Height = 22,
@@ -275,8 +257,22 @@ public class GraphicsCellView
             HorizontalAlignment = HorizontalAlignment.Center,
             VerticalAlignment = VerticalAlignment.Center
         };
-        Content.Children.Add(border);
-        Content.Children.Add(ellipse);
+        Content.Children.Add(ellipseOutside);
+
+        if (hasDoorRelations)
+        {
+            Ellipse ellipseInside = new Ellipse()
+            {
+                Fill = new SolidColorBrush(MainColor),
+                Width = 10,
+                Height = 10,
+                Stroke = new SolidColorBrush(MainColor),
+                StrokeThickness = 1,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center
+            };
+            Content.Children.Add(ellipseInside);
+        }
     }
 
     private void InitFacadeBackground(List<Color> colors)
@@ -292,11 +288,17 @@ public class GraphicsCellView
         AddLineToContent(0 * size, 0 * size, 1 * size, 1 * size, GetColor(2));
         AddLineToContent(0.3 * size, 0 * size, 1 * size, 0.7 * size, GetColor(3));
         AddLineToContent(0.6 * size, 0 * size, 1 * size, 0.4 * size, GetColor(4));
-        
+
+        AddBorderToContent();
+    }
+
+    private void AddBorderToContent()
+    {
         Border border = new Border()
         {
             BorderBrush = new SolidColorBrush(MainColor),
-            BorderThickness = new Thickness(1)
+            BorderThickness = new Thickness(1),
+            Margin = new Thickness(-0.5)
         };
         Content.Children.Add(border);
     }
