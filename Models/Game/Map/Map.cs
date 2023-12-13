@@ -19,7 +19,7 @@ namespace MapEditor.Models.Game
                 {
                     for (int x = 0; x < GetSizeX(); x++)
                     {
-                        MapIndex Index = GetRotatedIndex(new MapIndex(y, x), Rotation, GetSizeX(), GetSizeY());
+                        MapIndex Index = GetRotatedIndex(new MapIndex(y, x), Rotation, GetSizeY(), GetSizeX());
                         newMap.SetValue(Index, (MapCell)GetValue(new MapIndex(y, x)).Clone());
                     }
                 }
@@ -31,7 +31,7 @@ namespace MapEditor.Models.Game
                 {
                     for (int x = 0; x < GetSizeX(); x++)
                     {
-                        MapIndex Index = GetRotatedIndex(new MapIndex(y, x), Rotation, GetSizeY(), GetSizeX());
+                        MapIndex Index = GetRotatedIndex(new MapIndex(y, x), Rotation, GetSizeX(), GetSizeY());
                         newMap.SetValue(Index, (MapCell)GetValue(new MapIndex(y, x)).Clone());
                     }
                 }

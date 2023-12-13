@@ -20,7 +20,10 @@
         
         public override int GetHashCode()
         {
-            return DoorIndex.GetHashCode() ^ RelatedRoomIndex.GetHashCode() ^ RoomFloorDisplacement.GetHashCode() * 17;
+            return 17 
+                + DoorIndex.GetHashCode() * 61
+                + RelatedRoomIndex.GetHashCode() * 31
+                + RoomFloorDisplacement.GetHashCode() * 17;
         }
     }
 }
