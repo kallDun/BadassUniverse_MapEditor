@@ -22,8 +22,7 @@ public class BasicWorldFactory : IWorldFactory
                 Room room = roomFactory.CreateRoom(roomDto, mapperContext.GameStorage);
                 world.Rooms.Add(room);
 
-                bool result = world.Map.FillWithInnerMap(room.LocalMap, roomDto.Floor, 
-                    new MapIndex(roomDto.MapOffsetY, roomDto.MapOffsetX), out Map outMap);
+                bool result = world.Map.FillWithInnerMap(room.LocalMap, roomDto.Floor, room.LeftTopCorner, out Map outMap);
                 if (!result) throw new ArgumentException("Invalid intersection of room map");
                 world.Map = outMap;
             }
@@ -36,8 +35,7 @@ public class BasicWorldFactory : IWorldFactory
                 Facade facade = facadeFactory.CreateFacade(facadeDto, mapperContext.GameStorage);
                 world.Facades.Add(facade);
 
-                bool result = world.Map.FillWithInnerMap(facade.LocalMap, facadeDto.Floor,
-                    new MapIndex(facadeDto.MapOffsetY, facadeDto.MapOffsetX), out Map outMap);
+                bool result = world.Map.FillWithInnerMap(facade.LocalMap, facadeDto.Floor, facade.LeftTopCorner, out Map outMap);
                 if (!result) throw new ArgumentException("Invalid intersection of facade map");
                 world.Map = outMap;
             }

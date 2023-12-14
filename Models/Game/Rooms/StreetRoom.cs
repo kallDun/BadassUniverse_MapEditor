@@ -11,9 +11,9 @@ namespace MapEditor.Models.Game.Rooms
         private readonly StreetRoomDoorParameters[] doorParameters;
         private int nextDoorIndex = 0;
 
-        public StreetRoom(int id, string name, int floor, Color color, MapDirection rotation, StoredPreviewState state, 
+        public StreetRoom(int id, string name, MapIndex leftTopCorner, int floor, Color color, MapDirection rotation, StoredPreviewState state, 
             StreetRoomParameters parameters, StreetRoomDoorParameters[] doorParameters) 
-            : base(id, name, floor, color, state)
+            : base(id, name, leftTopCorner, floor, color, state)
         {
             this.rotation = rotation;
             this.parameters = parameters;

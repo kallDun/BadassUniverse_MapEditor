@@ -13,6 +13,7 @@ public class BasicFacadeSubFactory : IFacadeSubFactory
         FacadeStorageData data = gameStorage.GetFacadeData(facade.InGameFacadeId)
                                  ?? throw new ArgumentException($"Facade with id {facade.InGameFacadeId} does not exist.");
 
-        return new Facade(facade.Id, data.Name, facade.Floor, facade.Color, facade.Rotation, facade.State, data.Params);
+        return new Facade(facade.Id, data.Name, new MapIndex(facade.MapOffsetY, facade.MapOffsetX), 
+            facade.Floor, facade.Color, facade.Rotation, facade.State, data.Params);
     }
 }

@@ -9,9 +9,10 @@ namespace MapEditor.Models.Game.Rooms
         private readonly AnyFormBuildingParameters parameters;
         private readonly RoomDoorParameters[] doorParameters;
 
-        public AnyFormRoom(int id, string name, int floor, Color color, MapDirection rotation, StoredPreviewState state, 
+        public AnyFormRoom(int id, string name, MapIndex leftTopCorner, int floor, 
+            Color color, MapDirection rotation, StoredPreviewState state, 
             AnyFormBuildingParameters parameters, RoomDoorParameters[] doorParameters) 
-            : base(id, name, floor, color, state)
+            : base(id, name, leftTopCorner, floor, color, state)
         {
             this.rotation = rotation;
             this.parameters = parameters;

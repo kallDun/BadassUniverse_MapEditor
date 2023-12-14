@@ -9,8 +9,8 @@ namespace MapEditor.Models.Server
         [JsonProperty("roomId"), CustomProperty("Room Id", true)] public int RoomId { get; set; }
         [JsonProperty("inGameMobId")] public int InGameMobId { get; set; }
         [JsonProperty("name"), CustomProperty] public required string Name { get; set; } = "Mob";
-        [JsonProperty("roomOffsetX"), CustomProperty("X")] public float RoomOffsetX { get; set; }
-        [JsonProperty("roomOffsetY"), CustomProperty("Y")] public float RoomOffsetY { get; set; }
+        [JsonProperty("roomOffsetX"), CustomProperty("X")] public int RoomOffsetX { get; set; }
+        [JsonProperty("roomOffsetY"), CustomProperty("Y")] public int RoomOffsetY { get; set; }
         [JsonProperty("isRotationRandom"), CustomProperty("Rotation Random")] public bool IsRotationRandom { get; set; }
         [JsonProperty("zAngleRotation"), CustomProperty("Rotation", showIfProperty: "IsRotationRandom", showIfValue: false)] public float ZAngleRotation { get; set; }
         [JsonProperty("spawnRadius"), CustomProperty("Spawn Radius")] public int SpawnRadius { get; set; }

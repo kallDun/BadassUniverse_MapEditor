@@ -170,5 +170,10 @@ namespace MapEditor.Models.Game
                 }
             }
         }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Array);
+        }
     }
 }
