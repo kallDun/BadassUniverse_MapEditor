@@ -121,20 +121,53 @@ public class GraphicsCellView
     {
         List<MapItemWall> walls = MapCell.GetWalls(currentFloor);
 
-        List<(MapIndex Index, Color Color)> values = new();
+        List<Color> colors = new();
+        List<List<MapIndex>> lists = new();
         foreach (MapItemWall wall in walls)
         {
             Room? room = World.GetRoomFromWall(wall);
             if (room == null) continue;
+
+            colors.Add(room.Color);
+            lists.Add(new List<MapIndex>());
             foreach (MapIndex index in World.GetClosestNeightborPositionsToRoom(room, position, currentFloor))
             {
-                values.Add((position - index, room.Color));
+                lists.Last().Add(index - position);
             }
         }
 
         bool hasAnyWalls = walls.Any();
         if (hasAnyWalls)
         {
+            List<(bool notNull, MapIndex Index, Color Color)> values = new();
+            if (colors.Count == 1)
+            {
+                foreach (var item in lists[0])
+                {
+                    values.Add((true, item, colors[0]));
+                    values.Add((false, new MapIndex(), new Color()));
+                }
+            }
+            else
+            {
+                int maxCount = lists.Max(x => x.Count);
+                for (int i = 0; i < maxCount; i++)
+                {
+                    foreach (var list in lists)
+                    {
+                        if (i < list.Count)
+                        {
+                            values.Add((true, list[i], colors[lists.IndexOf(list)]));
+                        }
+                        else
+                        {
+                            values.Add((false, new MapIndex(), new Color()));
+                        }
+                    }
+                }
+            }
+            
+            
             InitGradientBackground(values);
             InitWallBackground();
         }
@@ -144,21 +177,8 @@ public class GraphicsCellView
     private bool TryToInitializeDoors()
     {
         List<MapItemDoor> doors = MapCell.GetDoors(currentFloor);
-
-        List<(MapIndex Index, Color Color)> values = new();
-        foreach (MapItemDoor door in doors)
-        {
-            Room? room = World.GetRoomFromDoor(door);
-            if (room == null) continue;
-            foreach (MapIndex index in World.GetClosestNeightborPositionsToRoom(room, position, currentFloor))
-            {
-                values.Add((position - index, room.Color));
-            }
-        }
-
         bool hasAnyDoors = doors.Any();
         if (!hasAnyDoors) return hasAnyDoors;
-        InitGradientBackground(values);
         bool hasDoorRelations = doors.Any(x => World.GetDoorRelation(x, position, currentFloor) != null);
         InitDoorBackground(hasDoorRelations);
         return hasAnyDoors;
@@ -199,21 +219,26 @@ public class GraphicsCellView
         backgroundInitialized = true;
     }
 
-    private void InitGradientBackground(List<(MapIndex Index, Color Color)> values)
+    private void InitGradientBackground(IReadOnlyList<(bool notNull, MapIndex Index, Color Color)> values)
     {
         if (values.Count == 0) return;
         if (backgroundInitialized) return;
+
+        if (position.Y == 32 && position.X == 25)
+        {
+            var a = 5;
+        }
 
         for (int i = 0; i < values.Count; i+=2)
         {
             byte alpha = (byte)(Alpha / (values.Count / 2 + values.Count % 2));
             Color color1 = Color.FromArgb(alpha, values[i].Color.R, values[i].Color.G, values[i].Color.B);
-            Color color2 = i + 1 < values.Count
+            Color color2 = i + 1 < values.Count && values[i + 1].notNull
                 ? Color.FromArgb(alpha, values[i + 1].Color.R, values[i + 1].Color.G, values[i + 1].Color.B)
                 : Color.FromArgb(0, 0, 0, 0);
 
             Point position1 = GetPosition(values[i].Index);
-            Point position2 = i + 1 < values.Count 
+            Point position2 = i + 1 < values.Count && values[i + 1].notNull
                 ? GetPosition(values[i + 1].Index) 
                 : GetInvertedPosition(position1);
 
