@@ -120,58 +120,42 @@ public class GraphicsCellView
     private bool TryToInitializeWalls()
     {
         List<MapItemWall> walls = MapCell.GetWalls(currentFloor);
+        bool hasAnyWalls = walls.Any();
+        if (!hasAnyWalls) return hasAnyWalls;
+        
+        Dictionary<MapIndex,Color> values = GetValuesForGradientBackground(walls);
+        InitGradientBackground(values);
+        InitWallBackground();
+        return hasAnyWalls;
+    }
 
-        List<Color> colors = new();
-        List<List<MapIndex>> lists = new();
+    private Dictionary<MapIndex, Color> GetValuesForGradientBackground(List<MapItemWall> walls)
+    {
+        Dictionary<MapIndex, Color> values = new();
+        
         foreach (MapItemWall wall in walls)
         {
             Room? room = World.GetRoomFromWall(wall);
             if (room == null) continue;
 
-            colors.Add(room.Color);
-            lists.Add(new List<MapIndex>());
             foreach (MapIndex index in World.GetClosestNeightborPositionsToRoom(room, position, currentFloor))
             {
-                lists.Last().Add(index - position);
+                var localPosition = index - position;
+                if (values.ContainsKey(localPosition)) continue;
+                values.Add(localPosition, room.Color);
             }
         }
 
-        bool hasAnyWalls = walls.Any();
-        if (hasAnyWalls)
-        {
-            List<(bool notNull, MapIndex Index, Color Color)> values = new();
-            if (colors.Count == 1)
-            {
-                foreach (var item in lists[0])
-                {
-                    values.Add((true, item, colors[0]));
-                    values.Add((false, new MapIndex(), new Color()));
-                }
-            }
-            else
-            {
-                int maxCount = lists.Max(x => x.Count);
-                for (int i = 0; i < maxCount; i++)
-                {
-                    foreach (var list in lists)
-                    {
-                        if (i < list.Count)
-                        {
-                            values.Add((true, list[i], colors[lists.IndexOf(list)]));
-                        }
-                        else
-                        {
-                            values.Add((false, new MapIndex(), new Color()));
-                        }
-                    }
-                }
-            }
-            
-            
-            InitGradientBackground(values);
-            InitWallBackground();
-        }
-        return hasAnyWalls;
+        if (!values.ContainsKey(new MapIndex(-1, -1))) values.Add(new MapIndex(-1, -1), Color.FromArgb(0,0,0,0));
+        if (!values.ContainsKey(new MapIndex(-1, 0))) values.Add(new MapIndex(-1, 0), Color.FromArgb(0,0,0,0));
+        if (!values.ContainsKey(new MapIndex(-1, 1))) values.Add(new MapIndex(-1, 1), Color.FromArgb(0,0,0,0));
+        if (!values.ContainsKey(new MapIndex(0, -1))) values.Add(new MapIndex(0, -1), Color.FromArgb(0,0,0,0));
+        if (!values.ContainsKey(new MapIndex(0, 1))) values.Add(new MapIndex(0, 1), Color.FromArgb(0,0,0,0));
+        if (!values.ContainsKey(new MapIndex(1, -1))) values.Add(new MapIndex(1, -1), Color.FromArgb(0,0,0,0));
+        if (!values.ContainsKey(new MapIndex(1, 0))) values.Add(new MapIndex(1, 0), Color.FromArgb(0,0,0,0));
+        if (!values.ContainsKey(new MapIndex(1, 1))) values.Add(new MapIndex(1, 1), Color.FromArgb(0,0,0,0));
+        
+        return values;
     }
 
     private bool TryToInitializeDoors()
@@ -219,48 +203,46 @@ public class GraphicsCellView
         backgroundInitialized = true;
     }
 
-    private void InitGradientBackground(IReadOnlyList<(bool notNull, MapIndex Index, Color Color)> values)
+    private void InitGradientBackground(Dictionary<MapIndex, Color> values)
     {
         if (values.Count == 0) return;
         if (backgroundInitialized) return;
 
-        if (position.Y == 32 && position.X == 25)
+        byte alpha = (byte)(Alpha / 3);
+        
+        while (values.Count > 0)
         {
-            var a = 5;
-        }
-
-        for (int i = 0; i < values.Count; i+=2)
-        {
-            byte alpha = (byte)(Alpha / (values.Count / 2 + values.Count % 2));
-            Color color1 = Color.FromArgb(alpha, values[i].Color.R, values[i].Color.G, values[i].Color.B);
-            Color color2 = i + 1 < values.Count && values[i + 1].notNull
-                ? Color.FromArgb(alpha, values[i + 1].Color.R, values[i + 1].Color.G, values[i + 1].Color.B)
-                : Color.FromArgb(0, 0, 0, 0);
-
-            Point position1 = GetPosition(values[i].Index);
-            Point position2 = i + 1 < values.Count && values[i + 1].notNull
-                ? GetPosition(values[i + 1].Index) 
-                : GetInvertedPosition(position1);
+            var index1 = values.First().Key;
+            var index2 = GetInvertedIndex(index1);
+            Color color1 = values[index1].A == 0 ? values[index1] : Color.FromArgb(alpha, values[index1].R, values[index1].G, values[index1].B);
+            Color color2 = values[index2].A == 0 ? values[index2] : Color.FromArgb(alpha, values[index2].R, values[index2].G, values[index2].B);
+            values.Remove(index1);
+            values.Remove(index2);
 
             Content.Children.Add(new Rectangle
             {
-                Fill = new LinearGradientBrush(color1, color2, position1, position2)
+                Fill = new LinearGradientBrush(
+                    color1, 
+                    color2, 
+                    GetPosition(index1, color1.A == 0), 
+                    GetPosition(index2, color2.A == 0))
             });
         }
 
         backgroundInitialized = true;
         return;
 
-        static Point GetPosition(MapIndex index)
+        static Point GetPosition(MapIndex index, bool distanced)
         {
+            if (distanced) return new Point(index.X == 0 ? 0.5 : index.X, index.Y == 0 ? 0.5 : index.Y);
             return new Point((index.X + 1) * 0.5, (index.Y + 1) * 0.5);
         }
-
-        static Point GetInvertedPosition(Point position)
+        
+        static MapIndex GetInvertedIndex(MapIndex index)
         {
-            var X = position.X < 0.45 ? position.X + 1 : position.X > 0.55 ? position.X - 1 : position.X;
-            var Y = position.Y < 0.45 ? position.Y + 1 : position.Y > 0.55 ? position.Y - 1 : position.Y;
-            return new Point(X, Y);
+            var X = index.X < 0 ? index.X + 2 : index.X > 0 ? index.X - 2 : index.X;
+            var Y = index.Y < 0 ? index.Y + 2 : index.Y > 0 ? index.Y - 2 : index.Y;
+            return new MapIndex(X, Y);
         }
     }
 

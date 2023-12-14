@@ -2,7 +2,7 @@
 
 namespace MapEditor.Models.Game
 {
-    public struct MapIndex
+    public struct MapIndex : IEquatable<MapIndex>
     {
         public MapIndex() { }
 
@@ -18,7 +18,7 @@ namespace MapEditor.Models.Game
 
         public static bool operator == (MapIndex left, MapIndex right)
         {
-            return left.X == right.X && left.Y == right.Y;
+            return left.Equals(right);
         }
 
         public static bool operator != (MapIndex left, MapIndex right)
@@ -43,7 +43,12 @@ namespace MapEditor.Models.Game
 
         public override readonly bool Equals(object obj)
         {
-            return obj is MapIndex index && this == index;
+            return obj is MapIndex other && Equals(other);
+        }
+
+        public bool Equals(MapIndex other)
+        {
+            return Y == other.Y && X == other.X;
         }
     }
 }
