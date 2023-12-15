@@ -17,6 +17,9 @@ public class BasicWorldFactory : IWorldFactory
 
         if (mapperContext.SubFactories.FirstOrDefault(x => x is IRoomSubFactory) is IRoomSubFactory roomFactory)
         {
+            var physicsItemSubFactory = mapperContext.SubFactories.FirstOrDefault(x => x is IPhysicsItemSubFactory) as IPhysicsItemSubFactory;
+            var mobSubFactory = mapperContext.SubFactories.FirstOrDefault(x => x is IMobSubFactory) as IMobSubFactory;
+            
             foreach (var roomDto in worldDto.Rooms)
             {
                 Room room = roomFactory.CreateRoom(roomDto, mapperContext.GameStorage);
@@ -25,6 +28,23 @@ public class BasicWorldFactory : IWorldFactory
                 bool result = world.Map.FillWithInnerMap(room.LocalMap, roomDto.Floor, room.LeftTopCorner, out Map outMap);
                 if (!result) throw new ArgumentException("Invalid intersection of room map");
                 world.Map = outMap;
+                
+                if (physicsItemSubFactory != null)
+                {
+                    foreach (var physicsItem in roomDto.PhysicsItems
+                                 .Select(physicsItemDto => physicsItemSubFactory.CreatePhysicsItem(physicsItemDto, room)))
+                    {
+                        room.PhysicsItems.Add(physicsItem);
+                    }
+                }
+                if (mobSubFactory != null)
+                {
+                    foreach (var mob in roomDto.Mobs
+                                 .Select(mobDto => mobSubFactory.CreateMob(mobDto, room)))
+                    {
+                        room.Mobs.Add(mob);
+                    }
+                }
             }
         }
 

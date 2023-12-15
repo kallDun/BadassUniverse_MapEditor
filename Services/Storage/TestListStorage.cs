@@ -40,4 +40,30 @@ public class TestListStorage : IListStorage
         };
         return facades;
     }
+
+    public IEnumerable<PhysicsItemDTO> GetPhysicsItems(IGameStorage storage)
+    {
+        List<PhysicsItemDTO> physicsItems = new()
+        {
+            new PhysicsItemDTO
+            {
+                InGamePhysicsItemId = 0,
+                Name = storage.GetPhysicsItemData(0)?.Name ?? "Physics Item"
+            }
+        };
+        return physicsItems;
+    }
+
+    public IEnumerable<MobDTO> GetMobs(IGameStorage storage)
+    {
+        List<MobDTO> mobs = new()
+        {
+            new MobDTO
+            {
+                InGameMobId = 0,
+                Name = storage.GetMobData(0)?.Name ?? "Mob"
+            }
+        };
+        return mobs;
+    }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using MapEditor.Extensions.Models;
 using MapEditor.Models;
 using MapEditor.Models.Game;
@@ -18,7 +19,7 @@ namespace MapEditor.Services
         private AItemDTO? previewItem;
         private ItemType? previewItemType;
         private WorldDTO? worldDTOPreview;
-
+        
         public bool IsPreviewing => previewItem != null && previewItemType != null && worldDTOPreview != null;
         
         public void SetPreviewItem(AItemDTO item, ItemType type)
@@ -51,6 +52,16 @@ namespace MapEditor.Services
                     facade.State = StoredPreviewState.Preview;
                     worldDTOPreview.Facades.Add(facade);
                     break;
+                case ItemType.PhysicsItem:
+                    var physicsItem = previewItem as PhysicsItemDTO ?? throw new ArgumentException("Cannot cast item to PhysicsItemDTO.");
+                    physicsItem.Color = ColorExtensions.GetRandomColor();
+                    physicsItem.State = StoredPreviewState.Preview;
+                    break;
+                case ItemType.Mob:
+                    var mob = previewItem as MobDTO ?? throw new ArgumentException("Cannot cast item to MobDTO.");
+                    mob.Color = ColorExtensions.GetRandomColor();
+                    mob.State = StoredPreviewState.Preview;
+                    break;
             }
             StorageService.SetPreviewWorld(worldDTOPreview);
             PropertiesService.SetActiveItem(previewItem);
@@ -76,6 +87,61 @@ namespace MapEditor.Services
                     facade.MapOffsetY = position.Y;
                     facade.OnValueChanged?.Invoke("MapOffsetX");
                     facade.OnValueChanged?.Invoke("MapOffsetY");
+                    break;
+            }
+            StorageService.SetPreviewWorld(worldDTOPreview);
+        }
+        
+        public void TryToMoveRoomItem(MapIndex position, Point mousePositionCellPercent, Room? room)
+        {
+            if (!(previewItem != null && previewItemType != null && worldDTOPreview != null)) return;
+            if (previewItemType is not (ItemType.PhysicsItem or ItemType.Mob)) return;
+
+            worldDTOPreview = (WorldDTO)StorageService.WorldDTO.Clone();
+            
+            if (room == null)
+            {
+                StorageService.SetPreviewWorld(worldDTOPreview);
+                return;
+            }
+            var roomDto = worldDTOPreview.Rooms.Find(r => r.Id == room.Id);
+            if (roomDto == null)
+            {
+                StorageService.SetPreviewWorld(worldDTOPreview);
+                return;
+            }
+
+            const int itemCellSize = 100;
+            MapIndex localPosition = position - room.LeftTopCorner;
+            Point offset = new(
+                localPosition.X * itemCellSize + mousePositionCellPercent.X * itemCellSize, 
+                localPosition.Y * itemCellSize + mousePositionCellPercent.Y * itemCellSize);
+            
+            switch (previewItemType)
+            {
+                case ItemType.PhysicsItem:
+                    var physicsItem = previewItem as PhysicsItemDTO ?? throw new ArgumentException("Cannot cast item to PhysicsItemDTO.");
+                    physicsItem.Id = roomDto.GetNextPhysicsItemId();
+                    physicsItem.RoomId = room.Id;
+                    physicsItem.RoomOffsetX = (int)offset.X;
+                    physicsItem.RoomOffsetY = (int)offset.Y;
+                    physicsItem.OnValueChanged?.Invoke("Id");
+                    physicsItem.OnValueChanged?.Invoke("RoomId");
+                    physicsItem.OnValueChanged?.Invoke("RoomOffsetX");
+                    physicsItem.OnValueChanged?.Invoke("RoomOffsetY");
+                    roomDto.PhysicsItems.Add(physicsItem);
+                    break;
+                case ItemType.Mob:
+                    var mob = previewItem as MobDTO ?? throw new ArgumentException("Cannot cast item to MobDTO.");
+                    mob.Id = roomDto.GetNextMobId();
+                    mob.RoomId = room.Id;
+                    mob.RoomOffsetX = (int)offset.X;
+                    mob.RoomOffsetY = (int)offset.Y;
+                    mob.OnValueChanged?.Invoke("Id");
+                    mob.OnValueChanged?.Invoke("RoomId");
+                    mob.OnValueChanged?.Invoke("RoomOffsetX");
+                    mob.OnValueChanged?.Invoke("RoomOffsetY");
+                    roomDto.Mobs.Add(mob);
                     break;
             }
             StorageService.SetPreviewWorld(worldDTOPreview);

@@ -5,6 +5,6 @@ namespace MapEditor.Services.Mapper.Factories
 {
     public interface IPhysicsItemSubFactory : ISubFactory
     {
-        PhysicsItem CreatePhysicsItem(PhysicsItemDTO physicsItem);
+        PhysicsItem CreatePhysicsItem(PhysicsItemDTO physicsItem, Room roomOwner);
     }
 }

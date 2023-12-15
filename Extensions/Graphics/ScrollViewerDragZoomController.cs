@@ -16,10 +16,11 @@ namespace MapEditor.Extensions.Graphics
         private Point? lastCenterPositionOnTarget;
         private Point? lastMousePositionOnTarget;
         private Point? lastDragPoint;
-        private double zoomValue = 1;
         private const double zoomMin = 1;
         private const double zoomMax = 10;
         private const double zoomDelta = .5f;
+        
+        public double ZoomValue { get; private set; } = 1;
         
         public ScrollViewerDragZoomController(ScrollViewer scrollViewer, 
             FrameworkElement content, ScaleTransform scaleTransform, MouseButton dragMouseButton)
@@ -84,11 +85,11 @@ namespace MapEditor.Extensions.Graphics
 
             if (e.Delta > 0)
             {
-                ChangeZoom(zoomValue + zoomDelta);
+                ChangeZoom(ZoomValue + zoomDelta);
             }
             if (e.Delta < 0)
             {
-                ChangeZoom(zoomValue - zoomDelta);
+                ChangeZoom(ZoomValue - zoomDelta);
             }
 
             e.Handled = true;
@@ -97,10 +98,10 @@ namespace MapEditor.Extensions.Graphics
         private void ChangeZoom(double value)
         {
             double newValue = Math.Clamp(value, zoomMin, zoomMax);
-            if (newValue.Equals(zoomValue)) return;
-            zoomValue = newValue;
-            scaleTransform.ScaleX = zoomValue;
-            scaleTransform.ScaleY = zoomValue;
+            if (newValue.Equals(ZoomValue)) return;
+            ZoomValue = newValue;
+            scaleTransform.ScaleX = ZoomValue;
+            scaleTransform.ScaleY = ZoomValue;
 
             var centerOfViewport = new Point(scrollViewer.ViewportWidth / 2, scrollViewer.ViewportHeight / 2);
             lastCenterPositionOnTarget = scrollViewer.TranslatePoint(centerOfViewport, content);

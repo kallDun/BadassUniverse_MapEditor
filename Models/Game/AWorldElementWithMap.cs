@@ -5,8 +5,14 @@ namespace MapEditor.Models.Game;
 
 public abstract class AWorldElementWithMap : AWorldElement
 {
-    protected AWorldElementWithMap(int id, string name, MapIndex leftTopCorner, int floor, Color color, StoredPreviewState state) 
-        : base(id, name, leftTopCorner, floor, color, state) { }
+    protected AWorldElementWithMap(int id, string name, MapIndex leftTopCorner, int floor, Color color,
+        StoredPreviewState state)
+        : base(id, name, leftTopCorner, color, state)
+    {
+        Floor = floor;
+    }
+    
+    public int Floor { get; }
     
     private Map? map;
     public Map LocalMap => map ??= GenerateMap();

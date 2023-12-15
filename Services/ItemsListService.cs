@@ -6,44 +6,51 @@ using MapEditor.Models.Server;
 using MapEditor.Services.Manager;
 using MapEditor.Services.Storage;
 
-namespace MapEditor.Services
+namespace MapEditor.Services;
+
+public class ItemsListService : AService
 {
-    public class ItemsListService : AService
+    private static LocalStorageService StorageService
+        => ServicesManager.Instance.GetService<LocalStorageService>();
+
+    public Action? OnItemsListChanged { get; set; }
+
+    public override void Initialize()
     {
-        private static LocalStorageService StorageService
-            => ServicesManager.Instance.GetService<LocalStorageService>();
+        base.Initialize();
+        StorageService.OnMapperContextChanged += MapperContextChanged;
+    }
 
-        public Action? OnItemsListChanged { get; set; }
+    public override void Destroy()
+    {
+        base.Destroy();
+        StorageService.OnMapperContextChanged -= MapperContextChanged;
+    }
 
-        public override void Initialize()
-        {
-            base.Initialize();
-            StorageService.OnMapperContextChanged += MapperContextChanged;
-        }
+    private void MapperContextChanged() => OnItemsListChanged?.Invoke();
 
-        public override void Destroy()
-        {
-            base.Destroy();
-            StorageService.OnMapperContextChanged -= MapperContextChanged;
-        }
+    public List<(AItemDTO Item, ItemType Type)> LoadItems()
+    {
+        IGameStorage gameStorage = StorageService.GetGameStorage();
+        IListStorage listStorage = StorageService.GetListStorage();
+        List<(AItemDTO Item, ItemType Type)> list = new();
 
-        private void MapperContextChanged() => OnItemsListChanged?.Invoke();
-
-        public List<(AItemDTO Item, ItemType Type)> LoadItems()
-        {
-            IGameStorage gameStorage = StorageService.GetGameStorage();
-            IListStorage listStorage = StorageService.GetListStorage();
-            List<(AItemDTO Item, ItemType Type)> list = new();
-
-            var rooms = listStorage.GetRooms(gameStorage)
-                .Select(item => (Item: item as AItemDTO, Type: ItemType.Room));
-            list.AddRange(rooms);
+        var rooms = listStorage.GetRooms(gameStorage)
+            .Select(item => (Item: item as AItemDTO, Type: ItemType.Room));
+        list.AddRange(rooms);
             
-            var facades = listStorage.GetFacades(gameStorage)
-                .Select(item => (Item: item as AItemDTO, Type: ItemType.Building));
-            list.AddRange(facades);
+        var facades = listStorage.GetFacades(gameStorage)
+            .Select(item => (Item: item as AItemDTO, Type: ItemType.Building));
+        list.AddRange(facades);
             
-            return list;
-        }
+        var physicsItems = listStorage.GetPhysicsItems(gameStorage)
+            .Select(item => (Item: item as AItemDTO, Type: ItemType.PhysicsItem));
+        list.AddRange(physicsItems);
+            
+        var mobs = listStorage.GetMobs(gameStorage)
+            .Select(item => (Item: item as AItemDTO, Type: ItemType.Mob));
+        list.AddRange(mobs);
+            
+        return list;
     }
 }

@@ -6,9 +6,9 @@ public abstract class ARoomItem : AWorldElement
 {
     public Room RoomOwner { get; }
 
-    protected ARoomItem(int id, string name, MapIndex leftTopCorner, int floor, Color color, StoredPreviewState state,
+    protected ARoomItem(int id, string name, MapIndex leftTopCorner, Color color, StoredPreviewState state,
         Room roomOwner)
-        : base(id, name, leftTopCorner, floor, color, state)
+        : base(id, name, leftTopCorner, color, state)
     {
         RoomOwner = roomOwner;
     }

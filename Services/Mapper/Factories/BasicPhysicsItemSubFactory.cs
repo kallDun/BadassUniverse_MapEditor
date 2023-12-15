@@ -1,14 +1,14 @@
-﻿using System;
-using MapEditor.Models.Game;
+﻿using MapEditor.Models.Game;
 using MapEditor.Models.Server;
 
-namespace MapEditor.Services.Mapper.Factories
+namespace MapEditor.Services.Mapper.Factories;
+
+public class BasicPhysicsItemSubFactory : IPhysicsItemSubFactory
 {
-    public class BasicPhysicsItemSubFactory : IPhysicsItemSubFactory
+    public PhysicsItem CreatePhysicsItem(PhysicsItemDTO itemDto, Room roomOwner)
     {
-        PhysicsItem IPhysicsItemSubFactory.CreatePhysicsItem(PhysicsItemDTO item)
-        {
-            throw new NotImplementedException();
-        }
+        return new PhysicsItem(itemDto.Id, itemDto.Name, 
+            new MapIndex(itemDto.RoomOffsetY, itemDto.RoomOffsetX), 
+            itemDto.Color, itemDto.State, roomOwner);
     }
 }

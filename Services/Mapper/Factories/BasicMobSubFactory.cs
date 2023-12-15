@@ -2,13 +2,14 @@
 using MapEditor.Models.Game;
 using MapEditor.Models.Server;
 
-namespace MapEditor.Services.Mapper.Factories
+namespace MapEditor.Services.Mapper.Factories;
+
+public class BasicMobSubFactory : IMobSubFactory
 {
-    public class BasicMobSubFactory : IMobSubFactory
+    public Mob CreateMob(MobDTO mobDto, Room roomOwner)
     {
-        Mob IMobSubFactory.CreateMob(MobDTO mob)
-        {
-            throw new NotImplementedException();
-        }
+        return new Mob(mobDto.Id, mobDto.Name, 
+            new MapIndex(mobDto.RoomOffsetY, mobDto.RoomOffsetX), 
+            mobDto.Color, mobDto.State, roomOwner);
     }
 }

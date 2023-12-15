@@ -9,6 +9,7 @@ namespace MapEditor.Models.Server
         [JsonProperty("roomId"), CustomProperty("Room Id", true)] public int RoomId { get; set; }
         [JsonProperty("inGamePhysicsItemId")] public int InGamePhysicsItemId { get; set; }
         [JsonProperty("name"), CustomProperty] public required string Name { get; set; } = "Physics Item";
+        [JsonProperty("color"), CustomProperty] public ColorDTO Color { get; set; }
         [JsonProperty("roomOffsetX"), CustomProperty("X")] public int RoomOffsetX { get; set; }
         [JsonProperty("roomOffsetY"), CustomProperty("Y")] public int RoomOffsetY { get; set; }
         [JsonProperty("simulatePhysics"), CustomProperty("Simulate Physics")] public bool SimulatePhysics { get; set; }

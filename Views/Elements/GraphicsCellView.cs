@@ -23,11 +23,13 @@ public class GraphicsCellView
     private byte Alpha => isPreview ? (byte)150 : (byte)255;
     private Color MainColor => Color.FromArgb(Alpha, 0, 0, 0);
     
+    private readonly GraphicsView parent;
     private readonly MapIndex position;
     private readonly int size;
     private bool isPreview;
     private bool backgroundInitialized;
     private int currentFloor;
+    private Room? room;
     private int hashCodeCache;
 
     private static World World => StorageService.World;
@@ -85,6 +87,10 @@ public class GraphicsCellView
     private void MouseMove(object sender, MouseEventArgs e)
     {
         PreviewService.TryToMoveRoomOrFacade(position);
+
+        Point mousePosition = e.GetPosition(Content);
+        mousePosition = new Point(mousePosition.X / size, mousePosition.Y / size);
+        PreviewService.TryToMoveRoomItem(position, mousePosition, room);
     }
 
     private void MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -110,9 +116,11 @@ public class GraphicsCellView
         Room? room = World.GetRoomFromWorldByCell(MapCell, currentFloor);
         if (room != null)
         {
+            this.room = room;
             InitBackground(room.Color);
             return true;
         }
+        this.room = null;
         return false;
     }
 

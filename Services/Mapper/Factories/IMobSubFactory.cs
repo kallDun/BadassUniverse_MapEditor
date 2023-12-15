@@ -5,6 +5,6 @@ namespace MapEditor.Services.Mapper.Factories
 {
     public interface IMobSubFactory : ISubFactory
     {
-        Mob CreateMob(MobDTO mob);
+        Mob CreateMob(MobDTO mob, Room roomOwner);
     }
 }

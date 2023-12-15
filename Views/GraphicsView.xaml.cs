@@ -1,8 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Shapes;
 using MapEditor.Extensions.Graphics;
 using MapEditor.Models.Game;
 using MapEditor.Models.Game.Data;
@@ -18,14 +21,16 @@ namespace MapEditor.Views
             => ServicesManager.Instance.GetService<LocalStorageService>();
         
         private const int cellSize = 25;
+        private readonly ScrollViewerDragZoomController controller;
         
         private GraphicsCellView[][]? cells;
+        private Grid? itemsContent;
         private List<RoomItemView> itemViews = new();
 
         public GraphicsView()
         {
             InitializeComponent();
-            scrollViewer.EnableDragZoom(GraphicsGrid, scaleTransform, MouseButton.Middle);
+            controller = scrollViewer.EnableDragZoom(GraphicsGrid, scaleTransform, MouseButton.Middle);
             
             ClearGrid();
             DrawGrid();
@@ -39,6 +44,7 @@ namespace MapEditor.Views
             GraphicsGrid.RowDefinitions.Clear();
             GraphicsGrid.ColumnDefinitions.Clear();
             itemViews.Clear();
+            itemsContent?.Children.Clear();
             cells = null;
         }
 
@@ -77,28 +83,28 @@ namespace MapEditor.Views
                     GraphicsGrid.Children.Add(cell.Content);
                 }
             }
+            
+            itemsContent = new Grid();
+            Grid.SetColumnSpan(itemsContent, map.GetSizeX());
+            Grid.SetRowSpan(itemsContent, map.GetSizeY());
+            GraphicsGrid.Children.Add(itemsContent);
         }
         
         private void DrawItems()
         {
-            List<RoomItemView> newItemViews = new();
-            var items = StorageService.World.GetAllRoomItems().Select(RoomItemData.FromARoomItem);
+            if (itemsContent == null) return;
+            var itemsData = StorageService.World.GetAllRoomItems().Select(RoomItemData.FromARoomItem);
 
-            foreach (var item in items)
+            List<RoomItemView> newItemViews = itemsData
+                .Select(data => itemViews
+                                    .FirstOrDefault(x => x.Data.Equals(data)) 
+                                ?? new RoomItemView(data, itemsContent, cellSize)).ToList();
+
+            foreach (var oldView in itemViews
+                         .Where(oldView => newItemViews
+                         .All(x => x.Data != oldView.Data)))
             {
-                var itemView = itemViews.FirstOrDefault(x => x.Data.Id == item.Id);
-                if (itemView == null)
-                {
-                    itemView = new RoomItemView(cellSize, item);
-                    GraphicsGrid.Children.Add(itemView);
-                }
-                newItemViews.Add(itemView);
-            }
-            
-            var itemsToRemove = itemViews.Except(newItemViews).ToList();
-            foreach (var itemView in itemsToRemove)
-            {
-                GraphicsGrid.Children.Remove(itemView);
+                oldView.RemoveFromField();
             }
             
             itemViews = newItemViews;
