@@ -9,8 +9,10 @@ using System.Windows.Shapes;
 using MapEditor.Extensions.Graphics;
 using MapEditor.Models.Game;
 using MapEditor.Models.Game.Data;
+using MapEditor.Models.Server;
 using MapEditor.Services;
 using MapEditor.Services.Manager;
+using MapEditor.Services.Properties;
 using MapEditor.Views.Elements;
 
 namespace MapEditor.Views
@@ -19,6 +21,10 @@ namespace MapEditor.Views
     {
         private static LocalStorageService StorageService
             => ServicesManager.Instance.GetService<LocalStorageService>();
+        private static PropertiesService PropertiesService
+            => ServicesManager.Instance.GetService<PropertiesService>();
+        private static PreviewService PreviewService
+            => ServicesManager.Instance.GetService<PreviewService>();
         
         private const int cellSize = 25;
         private readonly ScrollViewerDragZoomController controller;
@@ -26,6 +32,7 @@ namespace MapEditor.Views
         private GraphicsCellView[][]? cells;
         private Grid? itemsContent;
         private List<RoomItemView> itemViews = new();
+        private Action<RoomItemData> onClickRoomItem;
 
         public GraphicsView()
         {
@@ -35,6 +42,7 @@ namespace MapEditor.Views
             ClearGrid();
             DrawGrid();
             DrawItems();
+            SubscribeOnClickRoomItem();
             StorageService.OnWorldChanged += DrawItems;
         }
 
@@ -94,11 +102,11 @@ namespace MapEditor.Views
         {
             if (itemsContent == null) return;
             var itemsData = StorageService.World.GetAllRoomItems().Select(RoomItemData.FromARoomItem);
-
+            
             List<RoomItemView> newItemViews = itemsData
                 .Select(data => itemViews
                                     .FirstOrDefault(x => x.Data.Equals(data)) 
-                                ?? new RoomItemView(data, itemsContent, cellSize)).ToList();
+                                ?? new RoomItemView(data, itemsContent, cellSize, onClickRoomItem)).ToList();
 
             foreach (var oldView in itemViews
                          .Where(oldView => newItemViews
@@ -108,6 +116,40 @@ namespace MapEditor.Views
             }
             
             itemViews = newItemViews;
+        }
+        
+        private void SubscribeOnClickRoomItem()
+        {
+            onClickRoomItem = data =>
+            {
+                if (PreviewService.IsPreviewing) return;
+                
+                var room = StorageService.WorldDTO.Rooms.FirstOrDefault(x => x.Id == data.RoomId);
+                if (room == null) return;
+                
+                AItemDTO? selectedItem = null;
+                switch (data.Type)
+                {
+                    case RoomItemDataType.PhysicsItem:
+                    {
+                        var item = room.PhysicsItems.FirstOrDefault(x => x.Id == data.Id);
+                        if (item == null) return;
+                        selectedItem = item;
+                        break;
+                    }
+                    case RoomItemDataType.Mob:
+                    {
+                        var item = room.Mobs.FirstOrDefault(x => x.Id == data.Id);
+                        if (item == null) return;
+                        selectedItem = item;
+                        break;
+                    }
+                    default:
+                        return;
+                }
+                
+                PropertiesService.SetActiveItem(selectedItem);
+            };
         }
     }
 }

@@ -15,7 +15,8 @@ namespace MapEditor.Services
             => ServicesManager.Instance.GetService<LocalStorageService>();
         private static PropertiesService PropertiesService
             => ServicesManager.Instance.GetService<PropertiesService>();
-        
+
+        private bool notMovingState = false;
         private AItemDTO? previewItem;
         private ItemType? previewItemType;
         private WorldDTO? worldDTOPreview;
@@ -29,6 +30,7 @@ namespace MapEditor.Services
                 TryToCancel();
             }
             
+            notMovingState = false;
             previewItem = (AItemDTO)item.Clone();
             previewItemType = type;
             worldDTOPreview = (WorldDTO)StorageService.WorldDTO.Clone();
@@ -71,6 +73,7 @@ namespace MapEditor.Services
         {
             if (!(previewItem != null && previewItemType != null && worldDTOPreview != null)) return;
             if (previewItemType is not (ItemType.Room or ItemType.Building)) return;
+            if (notMovingState) return;
             
             switch (previewItemType)
             {
@@ -96,6 +99,7 @@ namespace MapEditor.Services
         {
             if (!(previewItem != null && previewItemType != null && worldDTOPreview != null)) return;
             if (previewItemType is not (ItemType.PhysicsItem or ItemType.Mob)) return;
+            if (notMovingState) return;
 
             worldDTOPreview = (WorldDTO)StorageService.WorldDTO.Clone();
             
@@ -147,6 +151,11 @@ namespace MapEditor.Services
             StorageService.SetPreviewWorld(worldDTOPreview);
         }
 
+        public void ChangeNotMovingState()
+        {
+            notMovingState = !notMovingState;
+        }
+        
         public void TryToSave()
         {
             if (!(previewItem != null && previewItemType != null && worldDTOPreview != null)) return;
@@ -164,6 +173,7 @@ namespace MapEditor.Services
         {
             if (!IsPreviewing) return;
             StorageService.SetPreviewWorld(null);
+            notMovingState = false;
             previewItem = null;
             previewItemType = null;
             worldDTOPreview = null;

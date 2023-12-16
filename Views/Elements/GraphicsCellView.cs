@@ -8,8 +8,10 @@ using System.Windows.Shapes;
 using MapEditor.Extensions.Game;
 using MapEditor.Models;
 using MapEditor.Models.Game;
+using MapEditor.Models.Server;
 using MapEditor.Services;
 using MapEditor.Services.Manager;
+using MapEditor.Services.Properties;
 
 namespace MapEditor.Views.Elements;
 
@@ -19,18 +21,20 @@ public class GraphicsCellView
         => ServicesManager.Instance.GetService<LocalStorageService>();
     private static PreviewService PreviewService
         => ServicesManager.Instance.GetService<PreviewService>();
+    private static PropertiesService PropertiesService
+        => ServicesManager.Instance.GetService<PropertiesService>();
     
-    private byte Alpha => isPreview ? (byte)150 : (byte)255;
+    private byte Alpha => isPreview ? (byte)125 : (byte)255;
     private Color MainColor => Color.FromArgb(Alpha, 0, 0, 0);
     
-    private readonly GraphicsView parent;
     private readonly MapIndex position;
     private readonly int size;
     private bool isPreview;
     private bool backgroundInitialized;
     private int currentFloor;
+    
     private Room? room;
-    private int hashCodeCache;
+    private List<Facade> facades = new();
 
     private static World World => StorageService.World;
     private MapCell MapCell => World.Map.GetValue(position);
@@ -41,9 +45,9 @@ public class GraphicsCellView
         this.position = position;
         this.size = size;
         Content = new Grid();
-        
+
         // init view
-        hashCodeCache = MapCell.GetHashCode();
+        var hashCodeCache = MapCell.GetHashCode();
         currentFloor = StorageService.CurrentFloor;
         ClearView();
         InitDefaultBackground();
@@ -65,7 +69,7 @@ public class GraphicsCellView
             }
         };
     }
-
+    
     
     #region Click Events
     
@@ -86,16 +90,42 @@ public class GraphicsCellView
 
     private void MouseMove(object sender, MouseEventArgs e)
     {
-        PreviewService.TryToMoveRoomOrFacade(position);
-
-        Point mousePosition = e.GetPosition(Content);
-        mousePosition = new Point(mousePosition.X / size, mousePosition.Y / size);
-        PreviewService.TryToMoveRoomItem(position, mousePosition, room);
+        if (PreviewService.IsPreviewing)
+        {
+            PreviewService.TryToMoveRoomOrFacade(position);
+        
+            Point mousePosition = e.GetPosition(Content);
+            mousePosition = new Point(mousePosition.X / size, mousePosition.Y / size);
+            PreviewService.TryToMoveRoomItem(position, mousePosition, room);
+        }
     }
 
     private void MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
-        PreviewService.TryToSave();
+        if (PreviewService.IsPreviewing)
+        {
+            PreviewService.ChangeNotMovingState();
+        }
+        else
+        {
+            AItemDTO? selectedItem = null;
+            if (facades.Any())
+            {
+                selectedItem = StorageService.WorldDTO.Facades.FirstOrDefault(x => x.Id == facades.First().Id);
+            }
+            else if (room != null && selectedItem == null)
+            {
+                selectedItem = StorageService.WorldDTO.Rooms.FirstOrDefault(x => x.Id == room.Id);
+            }
+            else if (selectedItem == null)
+            {
+                selectedItem = StorageService.WorldDTO;
+            }
+            if (selectedItem != null)
+            {
+                PropertiesService.SetActiveItem(selectedItem);
+            }
+        }
     }
     
     #endregion
@@ -179,6 +209,7 @@ public class GraphicsCellView
     {
         var facades = World.GetFacadesFromWorldByCell(MapCell, currentFloor);
         var facadesArray = facades as Facade[] ?? facades.ToArray();
+        this.facades = facadesArray.ToList();
         if (!facadesArray.Any()) return false;
         InitFacadeBackground(facadesArray.Select(x => x.Color).ToList());
         return true;
