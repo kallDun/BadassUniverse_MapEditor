@@ -6,11 +6,9 @@
              xmlns:local="clr-namespace:MapEditor.Views"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="400">
-    <Grid>
-        <ScrollViewer>
-            <StackPanel ScrollViewer.CanContentScroll="True" CanHorizontallyScroll="True"
-                x:Name="ItemsStackPanel">
-            </StackPanel>
-        </ScrollViewer>
-    </Grid>
+    <ScrollViewer>
+        <StackPanel ScrollViewer.CanContentScroll="True" CanHorizontallyScroll="True"
+            x:Name="ItemsStackPanel" Margin="5">
+        </StackPanel>
+    </ScrollViewer>
 </UserControl>

@@ -8,7 +8,8 @@
     <Grid>
         <ScrollViewer>
             <StackPanel x:Name="PropertiesPanel" Margin="5"
-                ScrollViewer.CanContentScroll="True" CanHorizontallyScroll="True"/>
+                ScrollViewer.CanContentScroll="True" CanHorizontallyScroll="True">
+            </StackPanel>
         </ScrollViewer>
     </Grid>
 </UserControl>

@@ -11,11 +11,11 @@
              TextOptions.TextFormattingMode="Ideal"
              TextOptions.TextRenderingMode="Auto"
              FontFamily="{DynamicResource MaterialDesignFont}">
-    <Grid HorizontalAlignment="Center" MinHeight="60">
+    <Grid MinHeight="60" Width="auto">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="130"/>
         </Grid.ColumnDefinitions>
         
         <Image x:Name="ItemIcon" Source="/Assets/Icons/Room.png" Width="40" Height="40" 
@@ -23,12 +23,12 @@
                Margin="20 0 20 0"/>
 
         <TextBlock x:Name="ItemName" Text="item to spawn on field"
-                   MinWidth="120" TextWrapping="Wrap" TextAlignment="Center"
+                   TextWrapping="Wrap" TextAlignment="Left"
                    VerticalAlignment="Center" Grid.Column="1"/>
 
         <Button x:Name="ItemButton" 
                 HorizontalAlignment="Right" VerticalAlignment="Center" 
-                Content="Spawn" FontSize="20" Margin="20 0 20 0" Grid.Column="2"
+                Content="Spawn" FontSize="20" Margin="10 0 20 0" Grid.Column="2"
                 Style="{DynamicResource MaterialDesignOutlinedButton}"/>
     </Grid>
 </UserControl>
