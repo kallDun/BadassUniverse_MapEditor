@@ -11,9 +11,12 @@
              FontFamily="{DynamicResource MaterialDesignFont}">
 
     <Border BorderThickness="1" BorderBrush="Black" CornerRadius="3" x:Name="BorderMain" Margin="5">
-        <StackPanel x:Name="MainStackContainer" Orientation="Vertical" Margin="3">
-            <TextBlock x:Name="NameTextBlock" TextDecorations="Underline" FontWeight="SemiBold" Text="Test" VerticalAlignment="Center" Margin="5,0,0,0" />
-        </StackPanel>
+        <Grid>
+            <TextBlock Text="*" Foreground="Coral" FontSize="25" x:Name="DirtyFlagItem" Margin="3,0,0,0"/>
+            <StackPanel x:Name="MainStackContainer" Orientation="Vertical" Margin="3">
+                <TextBlock x:Name="NameTextBlock" TextDecorations="Underline" FontWeight="SemiBold" Text="Test" VerticalAlignment="Center" Margin="20,0,20,0" />
+            </StackPanel>
+        </Grid>
     </Border>
     
 </UserControl>

@@ -17,6 +17,8 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
+        <TextBlock Text="*" Foreground="Coral" FontSize="25" x:Name="DirtyFlagColorPicker" Margin="3,0,0,0"/>
+        
         <TextBlock TextAlignment="Left" VerticalAlignment="Center" x:Name="NameTextBlock"
             Text="Property with color" Margin="20,0,20,0" TextWrapping="Wrap"/>
 

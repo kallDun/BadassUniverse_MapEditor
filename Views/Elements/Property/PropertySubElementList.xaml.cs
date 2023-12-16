@@ -13,7 +13,13 @@ namespace BadassUniverse_MapEditor.Views.Elements.Property
             InitializeComponent();
             if (propertyData.Value is not IEnumerable<object> 
                 || propertyData.ItemListProperties is null) return;
-            
+
+            DirtyFlagList.Visibility = propertyData.DirtyFlag ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
+            propertyData.OnDirtyFlagChanged += () =>
+            {
+                DirtyFlagList.Visibility = propertyData.DirtyFlag ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
+            };
+
             NameTextBlock.Text = propertyData.VisualizedName;
             BorderMain.Visibility = propertyData.IsVisible ? Visibility.Visible : Visibility.Collapsed;
             propertyData.OnVisibilityChanged += () =>
