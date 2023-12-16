@@ -16,13 +16,13 @@ namespace MapEditor.Views.Elements
 
             string imageName = type switch
             {
-                ItemType.Room => "Room.png",
-                ItemType.Building => "Facade.png",
-                ItemType.Mob => "Mob.png",
-                ItemType.PhysicsItem => "Item.png",
-                _ => "Room.png"
+                ItemType.Room => "Room",
+                ItemType.Building => "Facade",
+                ItemType.Mob => "Mob",
+                ItemType.PhysicsItem => "Item",
+                _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
             };
-            ItemIcon.Source = new BitmapImage(new Uri($"pack://application:,,,/Assets/Icons/{imageName}"));
+            ItemIcon.Source = ImagesStorage.GetImage(imageName, "Icons");
             
             ItemName.Text = type switch
             {

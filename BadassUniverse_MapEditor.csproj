@@ -24,6 +24,8 @@
     <Resource Include="Assets\Icons\Facade.png" />
     <Resource Include="Assets\Icons\Item.png" />
     <Resource Include="Assets\Icons\Mob.png" />
+    <Resource Include="Assets\Icons\RoomItems\item_0.png" />
+    <Resource Include="Assets\Icons\RoomItems\mob_0.png" />
     <Resource Include="Assets\Icons\Room.png" />
   </ItemGroup>
 

@@ -10,6 +10,6 @@ public class BasicMobSubFactory : IMobSubFactory
     {
         return new Mob(mobDto.Id, mobDto.Name, 
             new MapIndex(mobDto.RoomOffsetY, mobDto.RoomOffsetX), 
-            mobDto.Color, mobDto.State, roomOwner);
+            mobDto.Color, $"mob_{(int)mobDto.Icon}", mobDto.State, roomOwner);
     }
 }

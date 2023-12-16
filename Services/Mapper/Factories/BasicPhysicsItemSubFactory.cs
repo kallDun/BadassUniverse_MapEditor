@@ -9,6 +9,6 @@ public class BasicPhysicsItemSubFactory : IPhysicsItemSubFactory
     {
         return new PhysicsItem(itemDto.Id, itemDto.Name, 
             new MapIndex(itemDto.RoomOffsetY, itemDto.RoomOffsetX), 
-            itemDto.Color, itemDto.State, roomOwner);
+            itemDto.Color,$"item_{(int)itemDto.Icon}", itemDto.State, roomOwner);
     }
 }
