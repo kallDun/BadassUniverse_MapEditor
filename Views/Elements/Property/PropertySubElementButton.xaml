@@ -15,10 +15,10 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <TextBlock TextAlignment="Left" VerticalAlignment="Center" 
+        <TextBlock TextAlignment="Left" VerticalAlignment="Center" x:Name="NameTextBlock"
                    Text="Property with button" Margin="20,0,20,0" TextWrapping="Wrap"/>
 
-        <Button Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" 
+        <Button Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" x:Name="ActionButton"
                 VerticalContentAlignment="Center" Content="Action" Margin="20,0,20,0"
                 Style="{DynamicResource MaterialDesignOutlinedButton}" FontSize="20"/>
     </Grid>

@@ -14,6 +14,7 @@ public class PropertyData
     private readonly object Item;
     private readonly PropertyDataEvents DataEvents;
     private readonly CustomPropertyAttribute Attribute;
+    private readonly PropertySavingType SavingType;
     
     public string PropertyName => Attribute.PropertyName;
     public string VisualizedName => Attribute.VisualizeName;
@@ -26,11 +27,12 @@ public class PropertyData
     public Action? OnValueChangedFromProperties { get; set; }
     public Action? OnVisibilityChanged { get; set; }
     
-    public PropertyData(object item, PropertyDataEvents dataEvents, CustomPropertyAttribute attribute)
+    public PropertyData(object item, PropertyDataEvents dataEvents, CustomPropertyAttribute attribute, PropertySavingType savingType)
     {
         Item = item;
         DataEvents = dataEvents;
         Attribute = attribute;
+        SavingType = savingType;
         IsVisible = true;
         
         UpdateValue();
@@ -54,13 +56,37 @@ public class PropertyData
     public void SetValue(object? value)
     {
         if (value == null) return;
-        
-        DataEvents.SetValue(Attribute is CustomPropertyStringSerializedAttribute serializedAttribute 
-            ? serializedAttribute.Serialize(value)
-            : value);
+
+        if (SavingType == PropertySavingType.Immediate)
+        {
+            DataEvents.SetValue(Attribute is CustomPropertyStringSerializedAttribute serializedAttribute 
+                ? serializedAttribute.Serialize(value)
+                : value);
+        }
         
         Value = value;
         OnValueChangedFromProperties?.Invoke();
+    }
+
+    public void SetValueOnClick()
+    {
+        if (SubProperties != null)
+        {
+            foreach (var property in SubProperties)
+            {
+                property.SetValueOnClick();
+            }
+        }
+        if (ItemListProperties != null)
+        {
+            foreach (var property in ItemListProperties)
+            {
+                property.SetValueOnClick();
+            }
+        }
+        DataEvents.SetValue(Attribute is CustomPropertyStringSerializedAttribute serializedAttribute 
+            ? serializedAttribute.Serialize(Value)
+            : Value);
     }
     
     private void UpdateValue()
@@ -98,7 +124,7 @@ public class PropertyData
         {
             CustomPropertyAttribute? propertyAttribute = property.GetCustomAttribute<CustomPropertyAttribute>();
             if (propertyAttribute == null) continue;
-            SubProperties.Add(new PropertyData(Value, PropertyDataEvents.FromPropertyInfo(Value, property), propertyAttribute));
+            SubProperties.Add(new PropertyData(Value, PropertyDataEvents.FromPropertyInfo(Value, property), propertyAttribute, SavingType));
         }
         foreach (var property in SubProperties)
         {
@@ -123,7 +149,7 @@ public class PropertyData
             attribute.VisualizeName = $"{Attribute.VisualizeName} [{i}]";
             attribute.IsReadOnly = Attribute.IsItemReadOnly;
             
-            var itemListProperty = new PropertyData(array[i], dataEvents, attribute);
+            var itemListProperty = new PropertyData(array[i], dataEvents, attribute, SavingType);
             ItemListProperties.Add(itemListProperty);
             
             itemListProperty.OnValueChangedFromProperties += () => SetValue(Value);

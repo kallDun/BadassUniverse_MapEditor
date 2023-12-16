@@ -72,7 +72,7 @@ namespace MapEditor.Services
             if (worldDTO is null) throw new Exception("WorldDTO is null.");
             if (worldDTOPreview == null || !TryToSetWorld(worldDTOPreview))
             {
-                TryToSetWorld(worldDTO);
+                SetWorld(worldDTO);
             }
         }
         

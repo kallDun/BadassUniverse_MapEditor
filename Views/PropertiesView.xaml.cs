@@ -2,6 +2,7 @@
 using BadassUniverse_MapEditor.Views.Elements.Property;
 using MapEditor.Services.Manager;
 using MapEditor.Services.Properties;
+using MapEditor.Views.Elements;
 
 namespace MapEditor.Views
 {
@@ -20,6 +21,10 @@ namespace MapEditor.Views
         {
             PropertiesPanel.Children.Clear();
 
+            foreach (var actionButton in PropertiesService.ActionButtons)
+            {
+                PropertiesPanel.Children.Add(new PropertySubElementButton(actionButton));
+            }
             foreach (var property in PropertiesService.Properties)
             {
                 var propertySubElement = PropertyExtensions.GetPropertyView(property);

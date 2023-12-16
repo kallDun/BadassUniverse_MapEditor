@@ -154,7 +154,9 @@ namespace MapEditor.Services
             {
                 previewItem.State = StoredPreviewState.Stored;
                 StorageService.SetWorld(worldDTOPreview);
+                var itemRef = previewItem;
                 TryToCancel();
+                PropertiesService.SetActiveItem(itemRef);
             }
         }
         
@@ -165,6 +167,7 @@ namespace MapEditor.Services
             previewItem = null;
             previewItemType = null;
             worldDTOPreview = null;
+            PropertiesService.Reset();
         }
     }
 }

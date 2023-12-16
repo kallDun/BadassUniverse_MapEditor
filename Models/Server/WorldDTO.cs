@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using MapEditor.Services.Properties.Attributes;
 using Newtonsoft.Json;
 
 namespace MapEditor.Models.Server
 {
-    public class WorldDTO : ICloneable
+    public class WorldDTO : AItemDTO
     {
         [JsonProperty("id"), CustomProperty(isReadOnly: true)] public required int Id { get; set; } 
         [JsonProperty("name"), CustomProperty] public required string Name { get; set; }
@@ -17,7 +16,7 @@ namespace MapEditor.Models.Server
         [JsonProperty("rooms")] public List<RoomDTO> Rooms { get; set; } = new();
         [JsonProperty("facades")] public List<FacadeDTO> Facades { get; set; } = new();
         
-        public object Clone()
+        public override object Clone()
         {
             return new WorldDTO
             {
@@ -28,7 +27,8 @@ namespace MapEditor.Models.Server
                 PlayerSpawnRoomId = PlayerSpawnRoomId,
                 Rooms = Rooms.Select(x => (RoomDTO)x.Clone()).ToList(),
                 Facades = Facades.Select(x => (FacadeDTO)x.Clone()).ToList(),
-                Version = Version
+                Version = Version,
+                State = State
             };
         }
     }
