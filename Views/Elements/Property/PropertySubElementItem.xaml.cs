@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using MapEditor.Services.Properties.Data;
 
-namespace BadassUniverse_MapEditor.Views.Elements.Property
+namespace MapEditor.Views.Elements.Property
 {
     public partial class PropertySubElementItem : UserControl
     {

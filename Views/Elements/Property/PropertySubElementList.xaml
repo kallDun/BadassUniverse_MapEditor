@@ -1,9 +1,9 @@
-﻿<UserControl x:Class="BadassUniverse_MapEditor.Views.Elements.Property.PropertySubElementList"
+﻿<UserControl x:Class="MapEditor.Views.Elements.Property.PropertySubElementList"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:BadassUniverse_MapEditor.Views.Elements.Property"
+             xmlns:local="clr-namespace:MapEditor.Views.Elements.Property"
              mc:Ignorable="d" 
              TextElement.FontWeight="Regular"
              TextElement.FontSize="20"
@@ -15,7 +15,7 @@
         <Grid x:Name="MainStackContainer" VerticalAlignment="Center" Margin="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -26,13 +26,14 @@
             
             <TextBlock x:Name="NameTextBlock" Grid.Column="0" Grid.Row="0" Text="List Name" TextDecorations="Underline" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,20,0"/>
             
-            <StackPanel x:Name="AddSubElementStackContainer" Grid.Column="1" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,0,0">
-                <TextBlock x:Name="CountSubElementText" Grid.Column="0" Text="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="DemiBold" Margin="0,0,0,0"/>
+            <StackPanel x:Name="AddSubElementStackContainer" Grid.Column="1" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0">
+                <TextBlock x:Name="CountSubElementText" Grid.Column="0" Text="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="DemiBold" Margin="0"/>
                 <Button x:Name="AddSubElementButton" Content="+" Height="25" Width="25" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0" Padding="0" Style="{DynamicResource MaterialDesignOutlinedButton}" FontSize="20"/>
                 <Button x:Name="RemoveSubElementButton" Content="-" Height="25" Width="25" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,0,0,0" Padding="0" Style="{DynamicResource MaterialDesignOutlinedButton}" FontSize="20"/>
             </StackPanel>
             
-            <StackPanel x:Name="SubElementsStackContainer" Grid.Row="1" Grid.ColumnSpan="2" Orientation="Vertical" VerticalAlignment="Center" Margin="5,0,5,0"/>
+            <StackPanel x:Name="SubElementsStackContainer" Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="0"
+                        Orientation="Vertical" VerticalAlignment="Center" Margin="5,0,5,0"/>
         </Grid>
     </Border>
 </UserControl>

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using MapEditor.Models;
 using MapEditor.Models.Game;
 using MapEditor.Models.Server;
 using MapEditor.Services.Manager;
@@ -88,6 +90,29 @@ namespace MapEditor.Services
             world = worldData;
             OnWorldChanged?.Invoke();
             return true;
+        }
+
+        public List<(AItemDTO Item, ItemType Type)> LoadStoredItems()
+        {
+            List<(AItemDTO Item, ItemType Type)> items = new();
+            if (worldDTO is null) return items;
+            foreach (var room in worldDTO.Rooms)
+            {
+                items.Add((room, ItemType.Room));
+                foreach (var item in room.PhysicsItems)
+                {
+                    items.Add((item, ItemType.PhysicsItem));
+                }
+                foreach (var mob in room.Mobs)
+                {
+                    items.Add((mob, ItemType.Mob));
+                }
+            }
+            foreach (var facade in worldDTO.Facades)
+            {
+                items.Add((facade, ItemType.Building));
+            }
+            return items;
         }
     }
 }

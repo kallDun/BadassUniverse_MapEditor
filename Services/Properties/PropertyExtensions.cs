@@ -7,7 +7,7 @@ using MapEditor.Models.Server;
 using MapEditor.Services.Properties.Data;
 using MapEditor.Views.Elements;
 
-namespace BadassUniverse_MapEditor.Views.Elements.Property;
+namespace MapEditor.Views.Elements.Property;
 
 public static class PropertyExtensions
 {

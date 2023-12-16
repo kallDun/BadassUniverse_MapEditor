@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace BadassUniverse_MapEditor.Views.Elements.Property
+namespace MapEditor.Views.Elements.Property
 {
     public partial class PropertySubElementListItem : UserControl
     {

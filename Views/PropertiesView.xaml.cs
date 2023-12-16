@@ -1,5 +1,5 @@
 ﻿using System.Windows.Controls;
-using BadassUniverse_MapEditor.Views.Elements.Property;
+using MapEditor.Views.Elements.Property;
 using MapEditor.Services.Manager;
 using MapEditor.Services.Properties;
 using MapEditor.Views.Elements;
