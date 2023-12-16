@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using MapEditor.Services.Properties.Data;
@@ -56,7 +55,7 @@ namespace BadassUniverse_MapEditor.Views.Elements.Property
                 if (propertySubElement != null)
                 {
                     var index = i;
-                    var view = new PropertySubElementListItem(propertySubElement, () =>
+                    var view = new PropertySubElementListItem(propertySubElement, propertyData.IsReadOnly, () =>
                     {
                         propertyData.RemoveItemFromList(index);
                         UpdateListView(propertyData);
