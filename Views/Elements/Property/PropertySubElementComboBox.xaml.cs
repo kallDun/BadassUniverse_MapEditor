@@ -19,7 +19,13 @@ namespace MapEditor.Views.Elements
             string[] names = Enum.GetNames(propertyData.Value.GetType());
             ValueComboBox.ItemsSource = names;
             ValueComboBox.SelectedIndex = Array.IndexOf(names, propertyData.Value.ToString());
-            
+
+            DirtyFlagComboBox.Visibility = propertyData.DirtyFlag ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
+            propertyData.OnDirtyFlagChanged += () =>
+            {
+                DirtyFlagComboBox.Visibility = propertyData.DirtyFlag ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
+            };
+
             MainGrid.Visibility = propertyData.IsVisible ? Visibility.Visible : Visibility.Collapsed;
             propertyData.OnVisibilityChanged += () =>
             {

@@ -15,7 +15,13 @@ namespace MapEditor.Views.Elements
             NameTextBlock.Text = propertyData.VisualizedName;
             ValueCheckBox.IsEnabled = !propertyData.IsReadOnly;
             ValueCheckBox.IsChecked = value;
-            
+
+            DirtyFlagCheckBox.Visibility = propertyData.DirtyFlag ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
+            propertyData.OnDirtyFlagChanged += () =>
+            {
+                DirtyFlagCheckBox.Visibility = propertyData.DirtyFlag ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
+            };
+
             MainGrid.Visibility = propertyData.IsVisible ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
             propertyData.OnVisibilityChanged += () =>
             {

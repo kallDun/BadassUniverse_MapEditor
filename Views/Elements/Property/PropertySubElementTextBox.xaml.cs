@@ -11,8 +11,14 @@ namespace MapEditor.Views.Elements
             NameTextBlock.Text = propertyData.VisualizedName;
             ValueTextBox.Text = propertyData.Value?.ToString();
             ValueTextBox.IsReadOnly = propertyData.IsReadOnly;
+
+            DirtyFlagTextBlock.Visibility = propertyData.DirtyFlag ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
+            propertyData.OnDirtyFlagChanged += () =>
+            {
+                DirtyFlagTextBlock.Visibility = propertyData.DirtyFlag ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
+            };
+
             MainGrid.Visibility = propertyData.IsVisible ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
-            
             propertyData.OnVisibilityChanged += () =>
             {
                 MainGrid.Visibility = propertyData.IsVisible ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;

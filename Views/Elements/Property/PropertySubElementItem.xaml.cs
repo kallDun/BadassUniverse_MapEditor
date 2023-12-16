@@ -12,6 +12,13 @@ namespace BadassUniverse_MapEditor.Views.Elements.Property
             if (propertyData.SubProperties == null) return;
             
             NameTextBlock.Text = propertyData.VisualizedName;
+
+            DirtyFlagItem.Visibility = propertyData.DirtyFlag ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
+            propertyData.OnDirtyFlagChanged += () =>
+            {
+                DirtyFlagItem.Visibility = propertyData.DirtyFlag ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
+            };
+
             BorderMain.Visibility = propertyData.IsVisible ? Visibility.Visible : Visibility.Collapsed;
             propertyData.OnVisibilityChanged += () =>
             {
