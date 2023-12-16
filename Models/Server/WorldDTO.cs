@@ -13,8 +13,8 @@ namespace MapEditor.Models.Server
         [JsonProperty("yLength"), CustomProperty("Height")] public required int YLenght { get; set; }
         [JsonProperty("playerSpawnRoomId"), CustomProperty("Spawn Room Id")] public required int PlayerSpawnRoomId { get; set; }
         [JsonProperty("version"), CustomProperty(isReadOnly: true)] public required string Version { get; set; }
-        [JsonProperty("rooms")] public List<RoomDTO> Rooms { get; set; } = new();
-        [JsonProperty("facades")] public List<FacadeDTO> Facades { get; set; } = new();
+        [JsonProperty("rooms"), CustomProperty(isReadOnly: true)] public List<RoomDTO> Rooms { get; set; } = new();
+        [JsonProperty("facades"), CustomProperty(isReadOnly: true)] public List<FacadeDTO> Facades { get; set; } = new();
         
         public override object Clone()
         {

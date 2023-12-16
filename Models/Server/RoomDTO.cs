@@ -20,8 +20,8 @@ namespace MapEditor.Models.Server
         [JsonProperty("floor"), CustomProperty] public int Floor { get; set; }
         [JsonProperty("params"), CustomPropertyStringSerialized(types: new[] { typeof(StreetRoomParameters) })] public string? Params { get; set; }
         [JsonProperty("doorParams"), CustomPropertyStringSerialized(types: new[] { typeof(List<StreetRoomDoorParameters>) })] public string? DoorParams { get; set; }
-        [JsonProperty("physicsItems"), CustomProperty] public List<PhysicsItemDTO> PhysicsItems { get; set; } = new();
-        [JsonProperty("mobs"), CustomProperty] public List<MobDTO> Mobs { get; set; } = new();
+        [JsonProperty("physicsItems"), CustomProperty("Physics Items", IsReadOnly = true)] public List<PhysicsItemDTO> PhysicsItems { get; set; } = new();
+        [JsonProperty("mobs"), CustomProperty(IsReadOnly = true)] public List<MobDTO> Mobs { get; set; } = new();
         public override object Clone()
         {
             return new RoomDTO

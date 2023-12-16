@@ -20,6 +20,8 @@ namespace BadassUniverse_MapEditor.Views.Elements.Property
             {
                 BorderMain.Visibility = propertyData.IsVisible ? Visibility.Visible : Visibility.Collapsed;
             };
+            AddSubElementButton.IsEnabled = !propertyData.IsReadOnly;
+            RemoveSubElementButton.IsEnabled = !propertyData.IsReadOnly;
             
             UpdateListView(propertyData);
             
@@ -58,6 +60,5 @@ namespace BadassUniverse_MapEditor.Views.Elements.Property
             }
             CountSubElementText.Text = propertyData.ItemListProperties.Count.ToString();
         }
-        
     }
 }
