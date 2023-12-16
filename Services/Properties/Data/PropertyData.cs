@@ -20,12 +20,14 @@ public class PropertyData
     public string VisualizedName => Attribute.VisualizeName;
     public bool IsReadOnly => Attribute.IsReadOnly;
     public bool IsVisible { get; private set; }
+    public bool DirtyFlag { get; private set; }
     public object? Value { get; private set; }
     public List<PropertyData>? SubProperties { get; private set; }
     public List<PropertyData>? ItemListProperties { get; private set; }
     public Action? OnValueChangedFromWorld { get; set; }
     public Action? OnValueChangedFromProperties { get; set; }
     public Action? OnVisibilityChanged { get; set; }
+    public Action? OnDirtyFlagChanged { get; set; }
     
     public PropertyData(object item, PropertyDataEvents dataEvents, CustomPropertyAttribute attribute, PropertySavingType savingType)
     {
@@ -63,6 +65,11 @@ public class PropertyData
                 ? serializedAttribute.Serialize(value)
                 : value);
         }
+        else
+        {
+            DirtyFlag = true;
+            OnDirtyFlagChanged?.Invoke();
+        }
         
         Value = value;
         OnValueChangedFromProperties?.Invoke();
@@ -84,9 +91,12 @@ public class PropertyData
                 property.SetValueOnClick();
             }
         }
+
         DataEvents.SetValue(Attribute is CustomPropertyStringSerializedAttribute serializedAttribute 
             ? serializedAttribute.Serialize(Value)
             : Value);
+        DirtyFlag = false;
+        OnDirtyFlagChanged?.Invoke();
     }
     
     private void UpdateValue()

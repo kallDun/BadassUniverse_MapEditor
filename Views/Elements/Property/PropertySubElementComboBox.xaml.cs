@@ -14,6 +14,8 @@ namespace MapEditor.Views.Elements
             
             NameTextBlock.Text = propertyData.VisualizedName;
             ValueComboBox.IsReadOnly = propertyData.IsReadOnly;
+            ValueComboBox.IsEditable = !propertyData.IsReadOnly;
+            ValueComboBox.IsEnabled = !propertyData.IsReadOnly;
             string[] names = Enum.GetNames(propertyData.Value.GetType());
             ValueComboBox.ItemsSource = names;
             ValueComboBox.SelectedIndex = Array.IndexOf(names, propertyData.Value.ToString());
