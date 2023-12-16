@@ -8,6 +8,7 @@ public class World
     public List<Room> Rooms { get; } = new();
     public List<Facade> Facades { get; } = new();
     public required Map Map { get; set; }
+    public MapIndex Size => new MapIndex(Map.GetSizeY(), Map.GetSizeX());
     
     public IEnumerable<ARoomItem> GetAllRoomItems()
     {

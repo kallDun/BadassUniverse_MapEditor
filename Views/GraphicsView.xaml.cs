@@ -30,6 +30,7 @@ namespace MapEditor.Views
         private readonly ScrollViewerDragZoomController controller;
         
         private GraphicsCellView[][]? cells;
+        private MapIndex worldSize = new();
         private Grid? itemsContent;
         private List<RoomItemView> itemViews = new();
         private Action<RoomItemData> onClickRoomItem;
@@ -42,8 +43,21 @@ namespace MapEditor.Views
             ClearGrid();
             DrawGrid();
             DrawItems();
+            
+            StorageService.OnWorldChanged += () =>
+            {
+                var currentWorldSize = new MapIndex(
+                    StorageService.World.Map.GetSizeY(), 
+                    StorageService.World.Map.GetSizeX());
+                if (currentWorldSize != worldSize)
+                {
+                    ClearGrid();
+                    DrawGrid();
+                }
+                DrawItems();
+            };
+            
             SubscribeOnClickRoomItem();
-            StorageService.OnWorldChanged += DrawItems;
         }
 
         private void ClearGrid()
@@ -53,11 +67,24 @@ namespace MapEditor.Views
             GraphicsGrid.ColumnDefinitions.Clear();
             itemViews.Clear();
             itemsContent?.Children.Clear();
-            cells = null;
+            worldSize = new MapIndex();
+
+            if (cells != null)
+            {
+                foreach (var cellArray in cells)
+                {
+                    foreach (var cell in cellArray)
+                    {
+                        cell.Dispose();
+                    }
+                }
+                cells = null;
+            }
         }
 
         private void DrawGrid()
         {
+            worldSize = StorageService.World.Size;
             Map map = StorageService.World.Map;
             cells = new GraphicsCellView[map.GetSizeY()][];
 

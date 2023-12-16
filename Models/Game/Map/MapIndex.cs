@@ -23,7 +23,7 @@ namespace MapEditor.Models.Game
 
         public static bool operator != (MapIndex left, MapIndex right)
         {
-            return left != right;
+            return !left.Equals(right);
         }
         
         public static MapIndex operator -(MapIndex left, MapIndex right)
@@ -41,7 +41,7 @@ namespace MapEditor.Models.Game
             return HashCode.Combine(Y, X);
         }
 
-        public override readonly bool Equals(object obj)
+        public override bool Equals(object obj)
         {
             return obj is MapIndex other && Equals(other);
         }

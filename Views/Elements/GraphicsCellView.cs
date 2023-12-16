@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -15,7 +16,7 @@ using MapEditor.Services.Properties;
 
 namespace MapEditor.Views.Elements;
 
-public class GraphicsCellView
+public class GraphicsCellView : IDisposable
 {
     private static LocalStorageService StorageService
         => ServicesManager.Instance.GetService<LocalStorageService>();
@@ -32,6 +33,7 @@ public class GraphicsCellView
     private bool isPreview;
     private bool backgroundInitialized;
     private int currentFloor;
+    private int hashCodeCache;
     
     private Room? room;
     private List<Facade> facades = new();
@@ -45,29 +47,38 @@ public class GraphicsCellView
         this.position = position;
         this.size = size;
         Content = new Grid();
+        
+        // init events
+        StorageService.OnWorldChanged += WorldChangedEventHandler;
 
         // init view
-        var hashCodeCache = MapCell.GetHashCode();
+        hashCodeCache = MapCell.GetHashCode();
         currentFloor = StorageService.CurrentFloor;
         ClearView();
         InitDefaultBackground();
         InitializeView();
         InitClickEvents();
+    }
+
+    private void WorldChangedEventHandler()
+    {
+        if (position.Y >= World.Size.Y || position.X >= World.Size.X) return;
         
-        // update view
-        StorageService.OnWorldChanged += () =>
+        if (hashCodeCache != MapCell.GetHashCode() 
+            || currentFloor != StorageService.CurrentFloor)
         {
-            if (hashCodeCache != MapCell.GetHashCode() 
-                || currentFloor != StorageService.CurrentFloor)
-            {
-                hashCodeCache = MapCell.GetHashCode();
-                currentFloor = StorageService.CurrentFloor;
-                ClearView();
-                InitDefaultBackground();
-                InitializeView();
-                InitClickEvents();
-            }
-        };
+            hashCodeCache = MapCell.GetHashCode();
+            currentFloor = StorageService.CurrentFloor;
+            ClearView();
+            InitDefaultBackground();
+            InitializeView();
+            InitClickEvents();
+        }
+    }
+
+    public void Dispose()
+    {
+        StorageService.OnWorldChanged -= WorldChangedEventHandler;
     }
     
     

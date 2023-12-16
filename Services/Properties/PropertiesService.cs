@@ -78,8 +78,8 @@ public class PropertiesService : AService
             ActionButtons.Add(
                 new ActionButtonData()
                 {
-                    Name = "Delete preview",
-                    ButtonName = "Delete",
+                    Name = "Remove preview",
+                    ButtonName = "Remove",
                     OnClick = () =>
                     {
                         PreviewService.TryToCancel();
