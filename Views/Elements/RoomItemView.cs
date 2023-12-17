@@ -16,6 +16,8 @@ public class RoomItemView
 {
     private static LocalStorageService StorageService
         => ServicesManager.Instance.GetService<LocalStorageService>();
+    private static PreviewService PreviewService
+        => ServicesManager.Instance.GetService<PreviewService>();
 
     private byte Alpha => Data.State == StoredPreviewState.Preview ? (byte)125 : (byte)255;
     private Color MainColor => Color.FromArgb(Alpha, Data.Color.R, Data.Color.G, Data.Color.B);
@@ -57,8 +59,8 @@ public class RoomItemView
         Image image = new Image()
         {
             Source = ImagesStorage.GetImage(Data.IconName, "Icons/RoomItems"),
-            Width = viewSize * 0.75,
-            Height = viewSize * 0.75,
+            Width = viewSize * 0.7,
+            Height = viewSize * 0.7,
             Opacity = Alpha / 255f,
             IsHitTestVisible = false
         };
@@ -79,6 +81,20 @@ public class RoomItemView
                 IsHitTestVisible = true
             };
             clickEllipse.Fill = new SolidColorBrush(Colors.Transparent);
+            clickEllipse.MouseEnter += (sender, args) =>
+            {
+                if (!PreviewService.IsPreviewing)
+                {
+                    content.Opacity = 0.75;
+                }
+            };
+            clickEllipse.MouseLeave += (sender, args) =>
+            {
+                if (!PreviewService.IsPreviewing)
+                {
+                    content.Opacity = 1;
+                }
+            };
             clickEllipse.MouseLeftButtonDown += (sender, args) => onClick?.Invoke(Data);
             content.Children.Add(clickEllipse);
         }

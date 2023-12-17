@@ -56,7 +56,6 @@ public class GraphicsCellView : IDisposable
         hashCodeCache = MapCell.GetHashCode();
         currentFloor = StorageService.CurrentFloor;
         ClearView();
-        InitDefaultBackground();
         InitializeView();
         InitClickEvents();
     }
@@ -77,7 +76,6 @@ public class GraphicsCellView : IDisposable
             hashCodeCache = MapCell.GetHashCode();
             currentFloor = StorageService.CurrentFloor;
             ClearView();
-            InitDefaultBackground();
             InitializeView();
             InitClickEvents();
         }
@@ -98,14 +96,14 @@ public class GraphicsCellView : IDisposable
         Content.Children.Add(rect);
         rect.MouseMove += MouseMove;
         rect.MouseLeftButtonDown += MouseLeftButtonDown;
+        rect.MouseEnter += MouseEnter;
+        rect.MouseLeave += MouseLeave;
     }
 
     private void MouseMove(object sender, MouseEventArgs e)
     {
-        if (PreviewService.IsPreviewing)
+        if (PreviewService.NeedToMoveRoomItem())
         {
-            PreviewService.TryToMoveRoomOrFacade(position);
-        
             Point mousePosition = e.GetPosition(Content);
             mousePosition = new Point(mousePosition.X / size, mousePosition.Y / size);
             PreviewService.TryToMoveRoomItem(position, mousePosition, room);
@@ -140,6 +138,39 @@ public class GraphicsCellView : IDisposable
         }
     }
     
+    private void MouseEnter(object sender, MouseEventArgs e)
+    {
+        if (PreviewService.NeedToMoveRoomOrFacade())
+        {
+            PreviewService.TryToMoveRoomOrFacade(position);
+        }
+        
+        if (!PreviewService.IsPreviewing)
+        {
+            if (room != null)
+            {
+                Content.Opacity = 0.9;
+            }
+            else if (facades.Any())
+            {
+                Content.Opacity = 0.5;
+            }
+            else
+            {
+                Content.Background = new SolidColorBrush(Color.FromArgb(10, 0, 0, 0));
+            }
+        }
+    }
+    
+    private void MouseLeave(object sender, MouseEventArgs e)
+    {
+        if (!PreviewService.IsPreviewing)
+        {
+            Content.Opacity = 1;
+            Content.Background = new SolidColorBrush(Colors.Transparent);
+        }
+    }
+    
     #endregion
 
     #region Initialiaze View
@@ -151,6 +182,10 @@ public class GraphicsCellView : IDisposable
         bool hasWalls = TryToInitializeWalls();
         bool hasDoors = TryToInitializeDoors();
         bool hasFacade = TryToInitializeFacade();
+        if (!hasRoom && !hasWalls && !hasDoors && !hasFacade)
+        {
+            InitDefaultBackground();
+        }
     }
 
     private bool TryToInitializeRoom()
@@ -186,6 +221,10 @@ public class GraphicsCellView : IDisposable
         {
             Room? room = World.GetRoomFromWall(wall);
             if (room == null) continue;
+            if (this.room == null)
+            {
+                this.room = room;
+            }
 
             foreach (MapIndex index in World.GetClosestNeightborPositionsToRoom(room, position, currentFloor))
             {
@@ -242,7 +281,7 @@ public class GraphicsCellView : IDisposable
         Content.Children.Add(new Border()
         {
             BorderBrush = new SolidColorBrush(MainColor),
-            BorderThickness = new Thickness(0.05)
+            BorderThickness = new Thickness(0.08)
         });
     }
 

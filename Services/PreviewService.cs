@@ -91,6 +91,14 @@ namespace MapEditor.Services
             PropertiesService.SetActiveItem(previewItem);
         }
 
+        public bool NeedToMoveRoomOrFacade()
+        {
+            if (!(previewItem != null && previewItemType != null && worldDTOPreview != null)) return false;
+            if (previewItemType is not (ItemType.Room or ItemType.Building)) return false;
+            if (notMovingState) return false;
+            return true;
+        }
+        
         public void TryToMoveRoomOrFacade(MapIndex position)
         {
             if (!(previewItem != null && previewItemType != null && worldDTOPreview != null)) return;
@@ -115,6 +123,14 @@ namespace MapEditor.Services
                     break;
             }
             StorageService.SetPreviewWorld(worldDTOPreview);
+        }
+        
+        public bool NeedToMoveRoomItem()
+        {
+            if (!(previewItem != null && previewItemType != null && worldDTOPreview != null)) return false;
+            if (previewItemType is not (ItemType.PhysicsItem or ItemType.Mob)) return false;
+            if (notMovingState) return false;
+            return true;
         }
         
         public void TryToMoveRoomItem(MapIndex position, Point mousePositionCellPercent, Room? room)

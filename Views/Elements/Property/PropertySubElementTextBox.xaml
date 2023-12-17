@@ -19,7 +19,7 @@
         <TextBlock Text="*" Foreground="Coral" FontSize="25" x:Name="DirtyFlagTextBlock" Margin="3,0,0,0"/>
 
         <TextBlock TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="NameTextBlock"
-            Text="Property with textbox" Margin="20,0,20,0" TextWrapping="Wrap"/>
+            Text="Property with textbox" Margin="20,0,20,0" TextWrapping="Wrap" MaxHeight="50"/>
 
         <TextBox Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" x:Name="ValueTextBox"
             VerticalContentAlignment="Center" Margin="20,0,20,0" Text="Text example" MinWidth="75" TextAlignment="Left"

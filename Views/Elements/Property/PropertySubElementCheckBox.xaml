@@ -18,7 +18,7 @@
         <TextBlock Text="*" Foreground="Coral" FontSize="25" x:Name="DirtyFlagCheckBox" Margin="3,0,0,0"/>
         
         <TextBlock TextAlignment="Left" VerticalAlignment="Center" x:Name="NameTextBlock"
-               Text="Property with checkbox" Margin="20,0,20,0" TextWrapping="Wrap"/>
+               Text="Property with checkbox" Margin="20,0,20,0" TextWrapping="Wrap" MaxHeight="50"/>
 
         <CheckBox Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" x:Name="ValueCheckBox"
             VerticalContentAlignment="Center" Content="No" Margin="20,0,20,0"
