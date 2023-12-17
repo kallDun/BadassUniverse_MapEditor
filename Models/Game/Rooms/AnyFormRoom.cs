@@ -27,12 +27,12 @@ namespace MapEditor.Models.Game.Rooms
                 map.RoomInit_FillSquareRoomSpace(Id, 
                     new MapIndex(0, 0), 
                     new MapIndex(squareRoom.Width + 1, squareRoom.Length + 1),
-                    Floor, State);
+                    Floor, State, Color);
             }
             
             foreach (var door in doorParameters)
             {
-                map.RoomInit_SetDoor(Id, door.Position, door.Id, door.FloorDisplacement, Floor, State);
+                map.RoomInit_SetDoor(Id, door.Position, door.Id, door.FloorDisplacement, Floor, State, Color);
             }
             map = map.RotateMap(rotation);
             return map;

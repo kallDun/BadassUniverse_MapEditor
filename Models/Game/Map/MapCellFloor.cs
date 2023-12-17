@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows.Media;
 
 namespace MapEditor.Models.Game
 {
@@ -10,29 +11,29 @@ namespace MapEditor.Models.Game
 
         public bool IsEmpty() => Items.Count == 0;
 
-        public bool AddRoom(int roomIndex)
+        public bool AddRoom(int roomIndex, Color color)
         {
             if (GetRoom() != null) return false;
-            Items.Add(new MapItemRoom(roomIndex));
+            Items.Add(new MapItemRoom(roomIndex, color));
             return true;
         }
 
-        public bool AddWall(int relatedRoomIndex)
+        public bool AddWall(int relatedRoomIndex, Color color)
         {
             if (GetRoom() != null) return false;
-            Items.Add(new MapItemWall(relatedRoomIndex));
+            Items.Add(new MapItemWall(relatedRoomIndex, color));
             return true;
         }
 
-        public bool AddBuilding(int buildingIndex)
+        public bool AddBuilding(int buildingIndex, Color color)
         {
-            Items.Add(new MapItemBuilding(buildingIndex));
+            Items.Add(new MapItemBuilding(buildingIndex, color));
             return true;
         }
 
-        public bool AddDoor(int doorIndex, int relatedRoomIndex, int roomFloorDisplacement = 0)
+        public bool AddDoor(int doorIndex, int relatedRoomIndex, Color color, int roomFloorDisplacement = 0)
         {
-            Items.Add(new MapItemDoor(doorIndex, relatedRoomIndex, roomFloorDisplacement));
+            Items.Add(new MapItemDoor(doorIndex, relatedRoomIndex, roomFloorDisplacement, color));
             return true;
         }
 

@@ -1,12 +1,14 @@
-﻿namespace MapEditor.Models.Game
+﻿using System.Windows.Media;
+
+namespace MapEditor.Models.Game
 {
     public class MapItemDoor : MapItem
     {
-        public int DoorIndex { get; set; }
-        public int RelatedRoomIndex { get; set; }
-        public int RoomFloorDisplacement { get; set; }
+        public int DoorIndex { get; }
+        public int RelatedRoomIndex { get; }
+        public int RoomFloorDisplacement { get; }
         
-        public MapItemDoor(int doorIndex, int relatedRoomIndex, int roomFloorDisplacement)
+        public MapItemDoor(int doorIndex, int relatedRoomIndex, int roomFloorDisplacement, Color color) : base(color)
         {
             DoorIndex = doorIndex;
             RelatedRoomIndex = relatedRoomIndex;
@@ -15,7 +17,7 @@
 
         public override object Clone()
         {
-            return new MapItemDoor(DoorIndex, RelatedRoomIndex, RoomFloorDisplacement);
+            return new MapItemDoor(DoorIndex, RelatedRoomIndex, RoomFloorDisplacement, Color);
         }
         
         public override int GetHashCode()
@@ -23,7 +25,8 @@
             return 17 
                 + DoorIndex.GetHashCode() * 61
                 + RelatedRoomIndex.GetHashCode() * 31
-                + RoomFloorDisplacement.GetHashCode() * 17;
+                + RoomFloorDisplacement.GetHashCode() * 17
+                + Color.GetHashCode() * 13;
         }
     }
 }

@@ -41,6 +41,8 @@
     <Resource Include="Assets\Icons\RoomItems\mob_1.png" />
     <Resource Include="Assets\Icons\RoomItems\mob_2.png" />
     <Resource Include="Assets\Icons\RoomItems\mob_3.png" />
+    <None Remove="Assets\Icons\Arrow.png" />
+    <Resource Include="Assets\Icons\Arrow.png" />
   </ItemGroup>
 
   <ItemGroup>

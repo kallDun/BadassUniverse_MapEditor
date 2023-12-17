@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Media;
 
 namespace MapEditor.Models.Game
 {
@@ -122,7 +123,7 @@ namespace MapEditor.Models.Game
         }
 
         public void RoomInit_FillSquareRoomSpace(int RoomIndex, MapIndex TopLeftCornerWithWalls,
-            MapIndex BottomRightCornerWithWalls, int Floor, StoredPreviewState State)
+            MapIndex BottomRightCornerWithWalls, int Floor, StoredPreviewState State, Color Color)
         {
             for (int i = TopLeftCornerWithWalls.Y; i <= BottomRightCornerWithWalls.Y; i++)
             {
@@ -133,12 +134,12 @@ namespace MapEditor.Models.Game
                     if (i == TopLeftCornerWithWalls.Y || i == BottomRightCornerWithWalls.Y
                         || j == TopLeftCornerWithWalls.X || j == BottomRightCornerWithWalls.X)
                     {
-                        Cell.AddWall(RoomIndex, Floor);
+                        Cell.AddWall(RoomIndex, Floor, Color);
                         Cell.SetState(State, Floor);
                     }
                     else
                     {
-                        Cell.AddRoom(RoomIndex, Floor);
+                        Cell.AddRoom(RoomIndex, Floor, Color);
                         Cell.SetState(State, Floor);
                     }
 
@@ -148,23 +149,23 @@ namespace MapEditor.Models.Game
         }
 
         public void RoomInit_SetDoor(int RoomIndex, MapIndex Index, int DoorIndex,
-            int FloorDisplacement, int Floor, StoredPreviewState State)
+            int FloorDisplacement, int Floor, StoredPreviewState State, Color Color)
         {
             var Cell = GetValue(Index);
-            Cell.AddDoor(DoorIndex, RoomIndex, FloorDisplacement, Floor);
+            Cell.AddDoor(DoorIndex, RoomIndex, Color, FloorDisplacement, Floor);
             Cell.SetState(State, Floor);
             SetValue(Index, Cell);
         }
 
         public void BuildingInit_FillSquareBuildingSpace(int BuildingIndex, MapIndex TopLeftCorner, 
-            MapIndex BottomRightCorner, int Floor, StoredPreviewState State)
+            MapIndex BottomRightCorner, int Floor, StoredPreviewState State, Color Color)
         {
             for (int i = TopLeftCorner.Y; i <= BottomRightCorner.Y; i++)
             {
                 for (int j = TopLeftCorner.X; j <= BottomRightCorner.X; j++)
                 {
                     var Cell = MapCell.InitEmpty();
-                    Cell.AddBuilding(BuildingIndex, Floor);
+                    Cell.AddBuilding(BuildingIndex, Floor, Color);
                     Cell.SetState(State, Floor);
                     SetValue(new MapIndex(i, j), Cell);
                 }

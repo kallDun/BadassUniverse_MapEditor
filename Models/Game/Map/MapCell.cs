@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows.Media;
 
 namespace MapEditor.Models.Game
 {
@@ -18,21 +19,21 @@ namespace MapEditor.Models.Game
             }
             return true;
         }
-        public bool AddRoom(int roomIndex, int floorIndex)
+        public bool AddRoom(int roomIndex, int floorIndex, Color color)
         {
-            return GetFloor(floorIndex).AddRoom(roomIndex);
+            return GetFloor(floorIndex).AddRoom(roomIndex, color);
         }
-        public bool AddWall(int relatedRoomIndex, int floorIndex)
+        public bool AddWall(int relatedRoomIndex, int floorIndex, Color color)
         {
-            return GetFloor(floorIndex).AddWall(relatedRoomIndex);
+            return GetFloor(floorIndex).AddWall(relatedRoomIndex, color);
         }
-        public bool AddDoor(int doorIndex, int relatedRoomIndex, int roomFloorDisplacement = 0, int floorIndex = 0)
+        public bool AddDoor(int doorIndex, int relatedRoomIndex, Color color, int roomFloorDisplacement = 0, int floorIndex = 0)
         {
-            return GetFloor(floorIndex).AddDoor(doorIndex, relatedRoomIndex, roomFloorDisplacement);
+            return GetFloor(floorIndex).AddDoor(doorIndex, relatedRoomIndex, color, roomFloorDisplacement);
         }
-        public bool AddBuilding(int buildingIndex, int floorIndex)
+        public bool AddBuilding(int buildingIndex, int floorIndex, Color color)
         {
-            return GetFloor(floorIndex).AddBuilding(buildingIndex);
+            return GetFloor(floorIndex).AddBuilding(buildingIndex, color);
         }
 
         public MapItemRoom? GetRoom(int floorIndex)
@@ -72,7 +73,7 @@ namespace MapEditor.Models.Game
             var Room = InnerCellFloor.GetRoom();
             if (Room is not null)
 		    {
-                bool bAddResult = Floor.AddRoom(Room.Index);
+                bool bAddResult = Floor.AddRoom(Room.Index, Room.Color);
                 if (!bAddResult) return false;
             }
 
@@ -81,7 +82,7 @@ namespace MapEditor.Models.Game
 		    {
                 foreach (var Wall in Walls)
 			    {
-                    bool bAddResult = Floor.AddWall(Wall.RelatedRoomIndex);
+                    bool bAddResult = Floor.AddWall(Wall.RelatedRoomIndex, Wall.Color);
                     if (!bAddResult) return false;
                 }
             }
@@ -91,7 +92,7 @@ namespace MapEditor.Models.Game
             {   
                 foreach (var Door in Doors)
 			    {
-                    bool bAddResult = Floor.AddDoor(Door.DoorIndex, Door.RelatedRoomIndex, Door.RoomFloorDisplacement);
+                    bool bAddResult = Floor.AddDoor(Door.DoorIndex, Door.RelatedRoomIndex, Door.Color, Door.RoomFloorDisplacement);
                     if (!bAddResult) return false;
                 }
             }
@@ -101,7 +102,7 @@ namespace MapEditor.Models.Game
 		    {
                 foreach (var Building in Buildings)
 			    {
-                    bool bAddResult = Floor.AddBuilding(Building.Index);
+                    bool bAddResult = Floor.AddBuilding(Building.Index, Building.Color);
                     if (!bAddResult) return false;
                 }
             }

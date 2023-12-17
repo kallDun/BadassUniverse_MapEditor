@@ -26,7 +26,7 @@ namespace MapEditor.Models.Game.Rooms
             map.RoomInit_FillSquareRoomSpace(Id, 
                 new MapIndex(0, 0), 
                 new MapIndex(parameters.Width + 1, parameters.Length + 1),
-                Floor, State);
+                Floor, State, Color);
             foreach (var door in doorParameters)
             {
                 GenerateDoor(door, map);
@@ -60,7 +60,7 @@ namespace MapEditor.Models.Game.Rooms
                     MapDirection.Right => new MapIndex(i + 1, parameters.Length + 1),
                     _ => throw new ArgumentOutOfRangeException(nameof(doorParams.Direction)),
                 };
-                map.GetValue(MapIndex).AddDoor(nextDoorIndex, Id, 0, Floor);
+                map.GetValue(MapIndex).AddDoor(nextDoorIndex, Id, Color, 0, Floor);
                 nextDoorIndex++;
             }
         }

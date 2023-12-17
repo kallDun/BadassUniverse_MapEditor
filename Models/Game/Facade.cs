@@ -24,7 +24,7 @@ public class Facade : AWorldElementWithMap
             map.BuildingInit_FillSquareBuildingSpace(Id, 
                 new MapIndex(0, 0), 
                 new MapIndex(squareRoom.Width + 1, squareRoom.Length + 1),
-                Floor, State);
+                Floor, State, Color);
         }
         map = map.RotateMap(rotation);
         return map;

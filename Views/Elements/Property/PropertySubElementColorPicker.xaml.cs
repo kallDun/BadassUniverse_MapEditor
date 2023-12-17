@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Linq;
+using System.Collections.ObjectModel;
 using System.Windows.Controls;
 using System.Windows.Media;
 using MapEditor.Models.Server;
@@ -19,6 +19,15 @@ namespace MapEditor.Views.Elements
             NameTextBlock.Text = propertyData.VisualizedName;
             ValueColorPicker.IsEnabled = !propertyData.IsReadOnly;
             ValueColorPicker.SelectedColor = value;
+
+            ValueColorPicker.StandardColors = new ObservableCollection<ColorItem>()
+            {
+                new(Colors.Red, "Giga Red"),
+                new(Colors.Orange, "Giga Orange"),
+                new(Colors.Yellow, "Giga Yellow"),
+                new(Colors.Green, "Giga Green"),
+                new(Colors.Blue, "Giga Blue"),
+            };
 
             DirtyFlagColorPicker.Visibility = propertyData.DirtyFlag ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
             propertyData.OnDirtyFlagChanged += () =>
