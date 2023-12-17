@@ -12,12 +12,20 @@
     <None Remove="Assets\Icons\Item.png" />
     <None Remove="Assets\Icons\Mob.png" />
     <None Remove="Assets\Icons\Room.png" />
+    <None Remove="Assets\Icons\RoomItems\item_1.png" />
+    <None Remove="Assets\Icons\RoomItems\item_2.png" />
+    <None Remove="Assets\Icons\RoomItems\item_3.png" />
+    <None Remove="Assets\Icons\RoomItems\mob_1.png" />
+    <None Remove="Assets\Icons\RoomItems\mob_2.png" />
+    <None Remove="Assets\Icons\RoomItems\mob_3.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.5.1" />
     <PackageReference Include="MaterialDesignColors" Version="2.1.4" />
     <PackageReference Include="MaterialDesignThemes" Version="4.9.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="PixiEditor.ColorPicker" Version="3.4.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,9 +33,14 @@
     <Resource Include="Assets\Icons\Item.png" />
     <Resource Include="Assets\Icons\Mob.png" />
     <Resource Include="Assets\Icons\RoomItems\item_0.png" />
+    <Resource Include="Assets\Icons\RoomItems\item_1.png" />
+    <Resource Include="Assets\Icons\RoomItems\item_2.png" />
+    <Resource Include="Assets\Icons\RoomItems\item_3.png" />
     <Resource Include="Assets\Icons\RoomItems\mob_0.png" />
     <Resource Include="Assets\Icons\Room.png" />
-    <None Remove="Assets\Icons\arrow.png" />
+    <Resource Include="Assets\Icons\RoomItems\mob_1.png" />
+    <Resource Include="Assets\Icons\RoomItems\mob_2.png" />
+    <Resource Include="Assets\Icons\RoomItems\mob_3.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,10 +49,6 @@
       <XamlRuntime>Wpf</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="Assets\Icons\Arrow.png" />
   </ItemGroup>
 
 </Project>

@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Media;
 using MapEditor.Models.Server;
 using MapEditor.Services.Properties.Data;
+using Xceed.Wpf.Toolkit;
 
 namespace MapEditor.Views.Elements
 {
@@ -13,10 +15,10 @@ namespace MapEditor.Views.Elements
             InitializeComponent();
             if (propertyData.Value is not (Color or ColorDTO)) throw new ArgumentException("PropertyData.Value is not Color");
             var value = propertyData.Value is Color color ? color : (Color)(propertyData.Value is ColorDTO dto ? dto : default);
-            
+                
             NameTextBlock.Text = propertyData.VisualizedName;
             ValueColorPicker.IsEnabled = !propertyData.IsReadOnly;
-            ValueColorPicker.Color = value;
+            ValueColorPicker.SelectedColor = value;
 
             DirtyFlagColorPicker.Visibility = propertyData.DirtyFlag ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
             propertyData.OnDirtyFlagChanged += () =>
@@ -29,19 +31,26 @@ namespace MapEditor.Views.Elements
             {
                 MainGrid.Visibility = propertyData.IsVisible ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
             };
-            
+
             propertyData.OnValueChangedFromWorld += () =>
             {
                 var color = propertyData.Value is Color clr ? clr : (Color)(propertyData.Value is ColorDTO dto ? dto : default);
-                if (ValueColorPicker.Color == color) return;
-                ValueColorPicker.Color = color;
+                if (ValueColorPicker.SelectedColor == color) return;
+                ValueColorPicker.SelectedColor = color;
             };
-            
-            ValueColorPicker.ColorChanged += (sender, args) =>
+
+            ValueColorPicker.SelectedColorChanged += (sender, args) =>
             {
                 var color = propertyData.Value is Color clr ? clr : (Color)(propertyData.Value is ColorDTO dto ? dto : default);
-                if (ValueColorPicker.Color == color) return;
-                propertyData.SetValue(ValueColorPicker.Color);
+                if (ValueColorPicker.SelectedColor == color) return;
+                if (propertyData.Value is ColorDTO)
+                {
+                    var colorDto = new ColorDTO();
+                    colorDto.Red = ValueColorPicker.SelectedColor.Value.R;
+                    colorDto.Green = ValueColorPicker.SelectedColor.Value.G;
+                    colorDto.Blue = ValueColorPicker.SelectedColor.Value.B;
+                    propertyData.SetValue(colorDto);
+                }
             };
         }
     }
