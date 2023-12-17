@@ -12,6 +12,12 @@
     <None Remove="Assets\Icons\Item.png" />
     <None Remove="Assets\Icons\Mob.png" />
     <None Remove="Assets\Icons\Room.png" />
+    <None Remove="Assets\Icons\RoomItems\item_1.png" />
+    <None Remove="Assets\Icons\RoomItems\item_2.png" />
+    <None Remove="Assets\Icons\RoomItems\item_3.png" />
+    <None Remove="Assets\Icons\RoomItems\mob_1.png" />
+    <None Remove="Assets\Icons\RoomItems\mob_2.png" />
+    <None Remove="Assets\Icons\RoomItems\mob_3.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,8 +33,14 @@
     <Resource Include="Assets\Icons\Item.png" />
     <Resource Include="Assets\Icons\Mob.png" />
     <Resource Include="Assets\Icons\RoomItems\item_0.png" />
+    <Resource Include="Assets\Icons\RoomItems\item_1.png" />
+    <Resource Include="Assets\Icons\RoomItems\item_2.png" />
+    <Resource Include="Assets\Icons\RoomItems\item_3.png" />
     <Resource Include="Assets\Icons\RoomItems\mob_0.png" />
     <Resource Include="Assets\Icons\Room.png" />
+    <Resource Include="Assets\Icons\RoomItems\mob_1.png" />
+    <Resource Include="Assets\Icons\RoomItems\mob_2.png" />
+    <Resource Include="Assets\Icons\RoomItems\mob_3.png" />
   </ItemGroup>
 
   <ItemGroup>
