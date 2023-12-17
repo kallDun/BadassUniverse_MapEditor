@@ -1,87 +1,87 @@
 ﻿<Window x:Class="MapEditor.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-        TextElement.FontWeight="Regular"
-        TextElement.FontSize="20"
-        TextOptions.TextFormattingMode="Ideal"
-        TextOptions.TextRenderingMode="Auto"
-        Background="{DynamicResource MaterialDesignPaper}"
-        FontFamily="{DynamicResource MaterialDesignFont}"
-        mc:Ignorable="d"
-        Title="Badass Universe Map Editor" Height="600" Width="1040" MinHeight="600" MinWidth="800">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition MinWidth="420" Width="8*"/>
-            <ColumnDefinition MinWidth="380"/>
-            <ColumnDefinition MinWidth="240"/>
-        </Grid.ColumnDefinitions>
-
-        <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-
-        <StackPanel Grid.Row="0" VerticalAlignment="Center">
-            <Menu Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" 
-                  Margin="10,5,0,0" FontSize="20">
-                <MenuItem Header="File" Height="25">
-                    <MenuItem Header="New"/>
-                    <MenuItem Header="Open"/>
-                    <MenuItem Header="Save" Click="MenuItem_OnClick"/>
-                    <MenuItem Header="Save As"/>
-                    <Separator/>
-                    <MenuItem Header="Exit"/>
-                </MenuItem>
-                <MenuItem Header="Server" Height="25">
-                    <MenuItem Header="User">
-                        <TextBox Text="Name"/>
-                        <TextBox Text="Password"/>
-                        <MenuItem Header="Log in"/>
-                        <MenuItem Header="Log out"/>
-                    </MenuItem>
-                    <MenuItem Header="Save"/>
-                    <MenuItem Header="Load"/>
-                </MenuItem>
-                <MenuItem Header="Help" Height="25">
-                    <MenuItem Header="Sorry, not done yet"/>
-                </MenuItem>
-            </Menu>
-        </StackPanel>
-
-        <materialDesign:Card Margin="10,10,0,10" Grid.Column="0" Grid.Row="1">
-            <Frame Source="Views/GraphicsView.xaml"/>
-        </materialDesign:Card>
-
-        <Grid Grid.Column="1" Grid.Row="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" MinHeight="100"/>
-                <RowDefinition Height="*" MinHeight="100"/>
-            </Grid.RowDefinitions>
-
-            <materialDesign:Card Margin="10,10,10,5" Grid.Row="0">
-                <Frame Source="Views/ItemsView.xaml"/>
-            </materialDesign:Card>
-            <materialDesign:Card Margin="10,5,10,10" Grid.Row="1">
-                <Frame Source="Views/PropertiesView.xaml"/>
-            </materialDesign:Card>
-
-            <GridSplitter Grid.Row="0" Height="4" Width="150" VerticalAlignment="Bottom" HorizontalAlignment="Center"
-                          Style="{DynamicResource MaterialDesignScrollBarThumbVertical}"
-                          ResizeDirection="Rows" Focusable="False">
-                <GridSplitter.Template>
-                    <ControlTemplate TargetType="{x:Type GridSplitter}">
-                        <Grid>
-                            <Rectangle Fill="{DynamicResource AttentionToActionBrush}" />
-                        </Grid>
-                    </ControlTemplate>
-                </GridSplitter.Template>
-            </GridSplitter>
-        </Grid>
+                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+                xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+                TextElement.FontWeight="Regular"
+                TextElement.FontSize="20"
+                TextOptions.TextFormattingMode="Ideal"
+                TextOptions.TextRenderingMode="Auto"
+                Background="{DynamicResource MaterialDesignPaper}"
+                FontFamily="{DynamicResource MaterialDesignFont}"
+                mc:Ignorable="d"
+                Title="Badass Universe Map Editor" Height="600" Width="1040" MinHeight="600" MinWidth="800">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition MinWidth="420" Width="8*"/>
+                    <ColumnDefinition MinWidth="380"/>
+                    <ColumnDefinition MinWidth="240"/>
+                </Grid.ColumnDefinitions>
         
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+        
+                <StackPanel Grid.Row="0" VerticalAlignment="Center">
+                    <Menu Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" 
+                          Margin="10,5,0,0" FontSize="20">
+                        <MenuItem Header="File" Height="25">
+                            <MenuItem Header="New"/>
+                            <MenuItem Header="Open"/>
+                            <MenuItem Header="Save" Click="MenuItem_OnClick"/>
+                            <MenuItem Header="Save As"/>
+                            <Separator/>
+                            <MenuItem Header="Exit"/>
+                        </MenuItem>
+                        <MenuItem Header="Server" Height="25">
+                            <MenuItem Header="User">
+                                <TextBox Text="Name"/>
+                                <TextBox Text="Password"/>
+                                <MenuItem Header="Log in"/>
+                                <MenuItem Header="Log out"/>
+                            </MenuItem>
+                            <MenuItem Header="Save"/>
+                            <MenuItem Header="Load"/>
+                        </MenuItem>
+                        <MenuItem Header="Help" Height="25">
+                            <MenuItem Header="Sorry, not done yet"/>
+                        </MenuItem>
+                    </Menu>
+                </StackPanel>
+        
+                <materialDesign:Card Margin="10,10,0,10" Grid.Column="0" Grid.Row="1">
+                    <Frame Source="Views/GraphicsView.xaml"/>
+                </materialDesign:Card>
+        
+                <Grid Grid.Column="1" Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" MinHeight="100"/>
+                        <RowDefinition Height="*" MinHeight="100"/>
+                    </Grid.RowDefinitions>
+        
+                    <materialDesign:Card Margin="10,10,10,5" Grid.Row="0">
+                        <Frame Source="Views/ItemsView.xaml"/>
+                    </materialDesign:Card>
+                    <materialDesign:Card Margin="10,5,10,10" Grid.Row="1">
+                        <Frame Source="Views/PropertiesView.xaml"/>
+                    </materialDesign:Card>
+        
+                    <GridSplitter Grid.Row="0" Height="4" Width="150" VerticalAlignment="Bottom" HorizontalAlignment="Center"
+                                  Style="{DynamicResource MaterialDesignScrollBarThumbVertical}"
+                                  ResizeDirection="Rows" Focusable="False">
+                        <GridSplitter.Template>
+                            <ControlTemplate TargetType="{x:Type GridSplitter}">
+                                <Grid>
+                                    <Rectangle Fill="{DynamicResource AttentionToActionBrush}" />
+                                </Grid>
+                            </ControlTemplate>
+                        </GridSplitter.Template>
+                    </GridSplitter>
+                </Grid>
+                
         <materialDesign:Card Grid.Column="2" Grid.Row="1" Margin="0,10,10,10">
             <Frame Source="Views/StoredItemsView.xaml"/>
         </materialDesign:Card>

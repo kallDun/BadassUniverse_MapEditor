@@ -4,8 +4,6 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Shapes;
 using MapEditor.Extensions.Graphics;
 using MapEditor.Models.Game;
 using MapEditor.Models.Game.Data;
@@ -33,7 +31,7 @@ namespace MapEditor.Views
         private MapIndex worldSize = new();
         private Grid? itemsContent;
         private List<RoomItemView> itemViews = new();
-        private Action<RoomItemData> onClickRoomItem;
+        private Action<RoomItemData>? onClickRoomItem;
 
         public GraphicsView()
         {
@@ -56,8 +54,10 @@ namespace MapEditor.Views
                 }
                 DrawItems();
             };
+            StorageService.OnCurrentFloorChanged += DrawItems;
             
             SubscribeOnClickRoomItem();
+            ChangeFloorUIInit();
         }
 
         private void ClearGrid()
@@ -128,12 +128,15 @@ namespace MapEditor.Views
         private void DrawItems()
         {
             if (itemsContent == null) return;
-            var itemsData = StorageService.World.GetAllRoomItems().Select(RoomItemData.FromARoomItem);
+            var itemsData = StorageService.World.GetAllRoomItems()
+                .Select(RoomItemData.FromARoomItem)
+                .Where(x => x.Floor == StorageService.CurrentFloor);
             
             List<RoomItemView> newItemViews = itemsData
                 .Select(data => itemViews
                                     .FirstOrDefault(x => x.Data.Equals(data)) 
-                                ?? new RoomItemView(data, itemsContent, cellSize, onClickRoomItem)).ToList();
+                                ?? new RoomItemView(data, itemsContent, cellSize, onClickRoomItem))
+                .ToList();
 
             foreach (var oldView in itemViews
                          .Where(oldView => newItemViews
@@ -176,6 +179,25 @@ namespace MapEditor.Views
                 }
                 
                 PropertiesService.SetActiveItem(selectedItem);
+            };
+        }
+        
+        private void ChangeFloorUIInit()
+        {
+            FloorUpButton.Click += (sender, args) =>
+            {
+                int floor = StorageService.CurrentFloor;
+                StorageService.SetCurrentFloor(floor + 1);
+            };
+            FloorDownButton.Click += (sender, args) =>
+            {
+                int floor = StorageService.CurrentFloor;
+                StorageService.SetCurrentFloor(floor - 1);
+            };
+            StorageService.OnCurrentFloorChanged += () =>
+            {
+                int floor = StorageService.CurrentFloor;
+                FloorNumberTextBlock.Text = floor.ToString();
             };
         }
     }

@@ -19,6 +19,7 @@ namespace MapEditor.Services
 
         public Action? OnWorldChanged { get; set; }
         public Action? OnMapperContextChanged { get; set; }
+        public Action? OnCurrentFloorChanged { get; set; }
 
         public World World => world ?? throw new Exception("World is null.");
         public WorldDTO WorldDTO => worldDTO ?? throw new Exception("WorldDTO is null.");
@@ -113,6 +114,13 @@ namespace MapEditor.Services
                 items.Add((facade, ItemType.Building));
             }
             return items;
+        }
+        
+        public void SetCurrentFloor(int floor)
+        {
+            if (world is null) throw new Exception("World is null.");
+            CurrentFloor = floor;
+            OnCurrentFloorChanged?.Invoke();
         }
     }
 }

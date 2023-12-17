@@ -50,6 +50,7 @@ public class GraphicsCellView : IDisposable
         
         // init events
         StorageService.OnWorldChanged += WorldChangedEventHandler;
+        StorageService.OnCurrentFloorChanged += WorldChangedEventHandler;
 
         // init view
         hashCodeCache = MapCell.GetHashCode();
@@ -60,6 +61,12 @@ public class GraphicsCellView : IDisposable
         InitClickEvents();
     }
 
+    public void Dispose()
+    {
+        StorageService.OnWorldChanged -= WorldChangedEventHandler;
+        StorageService.OnCurrentFloorChanged -= WorldChangedEventHandler;
+    }
+    
     private void WorldChangedEventHandler()
     {
         if (position.Y >= World.Size.Y || position.X >= World.Size.X) return;
@@ -75,12 +82,6 @@ public class GraphicsCellView : IDisposable
             InitClickEvents();
         }
     }
-
-    public void Dispose()
-    {
-        StorageService.OnWorldChanged -= WorldChangedEventHandler;
-    }
-    
     
     #region Click Events
     

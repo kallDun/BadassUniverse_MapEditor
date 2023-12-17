@@ -22,5 +22,22 @@
                 </Grid.LayoutTransform>
             </Grid>
         </ScrollViewer>
+        
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="15">
+            <Button Padding="3" Width="35" Height="35" Style="{DynamicResource MaterialDesignFlatButton}" 
+                    x:Name="FloorUpButton">
+                <Image Source="../Assets/Icons/Arrow.png">
+                    <Image.LayoutTransform> <RotateTransform Angle="-90"/> </Image.LayoutTransform>
+                </Image>
+            </Button>
+            <TextBlock Text="0" FontSize="30" Margin="10 0" FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center"
+                       x:Name="FloorNumberTextBlock"/>
+            <Button Padding="3" Width="35" Height="35" Style="{DynamicResource MaterialDesignFlatButton}"
+                    x:Name="FloorDownButton">
+                <Image Source="../Assets/Icons/Arrow.png">
+                    <Image.LayoutTransform> <RotateTransform Angle="90"/> </Image.LayoutTransform>
+                </Image>
+            </Button>
+        </StackPanel>
     </Grid>
 </UserControl>

@@ -19,10 +19,11 @@ public readonly struct RoomItemData : IEquatable<RoomItemData>
     public StoredPreviewState State { get; }
     public RoomItemDataType Type { get; }
     public int RoomId { get; }
+    public int Floor { get; }
     public int RoomHashCode { get; }
     
     public RoomItemData(int id, string name, MapIndex leftTopCorner, Color color, string iconName, 
-        StoredPreviewState state, RoomItemDataType type, int roomId, int roomHashCode)
+        StoredPreviewState state, RoomItemDataType type, int roomId, int floor, int roomHashCode)
     {
         Id = id;
         Name = name;
@@ -32,6 +33,7 @@ public readonly struct RoomItemData : IEquatable<RoomItemData>
         State = state;
         Type = type;
         RoomId = roomId;
+        Floor = floor;
         RoomHashCode = roomHashCode;
     }
     
@@ -39,14 +41,15 @@ public readonly struct RoomItemData : IEquatable<RoomItemData>
     {
         RoomItemDataType type = roomItem is PhysicsItem ? RoomItemDataType.PhysicsItem : RoomItemDataType.Mob;
         return new RoomItemData(roomItem.Id, roomItem.Name, roomItem.LeftTopCorner, 
-            roomItem.Color, roomItem.IconName, roomItem.State, type, roomItem.RoomOwner.Id, roomItem.GetHashCode());
+            roomItem.Color, roomItem.IconName, roomItem.State, type, 
+            roomItem.RoomOwner.Id, roomItem.RoomOwner.Floor, roomItem.GetHashCode());
     }
     
     public bool Equals(RoomItemData other)
     {
         return Id == other.Id && Name == other.Name && LeftTopCorner.Equals(other.LeftTopCorner) 
                && Color.Equals(other.Color) && IconName.Equals(other.IconName) && State.Equals(other.State)
-               && Type == other.Type && RoomId == other.RoomId && RoomHashCode == other.RoomHashCode;
+               && Type == other.Type && RoomId == other.RoomId && Floor == other.Floor && RoomHashCode == other.RoomHashCode;
     }
 
     public override bool Equals(object? obj)
@@ -56,7 +59,7 @@ public readonly struct RoomItemData : IEquatable<RoomItemData>
 
     public override int GetHashCode()
     {
-        return HashCode.Combine(Id, Name, LeftTopCorner, Color, IconName, (int)State + Type, RoomId, RoomHashCode);
+        return HashCode.Combine(Id, Name, LeftTopCorner, Color, IconName, (int)State + Type, RoomId + Floor, RoomHashCode);
     }
 
     public static bool operator ==(RoomItemData left, RoomItemData right)

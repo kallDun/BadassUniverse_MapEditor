@@ -27,6 +27,7 @@
     <Resource Include="Assets\Icons\RoomItems\item_0.png" />
     <Resource Include="Assets\Icons\RoomItems\mob_0.png" />
     <Resource Include="Assets\Icons\Room.png" />
+    <None Remove="Assets\Icons\arrow.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -35,6 +36,10 @@
       <XamlRuntime>Wpf</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\Icons\Arrow.png" />
   </ItemGroup>
 
 </Project>

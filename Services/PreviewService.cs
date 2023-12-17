@@ -22,7 +22,29 @@ namespace MapEditor.Services
         private WorldDTO? worldDTOPreview;
         
         public bool IsPreviewing => previewItem != null && previewItemType != null && worldDTOPreview != null;
-        
+
+        public override void Initialize()
+        {
+            base.Initialize();
+            StorageService.OnCurrentFloorChanged += () =>
+            {
+                if (!IsPreviewing) return;
+                if (previewItemType is not (ItemType.Room or ItemType.Building)) return;
+                switch (previewItemType)
+                {
+                    case ItemType.Room:
+                        var room = previewItem as RoomDTO ?? throw new ArgumentException("Cannot cast item to RoomDTO.");
+                        room.Floor = StorageService.CurrentFloor;
+                        break;
+                    case ItemType.Building:
+                        var facade = previewItem as FacadeDTO ?? throw new ArgumentException("Cannot cast item to FacadeDTO.");
+                        facade.Floor = StorageService.CurrentFloor;
+                        break;
+                }
+                StorageService.SetPreviewWorld(worldDTOPreview);
+            };
+        }
+
         public void SetPreviewItem(AItemDTO item, ItemType type)
         {
             if (IsPreviewing)
