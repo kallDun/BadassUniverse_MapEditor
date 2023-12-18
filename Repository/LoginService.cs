@@ -9,6 +9,11 @@ namespace MapEditor.Repository;
 
 public class LoginService : ILoginService
 {
+    private class Token
+    {
+        public string token { get; set; }
+    }
+    
     private readonly ApiConnectorService apiConnectorService;
 
     public LoginService(ApiConnectorService apiConnectorService)
@@ -27,9 +32,12 @@ public class LoginService : ILoginService
         {
             throw new Exception("Error while logging in");
         }
-
-        var token = await httpResponse.Content.ReadAsStringAsync();
-        return token;
+        var tokenData = JsonConvert.DeserializeObject<Token>(await httpResponse.Content.ReadAsStringAsync());
+        if (tokenData == null)
+        {
+            throw new Exception("Error while logging in");
+        }
+        return tokenData.token;
     }
     
     public async Task<bool> CheckConnection()
