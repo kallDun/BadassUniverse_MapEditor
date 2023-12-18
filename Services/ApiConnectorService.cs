@@ -11,6 +11,8 @@ public class ApiConnectorService : AService
 {
     private static LocalStorageService StorageService
         => ServicesManager.Instance.GetService<LocalStorageService>();
+    private static PreviewService PreviewService
+        => ServicesManager.Instance.GetService<PreviewService>();
     
     private ILoginService loginService;
     private IRepository<WorldDTO> worldRepository;
@@ -39,16 +41,24 @@ public class ApiConnectorService : AService
     public Task<bool> CheckBaseUrl() => loginService.CheckConnection();
     public void SetBaseUrl(string baseUrl) => BaseUrl = baseUrl;
     public Task<IEnumerable<WorldDTO>> GetWorlds() => worldRepository.GetAll();
-    public Task TryToAddCurrentWorld()
+    public async Task TryToAddCurrentWorld()
     {
-        var world = StorageService.WorldDTO;
-        return worldRepository.Add(world);
+        try
+        {
+            var world = StorageService.WorldDTO;
+            await worldRepository.Add(world);
+        }
+        catch (Exception)
+        {
+            // ignored
+        }
     }
     public async Task<bool> TryToLoadWorld(int id)
     {
         var world = await worldRepository.Get(id);
         try
         {
+            PreviewService.TryToCancel();
             StorageService.SetWorld(world);
             return true;
         }

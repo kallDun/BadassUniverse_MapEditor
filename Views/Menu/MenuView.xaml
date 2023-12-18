@@ -35,13 +35,13 @@
             <MenuItem Header="Login">
                 <MenuItem Margin="0 5">
                     <MenuItem.Header>
-                        <TextBox Width="100" materialDesign:HintAssist.Hint="Username"
+                        <TextBox Width="100" materialDesign:HintAssist.Hint="Username" Text="user"
                                  x:Name="UsernameLoginTextBox"/>
                     </MenuItem.Header>
                 </MenuItem>
                 <MenuItem Margin="0 5">
                     <MenuItem.Header>
-                        <PasswordBox Width="100" materialDesign:HintAssist.Hint="Password"
+                        <PasswordBox Width="100" materialDesign:HintAssist.Hint="Password" Password="user"
                                      x:Name="PasswordLoginPasswordBox"/>
                     </MenuItem.Header>
                 </MenuItem>
