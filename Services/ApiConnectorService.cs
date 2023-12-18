@@ -40,7 +40,19 @@ public class ApiConnectorService : AService
     }
     public Task<bool> CheckBaseUrl() => loginService.CheckConnection();
     public void SetBaseUrl(string baseUrl) => BaseUrl = baseUrl;
-    public Task<IEnumerable<WorldDTO>> GetWorlds() => worldRepository.GetAll();
+
+    public async Task<IEnumerable<WorldDTO>> GetWorlds()
+    {
+        try
+        {
+            var worlds = await worldRepository.GetAll();
+            return worlds;
+        }
+        catch (Exception e)
+        {
+            return new List<WorldDTO>();
+        }
+    }
     public async Task TryToAddCurrentWorld()
     {
         try

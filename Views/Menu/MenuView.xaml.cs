@@ -32,7 +32,22 @@ public partial class MenuView : UserControl
         };
         LoadWorldMenuItemButton.Click += async (sender, args) =>
         {
-            
+            var worlds = await ApiConnectionService.GetWorlds();
+            LoadWorldMenuItemButton.Items.Clear();
+            foreach (var world in worlds)
+            {
+                var item = new MenuItem
+                {
+                    Header = world.Name,
+                    Tag = world
+                };
+                item.Click += (o, eventArgs) =>
+                {
+                    var worldDto = (WorldDTO) item.Tag;
+                    StorageService.SetWorld(worldDto);
+                };
+                LoadWorldMenuItemButton.Items.Add(item);
+            }
         };
     }
 
