@@ -7,7 +7,7 @@ namespace MapEditor.Models.Server
 {
     public class WorldDTO : AItemDTO
     {
-        [JsonProperty("id")] public required int Id { get; set; } 
+        [JsonIgnore] public required int Id { get; set; } 
         [JsonProperty("name"), CustomProperty] public required string Name { get; set; }
         [JsonProperty("xLength"), CustomProperty("Length")] public required int XLenght { get; set; }
         [JsonProperty("yLength"), CustomProperty("Height")] public required int YLenght { get; set; }

@@ -4,19 +4,20 @@ using MapEditor.Services.Properties.Attributes;
 using MapEditor.Models.Game;
 using MapEditor.Models.Game.Data;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace MapEditor.Models.Server
 {
     public class RoomDTO : AItemDTO
     {
-        [JsonProperty("id"), CustomProperty(isReadOnly: true)] public int Id { get; set; }
+        [JsonIgnore, CustomProperty(isReadOnly: true)] public int Id { get; set; }
         [JsonProperty("mapId")] public int MapId { get; set; }
         [JsonProperty("inGameRoomId")] public required int InGameRoomId { get; set; }
         [JsonProperty("name"), CustomProperty] public required string Name { get; set; } = "Room";
         [JsonProperty("color"), CustomProperty] public ColorDTO Color { get; set; }
         [JsonProperty("mapOffsetX"), CustomProperty("X")] public int MapOffsetX { get; set; }
         [JsonProperty("mapOffsetY"), CustomProperty("Y")] public int MapOffsetY { get; set; }
-        [JsonProperty("rotation"), CustomProperty] public MapDirection Rotation { get; set; }
+        [JsonProperty("rotation"), JsonConverter(typeof(StringEnumConverter)), CustomProperty] public MapDirection Rotation { get; set; }
         [JsonProperty("floor"), CustomProperty] public int Floor { get; set; }
         [JsonProperty("params"), CustomPropertyStringSerialized(types: new[] { typeof(StreetRoomParameters) })] public string? Params { get; set; }
         [JsonProperty("doorParams"), CustomPropertyStringSerialized(types: new[] { typeof(List<StreetRoomDoorParameters>) })] public string? DoorParams { get; set; }
