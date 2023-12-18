@@ -57,7 +57,7 @@
                 <Separator/>
                 <MenuItem Margin="0 5" IsEnabled="False">
                     <MenuItem.Header>
-                        <TextBlock Text="Logged in" Foreground="Red"
+                        <TextBlock Text="Error" Foreground="Red"
                                    x:Name="LoginStatusTextBlock"/>
                     </MenuItem.Header>
                 </MenuItem>
@@ -69,7 +69,7 @@
                 <Separator/>
                 <MenuItem Margin="0 5" IsEnabled="False">
                     <MenuItem.Header>
-                        <TextBlock Text="" Foreground="Red" Width="100"
+                        <TextBlock Text="Error" Foreground="Red" Width="100"
                                    x:Name="RepositoryStatusTextBlock"/>
                     </MenuItem.Header>
                 </MenuItem>
