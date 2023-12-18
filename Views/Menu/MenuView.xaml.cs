@@ -43,8 +43,10 @@ public partial class MenuView : UserControl
             var username = UsernameLoginTextBox.Text;
             var password = PasswordLoginPasswordBox.Password;
             SetTextBlockStatus(LoginStatusTextBlock, "Checking...", Colors.Black);
+            LoginMenuItemButton.IsEnabled = false;
             var loginResult = await ApiConnectionService.Login(username, password);
             SetTextBlockStatus(LoginStatusTextBlock, loginResult ? "OK" : "Error", loginResult ? Colors.Green : Colors.Red);
+            LoginMenuItemButton.IsEnabled = true;
         };
     }
 
@@ -55,8 +57,10 @@ public partial class MenuView : UserControl
             var serverUrl = ServerUrlTextBox.Text;
             ApiConnectionService.SetBaseUrl(serverUrl);
             SetTextBlockStatus(ServerUrlStatusTextBlock, "Checking...", Colors.Black);
+            SaveServerUrlMenuButton.IsEnabled = false;
             bool status = await ApiConnectionService.CheckBaseUrl();
             SetTextBlockStatus(ServerUrlStatusTextBlock, status ? "OK" : "Error", status ? Colors.Green : Colors.Red);
+            SaveServerUrlMenuButton.IsEnabled = true;
         };
     }
     
