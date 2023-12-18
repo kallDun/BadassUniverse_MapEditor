@@ -25,7 +25,7 @@ public class ApiConnectorService : AService
         worldRepository = new WorldApiRepository(this);
     }
 
-    public async Task<bool> Login(string username, string password)
+    public async Task<bool> Login(string username, string password) 
     {
         try
         {
@@ -40,7 +40,6 @@ public class ApiConnectorService : AService
     }
     public Task<bool> CheckBaseUrl() => loginService.CheckConnection();
     public void SetBaseUrl(string baseUrl) => BaseUrl = baseUrl;
-
     public async Task<IEnumerable<WorldDTO>> GetWorlds()
     {
         try
@@ -53,16 +52,17 @@ public class ApiConnectorService : AService
             return new List<WorldDTO>();
         }
     }
-    public async Task TryToAddCurrentWorld()
+    public async Task<bool> TryToAddCurrentWorld()
     {
         try
         {
             var world = StorageService.WorldDTO;
             await worldRepository.Add(world);
+            return true;
         }
         catch (Exception)
         {
-            // ignored
+            return false;
         }
     }
     public async Task<bool> TryToLoadWorld(int id)

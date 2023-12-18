@@ -22,8 +22,7 @@ public class WorldApiRepository : IRepository<WorldDTO>
     public async Task Add(WorldDTO item)
     {
         HttpClient httpClient = new();
-        MessageBox.Show(apiConnectorService.Token);
-        httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiConnectorService.Token.ToString());
+        httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiConnectorService.Token);
         
         var content = JsonConvert.SerializeObject(item);
         HttpContent httpContent = new StringContent(content, new MediaTypeHeaderValue("application/json"));

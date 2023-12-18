@@ -30,7 +30,7 @@
                                  x:Name="ServerUrlTextBox"/>
                     </MenuItem.Header>
                 </MenuItem>
-                <MenuItem Header="Save Url" x:Name="SaveServerUrlMenuButton"/>
+                <MenuItem Header="Save Url" x:Name="SaveServerUrlMenuButton" Margin="0 5"/>
                 <Separator/>
                 <MenuItem Margin="0 5" IsEnabled="False">
                     <MenuItem.Header>
@@ -65,6 +65,14 @@
             <MenuItem Header="Repository">
                 <MenuItem Header="Save" Margin="0 5" x:Name="SaveWorldMenuItemButton"/>
                 <MenuItem Header="Load" Margin="0 5" x:Name="LoadWorldMenuItemButton"/>
+                <MenuItem Header="Worlds" Margin="0 5" IsEnabled="False" x:Name="WorldsListMenuItem"/>
+                <Separator/>
+                <MenuItem Margin="0 5" IsEnabled="False">
+                    <MenuItem.Header>
+                        <TextBlock Text="" Foreground="Red" Width="100"
+                                   x:Name="RepositoryStatusTextBlock"/>
+                    </MenuItem.Header>
+                </MenuItem>
             </MenuItem>
         </Menu>
     </StackPanel>
