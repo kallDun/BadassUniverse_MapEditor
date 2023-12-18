@@ -1,5 +1,6 @@
 using System;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using MapEditor.Services;
 using Newtonsoft.Json;
@@ -20,7 +21,7 @@ public class LoginService : ILoginService
         HttpClient httpClient = new();
         var user = new { username, password };
         var content = JsonConvert.SerializeObject(user);
-        HttpContent httpContent = new StringContent(content);
+        HttpContent httpContent = new StringContent(content, new MediaTypeHeaderValue("application/json"));
         var httpResponse = await httpClient.PostAsync($"{apiConnectorService.BaseUrl}/auth", httpContent);
         if (!httpResponse.IsSuccessStatusCode)
         {

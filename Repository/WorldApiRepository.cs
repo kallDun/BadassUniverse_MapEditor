@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using System.Windows;
 using MapEditor.Models.Server;
 using MapEditor.Services;
 using Newtonsoft.Json;
@@ -20,10 +22,11 @@ public class WorldApiRepository : IRepository<WorldDTO>
     public async Task Add(WorldDTO item)
     {
         HttpClient httpClient = new();
-        httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {apiConnectorService.Token}");
+        MessageBox.Show(apiConnectorService.Token);
+        httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiConnectorService.Token.ToString());
         
         var content = JsonConvert.SerializeObject(item);
-        HttpContent httpContent = new StringContent(content);
+        HttpContent httpContent = new StringContent(content, new MediaTypeHeaderValue("application/json"));
         var httpResponse = await httpClient.PostAsync($"{apiConnectorService.BaseUrl}/api/map", httpContent);
         if (!httpResponse.IsSuccessStatusCode)
         {
