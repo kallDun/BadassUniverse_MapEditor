@@ -10,8 +10,8 @@ namespace MapEditor.Models.Server
 {
     public class RoomDTO : AItemDTO
     {
-        [JsonIgnore, CustomProperty(isReadOnly: true)] public int Id { get; set; }
-        [JsonProperty("mapId")] public int MapId { get; set; }
+        [JsonProperty("id"), CustomProperty(isReadOnly: true)] public int Id { get; set; }
+        [JsonIgnore] public int MapId { get; set; }
         [JsonProperty("inGameRoomId")] public required int InGameRoomId { get; set; }
         [JsonProperty("name"), CustomProperty] public required string Name { get; set; } = "Room";
         [JsonProperty("color"), CustomProperty] public ColorDTO Color { get; set; }

@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:menu="clr-namespace:BadassUniverse_MapEditor.Views.Menu"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="20"
@@ -24,33 +25,8 @@
             <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
-        <StackPanel Grid.Row="0" VerticalAlignment="Center">
-            <Menu Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" 
-                  Margin="10,5,0,0" FontSize="20">
-                <MenuItem Header="File" Height="25">
-                    <MenuItem Header="New"/>
-                    <MenuItem Header="Open"/>
-                    <MenuItem Header="Save" Click="MenuItem_OnClick"/>
-                    <MenuItem Header="Save As"/>
-                    <Separator/>
-                    <MenuItem Header="Exit"/>
-                </MenuItem>
-                <MenuItem Header="Server" Height="25">
-                    <MenuItem Header="User">
-                        <TextBox Text="Name"/>
-                        <TextBox Text="Password"/>
-                        <MenuItem Header="Log in"/>
-                        <MenuItem Header="Log out"/>
-                    </MenuItem>
-                    <MenuItem Header="Save"/>
-                    <MenuItem Header="Load"/>
-                </MenuItem>
-                <MenuItem Header="Help" Height="25">
-                    <MenuItem Header="Sorry, not done yet"/>
-                </MenuItem>
-            </Menu>
-        </StackPanel>
+        
+        <menu:MenuView Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0"/>
 
         <materialDesign:Card Margin="10" Grid.Column="1" Grid.Row="1">
             <Frame Source="Views/GraphicsView.xaml"/>
