@@ -26,7 +26,7 @@
                 <MenuItem Margin="0 5">
                     <MenuItem.Header>
                         <TextBox Width="200" materialDesign:HintAssist.Hint="Server Url"
-                                 Text="http://localhost:8080"
+                                 Text="http://172.23.71.162:8080"
                                  x:Name="ServerUrlTextBox"/>
                     </MenuItem.Header>
                 </MenuItem>

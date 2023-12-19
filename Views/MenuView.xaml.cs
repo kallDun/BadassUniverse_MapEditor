@@ -50,8 +50,9 @@ public partial class MenuView : UserControl
             {
                 var worldDto = (WorldDTO) item.Tag;
                 StorageService.SetWorld(worldDto);
+                StorageService.OnWorldChanged?.Invoke();
             };
-            LoadWorldMenuItemButton.Items.Add(item);
+            WorldsListMenuItem.Items.Add(item);
         }
         WorldsListMenuItem.IsEnabled = worldArray.Any();
         

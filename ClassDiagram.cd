@@ -1,0 +1,597 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="MapEditor.Models.Game.Data.AnyFormBuildingParameters" Collapsed="true">
+    <Position X="26" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QABAAAAAAAAAAAAAAAAAAEBAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Game\Data\AnyFormBuildingParameters.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MapEditor.Models.Game.Data.RoomDoorParameters" Collapsed="true">
+    <Position X="27.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAgAAAAAABAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Game\Data\RoomDoorParameters.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MapEditor.Models.Game.Data.SquareBuildingParameters" Collapsed="true">
+    <Position X="29.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAEBAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Game\Data\SquareBuildingParameters.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MapEditor.Models.Game.Data.StreetRoomDoorParameters" Collapsed="true">
+    <Position X="31.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAACAAAABAAAAAAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Game\Data\StreetRoomDoorParameters.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MapEditor.Models.Game.Data.StreetRoomParameters" Collapsed="true">
+    <Position X="26" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAEBAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Game\Data\StreetRoomParameters.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MapEditor.Models.Game.Map" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="27.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAIAAIAAQKgAAgAAAAAAAAABAAMAQEACAAAAAABA=</HashCode>
+      <FileName>Models\Game\Map\Map.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MapEditor.Models.Game.MapCell" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="29.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABABEABAQABAgiAAAAAAAIAAAACAYgAAAAAAAAAAFA=</HashCode>
+      <FileName>Models\Game\Map\MapCell.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MapEditor.Models.Game.MapCellFloor" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="31.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABABAABAQABCgCAAAAAAAIAAAAAAYgAAAAABAAAABA=</HashCode>
+      <FileName>Models\Game\Map\MapCellFloor.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MapEditor.Models.Game.MapDirectionExtensions" Collapsed="true">
+    <Position X="26" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Game\Map\MapDirection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MapEditor.Models.Game.MapItem" Collapsed="true">
+    <Position X="17.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAABA=</HashCode>
+      <FileName>Models\Game\Map\MapItem.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MapEditor.Models.Game.MapItemBuilding" Collapsed="true">
+    <Position X="16.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAEAAAAAABA=</HashCode>
+      <FileName>Models\Game\Map\MapItemBuilding.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MapEditor.Models.Game.MapItemDoor" Collapsed="true">
+    <Position X="19" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAABAAAAAIAAAAAgAAAEABA=</HashCode>
+      <FileName>Models\Game\Map\MapItemDoor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MapEditor.Models.Game.MapItemRoom" Collapsed="true">
+    <Position X="21.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAEAAAAAABA=</HashCode>
+      <FileName>Models\Game\Map\MapItemRoom.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MapEditor.Models.Game.MapItemWall" Collapsed="true">
+    <Position X="14.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAEABA=</HashCode>
+      <FileName>Models\Game\Map\MapItemWall.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MapEditor.Models.Game.ARoomItem" Collapsed="true">
+    <Position X="15.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAQAAA=</HashCode>
+      <FileName>Models\Game\ARoomItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MapEditor.Models.Game.AWorldElement" Collapsed="true">
+    <Position X="19" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAEAAAAAAhAAAAAA=</HashCode>
+      <FileName>Models\Game\AWorldElement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MapEditor.Models.Game.AWorldElementWithMap" Collapsed="true">
+    <Position X="21.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAgAAAAAAAAAIAAAAIAAAAAAAAAAgAA=</HashCode>
+      <FileName>Models\Game\AWorldElementWithMap.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MapEditor.Models.Game.Facade" Collapsed="true">
+    <Position X="23.5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAACAAAAAIAAAAAAAAAAAAACAAAA=</HashCode>
+      <FileName>Models\Game\Facade.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MapEditor.Models.Game.Mob" Collapsed="true">
+    <Position X="16.75" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Game\Mob.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MapEditor.Models.Game.PhysicsItem" Collapsed="true">
+    <Position X="14.5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Game\PhysicsItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MapEditor.Models.Game.Room" Collapsed="true">
+    <Position X="20.25" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Game\Room.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MapEditor.Models.Game.World" Collapsed="true">
+    <Position X="27.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAgAAAAAAAAAQCAAAAAAIAEAAAAAAAAAA=</HashCode>
+      <FileName>Models\Game\World.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MapEditor.Models.Game.Rooms.AnyFormRoom" Collapsed="true">
+    <Position X="19" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAAAAAAAAACAAAAAIAAAAAAAAAAAAACAAAA=</HashCode>
+      <FileName>Models\Game\Rooms\AnyFormRoom.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MapEditor.Models.Game.Rooms.StreetRoom" Collapsed="true">
+    <Position X="21.25" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAUAAAAAABAAAACAAAAAIAAAAAAAAAAAAACAAAA=</HashCode>
+      <FileName>Models\Game\Rooms\StreetRoom.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MapEditor.Models.Server.AItemDTO" Collapsed="true">
+    <Position X="21.25" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAABAAAABA=</HashCode>
+      <FileName>Models\Server\AItemDTO.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MapEditor.Models.Server.FacadeDTO" Collapsed="true">
+    <Position X="19" Y="14.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAABCAIgAAAAAAAQAAAAAAAAAAAAAgACAARA=</HashCode>
+      <FileName>Models\Server\FacadeDTO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MapEditor.Models.Server.MobDTO" Collapsed="true">
+    <Position X="23.5" Y="14.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAKAgAAAAAAAAAAAAQAIAAAIAAAAABAgCFAABA=</HashCode>
+      <FileName>Models\Server\MobDTO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MapEditor.Models.Server.PhysicsItemDTO" Collapsed="true">
+    <Position X="16.75" Y="14.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAKAgAAAAAAAAAAAASAIAAAIAAAAAAAgCFIABA=</HashCode>
+      <FileName>Models\Server\PhysicsItemDTO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MapEditor.Models.Server.RoomDTO" Collapsed="true">
+    <Position X="21.25" Y="14.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAADAAIAAACCIIgAAAAEAAQAAAAAAAAAAAAAgACAARA=</HashCode>
+      <FileName>Models\Server\RoomDTO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MapEditor.Models.Server.WorldDTO" Collapsed="true">
+    <Position X="25.75" Y="14.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAACAAAIAAAAAAAAAAAAAAQyAAAAAAIAAAAAAAAAABA=</HashCode>
+      <FileName>Models\Server\WorldDTO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MapEditor.Repository.LoginService" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="35" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAQAAQAAAAAAA=</HashCode>
+      <FileName>Repository\LoginService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MapEditor.Repository.WorldApiRepository" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="36.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAAAAAgAAAAABAAAAABAAAAAAAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Repository\WorldApiRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MapEditor.Services.Manager.AService" Collapsed="true">
+    <Position X="38.75" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAABQAAAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\Manager\AService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MapEditor.Services.Manager.LoadServicesOnStartupManager" Collapsed="true">
+    <Position X="36.75" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\Manager\LoadServicesOnStartupManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MapEditor.Services.Manager.ServicesManager" Collapsed="true">
+    <Position X="40.25" Y="16.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAADAAAAAQAAAAIAAAEA=</HashCode>
+      <FileName>Services\Manager\ServicesManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MapEditor.Services.Mapper.WorldMapperContext" Collapsed="true">
+    <Position X="38.5" Y="17.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAQAAAAAAAAAAAAAAAAAAAAAgAAAAAACAAAAAAIAAA=</HashCode>
+      <FileName>Services\Mapper\Data\WorldMapperContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MapEditor.Services.Mapper.WorldMapper" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="36.75" Y="17.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAQAAAAAAAAAAAAAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Services\Mapper\WorldMapper.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MapEditor.Services.Mapper.WorldMapperContextFactory" Collapsed="true">
+    <Position X="40.25" Y="17.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAACCAAAAAAAAA=</HashCode>
+      <FileName>Services\Mapper\WorldMapperContextFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MapEditor.Services.Mapper.Factories.BasicFacadeSubFactory" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="35" Y="14.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAA=</HashCode>
+      <FileName>Services\Mapper\Factories\BasicFacadeSubFactory.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MapEditor.Services.Mapper.Factories.BasicMobSubFactory" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="36.75" Y="14.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\Mapper\Factories\BasicMobSubFactory.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MapEditor.Services.Mapper.Factories.BasicPhysicsItemSubFactory" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="38.5" Y="14.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\Mapper\Factories\BasicPhysicsItemSubFactory.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MapEditor.Services.Mapper.Factories.BasicRoomSubFactory" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="40.25" Y="14.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAA=</HashCode>
+      <FileName>Services\Mapper\Factories\BasicRoomSubFactory.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MapEditor.Services.Mapper.Factories.BasicWorldFactory" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="33.25" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\Mapper\Factories\BasicWorldFactory.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MapEditor.Services.Properties.Attributes.CustomPropertyAttribute" Collapsed="true">
+    <Position X="33.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABACAAAAQAAAAAAAAAAAAAAAAAAAAAARAABA=</HashCode>
+      <FileName>Services\Properties\Attributes\CustomPropertyAttribute.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MapEditor.Services.Properties.Attributes.CustomPropertyStringSerializedAttribute" Collapsed="true">
+    <Position X="33.25" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAACBAAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>Services\Properties\Attributes\CustomPropertyStringSerializedAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MapEditor.Services.Properties.Data.ActionButtonData" Collapsed="true">
+    <Position X="33.25" Y="14.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAABAAAAAAAAAEAAAQCAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\Properties\Data\ActionButtonData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MapEditor.Services.Properties.Data.PropertyData" Collapsed="true">
+    <Position X="33.25" Y="16.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QgAAgIAAAAASGgkQAAAAAAgEJAABAAAAIRCgBABgAAA=</HashCode>
+      <FileName>Services\Properties\Data\PropertyData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MapEditor.Services.Properties.Data.PropertyDataEvents" Collapsed="true">
+    <Position X="35" Y="16.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAiAAAAYAAAAAAAAAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>Services\Properties\Data\PropertyDataEvents.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MapEditor.Services.Properties.PropertiesService" Collapsed="true">
+    <Position X="42.25" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAADBgAAgAAAAAAAAAAAAAAIAAAAAEACAIA=</HashCode>
+      <FileName>Services\Properties\PropertiesService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MapEditor.Views.Elements.Property.PropertyExtensions" Collapsed="true">
+    <Position X="36.75" Y="16.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\Properties\PropertyExtensions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MapEditor.Services.Storage.Data.FacadeStorageData" Collapsed="true">
+    <Position X="35" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAIAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\Storage\Data\FacadeStorageData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MapEditor.Services.Storage.Data.MobStorageData" Collapsed="true">
+    <Position X="38.5" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\Storage\Data\MobStorageData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MapEditor.Services.Storage.Data.PhysicsItemStorageData" Collapsed="true">
+    <Position X="40.25" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\Storage\Data\PhysicsItemStorageData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MapEditor.Services.Storage.Data.RoomStorageData" Collapsed="true">
+    <Position X="38.5" Y="16.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAIAAACAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\Storage\Data\RoomStorageData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MapEditor.Services.Storage.TestGameStorage" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="33.25" Y="17.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAEAAABA=</HashCode>
+      <FileName>Services\Storage\TestGameStorage.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MapEditor.Services.Storage.TestListStorage" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="35" Y="17.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAACAAAAAAwAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\Storage\TestListStorage.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MapEditor.Services.ApiConnectorService" Collapsed="true">
+    <Position X="33.25" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEIABAAAAAAgAgAAAAAAAAAAoAAAxAAABAAA=</HashCode>
+      <FileName>Services\ApiConnectorService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MapEditor.Services.InitializationDefaultWorldService" Collapsed="true">
+    <Position X="35.5" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\InitializationDefaultWorldService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MapEditor.Services.ItemsListService" Collapsed="true">
+    <Position X="37.75" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABCQAAAAAAAAAAAABAQgAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\ItemsListService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MapEditor.Services.LocalStorageService" Collapsed="true">
+    <Position X="40" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AARAEAAgJFAKAQAAEAAAAAiAAAJgyAAAAgAAEAAAAAA=</HashCode>
+      <FileName>Services\LocalStorageService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MapEditor.Services.PreviewService" Collapsed="true">
+    <Position X="44.5" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABABAAEAAQBAQAACAAAAABAAAAIAAAAAAhAAAICSAA=</HashCode>
+      <FileName>Services\PreviewService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="MapEditor.Models.Game.Data.RoomItemData" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="27.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAACAAAAAAgAgAAAAAQQAQAAAMAAAQAAhAAAAiA=</HashCode>
+      <FileName>Models\Game\Data\RoomItemData.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Struct>
+  <Struct Name="MapEditor.Models.Game.MapIndex" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="26" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAwAEAAAAAAAAAAIAAAAAAAAAAYiA=</HashCode>
+      <FileName>Models\Game\Map\MapIndex.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Struct>
+  <Struct Name="MapEditor.Models.Server.ColorDTO" Collapsed="true">
+    <Position X="28.25" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAQgAAAAAAAAAAAAAAAAAAAAAAABAAAAA=</HashCode>
+      <FileName>Models\Server\ColorDTO.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Interface Name="MapEditor.Repository.ILoginService" Collapsed="true">
+    <Position X="35" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAQAAAAAAA=</HashCode>
+      <FileName>Repository\ILoginService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MapEditor.Repository.IRepository&lt;T&gt;" Collapsed="true">
+    <Position X="36.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAAAAAAAAAAABAAAAABAAAAAAAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Repository\IRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MapEditor.Services.Manager.IService" Collapsed="true">
+    <Position X="36.75" Y="18.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAABQAAAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\Manager\IService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MapEditor.Services.Mapper.IWorldMapper" Collapsed="true">
+    <Position X="40.25" Y="18.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Services\Mapper\IWorldMapper.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MapEditor.Services.Mapper.Factories.IFacadeSubFactory" Collapsed="true">
+    <Position X="40.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAA=</HashCode>
+      <FileName>Services\Mapper\Factories\IFacadeSubFactory.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MapEditor.Services.Mapper.Factories.IMobSubFactory" Collapsed="true">
+    <Position X="33.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\Mapper\Factories\IMobSubFactory.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MapEditor.Services.Mapper.Factories.IPhysicsItemSubFactory" Collapsed="true">
+    <Position X="35.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\Mapper\Factories\IPhysicsItemSubFactory.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MapEditor.Services.Mapper.Factories.IRoomSubFactory" Collapsed="true">
+    <Position X="38" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAA=</HashCode>
+      <FileName>Services\Mapper\Factories\IRoomSubFactory.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MapEditor.Services.Mapper.Factories.ISubFactory" Collapsed="true">
+    <Position X="36.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\Mapper\Factories\ISubFactory.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MapEditor.Services.Mapper.Factories.IWorldFactory" Collapsed="true">
+    <Position X="38.5" Y="18.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\Mapper\Factories\IWorldFactory.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MapEditor.Services.Storage.IGameStorage" Collapsed="true">
+    <Position X="33.25" Y="18.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>YAAQAAAAAAAAACAAAAAAAAAAAAAEAAAAAAAAAEAAARA=</HashCode>
+      <FileName>Services\Storage\IGameStorage.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MapEditor.Services.Storage.IListStorage" Collapsed="true">
+    <Position X="35" Y="18.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAACAAAAAAwAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\Storage\IListStorage.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="MapEditor.Models.Game.Data.RoomItemDataType" Collapsed="true">
+    <Position X="29.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Game\Data\RoomItemData.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="MapEditor.Models.Game.MapCellType" Collapsed="true">
+    <Position X="26" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAADAAAAAAAAAAABIAAAAAAAAAAAQAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Game\Map\MapCellType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="MapEditor.Models.Game.MapDirection" Collapsed="true">
+    <Position X="27.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAACACAAAAAAAI=</HashCode>
+      <FileName>Models\Game\Map\MapDirection.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="MapEditor.Models.Server.Icons.MobIconTypeDTO" Collapsed="true">
+    <Position X="28.25" Y="14.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAACAAAAAAAgAAAAAAQAgAAAAAAAAA=</HashCode>
+      <FileName>Models\Server\Icons\MobIconTypeDTO.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="MapEditor.Models.Server.Icons.PhysicsItemIconsTypeDTO" Collapsed="true">
+    <Position X="30" Y="14.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAABAAAAAAQAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Models\Server\Icons\PhysicsItemIconsTypeDTO.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="MapEditor.Services.Properties.Data.PropertySavingType" Collapsed="true">
+    <Position X="33.25" Y="19.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\Properties\Data\PropertySavingType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

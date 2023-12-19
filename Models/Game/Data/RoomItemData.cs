@@ -9,7 +9,7 @@ public enum RoomItemDataType
     Mob
 }
 
-public readonly struct RoomItemData : IEquatable<RoomItemData>
+public struct RoomItemData : IEquatable<RoomItemData>
 {
     public int Id { get; }
     public string Name { get; }
