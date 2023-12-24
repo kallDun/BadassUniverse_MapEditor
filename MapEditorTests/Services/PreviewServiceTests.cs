@@ -11,13 +11,18 @@ namespace MapEditorTests.Services;
 
 public class PreviewServiceTests
 {
+    private static LocalStorageService StorageService => ServicesManager.Instance.GetService<LocalStorageService>();
+    private static PreviewService PreviewService => ServicesManager.Instance.GetService<PreviewService>();
+    
+    [SetUp]
+    public void Setup()
+    {
+        ServicesManager.Instance.ResetAllServices();
+    }
+    
     [Test]
     public void SetPreviewRoomOkAndThenIntersectWithAnotherRoomTest()
     {
-        ServicesManager.Instance.ResetAllServices();
-        var localStorageService = ServicesManager.Instance.GetService<LocalStorageService>();
-        var previewService = ServicesManager.Instance.GetService<PreviewService>();
-        
         WorldDTO worldDTO = new()
         {
             Id = 0,
@@ -40,7 +45,7 @@ public class PreviewServiceTests
         };
         try
         {
-            localStorageService.SetWorld(worldDTO);
+            StorageService.SetWorld(worldDTO);
         }
         catch (Exception e)
         {
@@ -55,19 +60,19 @@ public class PreviewServiceTests
             DoorParams = JsonConvert.SerializeObject(Array.Empty<StreetRoomDoorParameters>())
         };
         
-        previewService.SetPreviewItem(previewRoom, ItemType.Room);
-        Assert.That(previewService.IsPreviewing, Is.True);
+        PreviewService.SetPreviewItem(previewRoom, ItemType.Room);
+        Assert.That(PreviewService.IsPreviewing, Is.True);
         
-        previewService.TryToMoveRoomOrFacade(new MapIndex(8, 8));
-        Assert.That(localStorageService.IsPreviewWorldValid, Is.True);
+        PreviewService.TryToMoveRoomOrFacade(new MapIndex(8, 8));
+        Assert.That(StorageService.IsPreviewWorldValid, Is.True);
         
-        previewService.TryToMoveRoomOrFacade(new MapIndex(0, 0));
-        Assert.That(localStorageService.IsPreviewWorldValid, Is.False);
-        Assert.That(previewService.TryToSave(), Is.False);
+        PreviewService.TryToMoveRoomOrFacade(new MapIndex(0, 0));
+        Assert.That(StorageService.IsPreviewWorldValid, Is.False);
+        Assert.That(PreviewService.TryToSave(), Is.False);
         
-        previewService.TryToMoveRoomOrFacade(new MapIndex(7, 7));
-        Assert.That(localStorageService.IsPreviewWorldValid, Is.True);
-        Assert.That(previewService.TryToSave(), Is.True);
+        PreviewService.TryToMoveRoomOrFacade(new MapIndex(7, 7));
+        Assert.That(StorageService.IsPreviewWorldValid, Is.True);
+        Assert.That(PreviewService.TryToSave(), Is.True);
     }
     
 }

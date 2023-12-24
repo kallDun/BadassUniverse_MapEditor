@@ -25,10 +25,6 @@ namespace MapEditor.Services.Manager
         
         public void ResetAllServices()
         {
-            foreach (var service in services)
-            {
-                service.Destroy();
-            }
             services.Clear();
         }
 
