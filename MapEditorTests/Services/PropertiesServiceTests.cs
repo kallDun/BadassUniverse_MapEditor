@@ -1,7 +1,3 @@
-using MapEditor.Services;
-using MapEditor.Services.Manager;
-using MapEditor.Services.Properties;
-
 namespace MapEditorTests.Services;
 
 public class PropertiesServiceTests

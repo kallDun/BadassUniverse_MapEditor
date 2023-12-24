@@ -1,1 +1,11 @@
 global using NUnit.Framework;
+global using MapEditor.Services;
+global using MapEditor.Services.Manager;
+global using MapEditor.Services.Properties;
+global using MapEditor;
+global using MapEditor.Models;
+global using MapEditor.Models.Game;
+global using MapEditor.Models.Game.Data;
+global using MapEditor.Models.Server;
+global using Newtonsoft.Json;
+global using MapEditor.Services.Mapper;

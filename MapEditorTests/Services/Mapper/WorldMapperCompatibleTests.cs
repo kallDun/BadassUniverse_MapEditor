@@ -1,10 +1,3 @@
-using MapEditor;
-using MapEditor.Models.Game;
-using MapEditor.Models.Game.Data;
-using MapEditor.Models.Server;
-using MapEditor.Services.Mapper;
-using Newtonsoft.Json;
-
 namespace MapEditorTests.Services.Mapper;
 
 public class WorldMapperCompatibleTests

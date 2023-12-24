@@ -1,6 +1,3 @@
-using MapEditor.Services;
-using MapEditor.Services.Manager;
-
 namespace MapEditorTests.Services;
 
 public class ItemsListServiceTests

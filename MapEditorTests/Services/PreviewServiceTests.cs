@@ -1,12 +1,3 @@
-using MapEditor;
-using MapEditor.Models;
-using MapEditor.Models.Game;
-using MapEditor.Models.Game.Data;
-using MapEditor.Models.Server;
-using MapEditor.Services;
-using MapEditor.Services.Manager;
-using Newtonsoft.Json;
-
 namespace MapEditorTests.Services;
 
 public class PreviewServiceTests
@@ -67,12 +58,16 @@ public class PreviewServiceTests
         Assert.That(StorageService.IsPreviewWorldValid, Is.True);
         
         PreviewService.TryToMoveRoomOrFacade(new MapIndex(0, 0));
-        Assert.That(StorageService.IsPreviewWorldValid, Is.False);
-        Assert.That(PreviewService.TryToSave(), Is.False);
-        
+        Assert.Multiple(() =>
+        {
+            Assert.That(StorageService.IsPreviewWorldValid, Is.False);
+            Assert.That(PreviewService.TryToSave(), Is.False);
+        });
         PreviewService.TryToMoveRoomOrFacade(new MapIndex(7, 7));
-        Assert.That(StorageService.IsPreviewWorldValid, Is.True);
-        Assert.That(PreviewService.TryToSave(), Is.True);
+        Assert.Multiple(() =>
+        {
+            Assert.That(StorageService.IsPreviewWorldValid, Is.True);
+            Assert.That(PreviewService.TryToSave(), Is.True);
+        });
     }
-    
 }
