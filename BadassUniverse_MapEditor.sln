@@ -5,6 +5,8 @@ VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BadassUniverse_MapEditor", "MapEditor\BadassUniverse_MapEditor.csproj", "{493BF3F7-78D4-4C62-8B21-7C29D4F1B175}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapEditorTests", "MapEditorTests\MapEditorTests.csproj", "{58E9B52A-13D2-4752-A80D-1C798781E9DF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{493BF3F7-78D4-4C62-8B21-7C29D4F1B175}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{493BF3F7-78D4-4C62-8B21-7C29D4F1B175}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{493BF3F7-78D4-4C62-8B21-7C29D4F1B175}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58E9B52A-13D2-4752-A80D-1C798781E9DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58E9B52A-13D2-4752-A80D-1C798781E9DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58E9B52A-13D2-4752-A80D-1C798781E9DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58E9B52A-13D2-4752-A80D-1C798781E9DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
