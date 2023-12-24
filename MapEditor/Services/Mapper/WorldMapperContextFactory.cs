@@ -31,8 +31,7 @@ public class WorldMapperContextFactory
 
     private static string GetApplicationVersion()
     {
-        App application = Application.Current as App ?? throw new Exception("App is null");
-        string version = application.Version;
+        string version = App.Version;
         return version;
     }
 }

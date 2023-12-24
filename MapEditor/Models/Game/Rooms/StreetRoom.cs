@@ -60,7 +60,8 @@ namespace MapEditor.Models.Game.Rooms
                     MapDirection.Right => new MapIndex(i + 1, parameters.Length + 1),
                     _ => throw new ArgumentOutOfRangeException(nameof(doorParams.Direction)),
                 };
-                map.GetValue(MapIndex).AddDoor(nextDoorIndex, Id, Color, 0, Floor);
+                bool result = map.GetValue(MapIndex).AddDoor(nextDoorIndex, Id, Color, 0, Floor);
+                if (!result) throw new ArgumentException("Door of this room at the same place already exists.");
                 nextDoorIndex++;
             }
         }

@@ -23,8 +23,7 @@ namespace MapEditor.Services
                 XLenght = 50,
                 YLenght = 50,
                 PlayerSpawnRoomId = 0,
-                Version = (Application.Current as App 
-                    ?? throw new Exception("Application cannot be null.")).Version
+                Version = App.Version
             };
             worldDTO.Rooms.Add(new RoomDTO
             {

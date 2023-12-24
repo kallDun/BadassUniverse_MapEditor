@@ -101,9 +101,7 @@ namespace MapEditor.Services
         
         public void TryToMoveRoomOrFacade(MapIndex position)
         {
-            if (!(previewItem != null && previewItemType != null && worldDTOPreview != null)) return;
-            if (previewItemType is not (ItemType.Room or ItemType.Building)) return;
-            if (notMovingState) return;
+            if (!NeedToMoveRoomOrFacade()) return;
             
             switch (previewItemType)
             {
@@ -135,9 +133,7 @@ namespace MapEditor.Services
         
         public void TryToMoveRoomItem(MapIndex position, Point mousePositionCellPercent, Room? room)
         {
-            if (!(previewItem != null && previewItemType != null && worldDTOPreview != null)) return;
-            if (previewItemType is not (ItemType.PhysicsItem or ItemType.Mob)) return;
-            if (notMovingState) return;
+            if (!NeedToMoveRoomItem()) return;
 
             worldDTOPreview = (WorldDTO)StorageService.WorldDTO.Clone();
             
@@ -194,9 +190,9 @@ namespace MapEditor.Services
             notMovingState = !notMovingState;
         }
         
-        public void TryToSave()
+        public bool TryToSave()
         {
-            if (!(previewItem != null && previewItemType != null && worldDTOPreview != null)) return;
+            if (!(previewItem != null && previewItemType != null && worldDTOPreview != null)) return false;
             if (StorageService.IsPreviewWorldValid)
             {
                 previewItem.State = StoredPreviewState.Stored;
@@ -204,7 +200,9 @@ namespace MapEditor.Services
                 var itemRef = previewItem;
                 TryToCancel();
                 PropertiesService.SetActiveItem(itemRef);
+                return true;
             }
+            return false;
         }
         
         public void TryToCancel()

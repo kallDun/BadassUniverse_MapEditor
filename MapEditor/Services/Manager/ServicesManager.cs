@@ -22,6 +22,15 @@ namespace MapEditor.Services.Manager
             }
             return (T)service;
         }
+        
+        public void ResetAllServices()
+        {
+            foreach (var service in services)
+            {
+                service.Destroy();
+            }
+            services.Clear();
+        }
 
         public void RegisterService<T>() where T : IService, new() => GetService<T>();
     }

@@ -33,7 +33,7 @@ public class ItemsListService : AService
     {
         IGameStorage gameStorage = StorageService.GetGameStorage();
         IListStorage listStorage = StorageService.GetListStorage();
-        List<(AItemDTO Item, ItemType Type)> list = new();
+        List<(AItemDTO Item, ItemType Type)> list = [];
 
         var rooms = listStorage.GetRooms(gameStorage)
             .Select(item => (Item: item as AItemDTO, Type: ItemType.Room));

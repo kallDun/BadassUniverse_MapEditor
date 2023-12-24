@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Media;
 
 namespace MapEditor.Models.Game
@@ -33,6 +34,7 @@ namespace MapEditor.Models.Game
 
         public bool AddDoor(int doorIndex, int relatedRoomIndex, Color color, int roomFloorDisplacement = 0)
         {
+            if (Items.FirstOrDefault(x => x is MapItemDoor door && door.RelatedRoomIndex == relatedRoomIndex) != null) return false;
             Items.Add(new MapItemDoor(doorIndex, relatedRoomIndex, roomFloorDisplacement, color));
             return true;
         }
